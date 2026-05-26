@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>EduGameKids - 3 Aspek</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="egk-trace-color-fix.css">
+</head>
+<body>
+  <!-- Floating decorations -->
+  <div class="deco" id="decoLayer"></div>
+
+  <!-- Theme toggle -->
+  <button id="themeBtn" class="theme-btn" title="Ganti tema">🌙</button>
+
+  <!-- ═══ SCREEN 1: Welcome ═══ -->
+  <section id="welcome" class="screen active">
+    <div class="stars-bg"></div>
+    <div class="welcome-card pop-in">
+      <div class="welcome-top">
+        <div class="mascot-wrap">
+          <div class="mascot-bubble">🌟</div>
+          <div class="mascot-eyes"></div>
+        </div>
+        <div class="welcome-sparkles">✨</div>
+      </div>
+      <div class="rainbow-title">EduGame<span>Kids</span></div>
+      <p class="welcome-sub">Halo Teman Kecil! 👋 Yuk kenalan dulu!</p>
+
+      <div class="form-grid">
+        <label class="form-field">
+          <span class="field-label">👤 Nama Kamu</span>
+          <input id="inpName" autocomplete="name" placeholder="Tulis namamu...">
+        </label>
+        <label class="form-field">
+          <span class="field-label">🔢 No. Absen</span>
+          <input id="inpNo" inputmode="numeric" placeholder="Contoh: 12">
+        </label>
+        <label class="form-field">
+          <span class="field-label">🏫 Kelas</span>
+          <input id="inpClass" placeholder="Contoh: 2A">
+        </label>
+      </div>
+
+      <button id="enterBtn" class="big-cta">
+        <span class="cta-icon">🚀</span>
+        <span>Ayo Mulai!</span>
+      </button>
+      <p class="welcome-note">Data tersimpan aman di browser kamu 🔒</p>
+    </div>
+  </section>
+
+  <!-- ═══ SCREEN 2: Lobby ═══ -->
+  <section id="lobby" class="screen">
+    <div class="lobby-wrap">
+      <header class="lobby-head">
+        <div class="lobby-hello">
+          <div class="hello-avatar">🎮</div>
+          <div>
+            <h2 id="helloText">Halo!</h2>
+            <p id="studentText" class="subtext"></p>
+          </div>
+        </div>
+        <div class="head-actions">
+          <button id="editIdentityBtn" class="pill-btn edit">✏️ Ubah Data</button>
+          <a href="dashboard.html" class="pill-btn teacher">📋 Dashboard</a><a href="editor.html" class="pill-btn teacher">🛠️ Editor</a>
+        </div>
+      </header>
+
+      <div class="lobby-title-wrap">
+        <h3 class="lobby-subtitle">🎯 Pilih Arena Belajar!</h3>
+        <p class="lobby-hint">Klik salah satu arena untuk memulai petualangan!</p>
+      </div>
+
+      <div class="cards3">
+        <article class="mission-card pink" data-aspect="afektif">
+          <div class="card-bg-deco">💕</div>
+          <div class="card-icon">💖</div>
+          <h3>Afektif</h3>
+          <p>Sikap baik, empati, peduli, dan pilihan perilaku.</p>
+          <div class="progress-wrap">
+            <div class="progress-label">Progress</div>
+            <div class="progress"><span class="prog-bar"></span></div>
+          </div>
+          <button class="card-btn">Mulai ❤️</button>
+        </article>
+
+        <article class="mission-card green" data-aspect="psikomotorik">
+          <div class="card-bg-deco">✏️</div>
+          <div class="card-icon">✋</div>
+          <h3>Psikomotor</h3>
+          <p>Coretan, garis, gerak halus, kreativitas, dan kemandirian.</p>
+          <div class="progress-wrap">
+            <div class="progress-label">Progress</div>
+            <div class="progress"><span class="prog-bar"></span></div>
+          </div>
+          <button class="card-btn">Mulai ✨</button>
+        </article>
+
+        <article class="mission-card blue" data-aspect="kognitif">
+          <div class="card-bg-deco">🧩</div>
+          <div class="card-icon">🧠</div>
+          <h3>Kognitif</h3>
+          <p>Logika, angka, pola, mencocokkan, dan berpikir kritis.</p>
+          <div class="progress-wrap">
+            <div class="progress-label">Progress</div>
+            <div class="progress"><span class="prog-bar"></span></div>
+          </div>
+          <button class="card-btn">Mulai 🧩</button>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SCREEN 3: Play ═══ -->
+  <section id="play" class="screen play-screen">
+
+    <!-- Game Header -->
+    <header class="game-header">
+      <div class="brandbox">
+        <div class="logo">⭐</div>
+        <div class="brand-text">
+          <h2 id="aspectTitle">Aspek</h2>
+          <div id="studentBadge" class="student-badge">Nama • Absen • Kelas</div>
+        </div>
+      </div>
+      <div class="top-actions">
+        <div class="page-chip header-chip" id="pageInfo">Slide 1 / 26</div>
+        <button id="scoreBtn" class="pill-btn score-btn"><span class="btn-emoji">🏆</span><span class="btn-text">Skor</span></button>
+        <button id="finishBtn" class="pill-btn finish-btn"><span class="btn-emoji">✅</span><span class="btn-text">Selesai!</span></button>
+        <button id="menuBtn" class="pill-btn home-btn"><span class="btn-emoji">🏠</span><span class="btn-text">Menu</span></button>
+      </div>
+    </header>
+
+    <!-- Stage + vertical game tools -->
+    <main class="stage-area">
+      <button id="prevBtn" class="side-nav left" aria-label="Sebelumnya">‹</button>
+
+      <div class="tool-rail rail-left" aria-label="Alat kiri">
+        <button id="selectTool" class="tool active">
+          <span class="tool-icon">👆</span>
+          <span class="tool-label">Pilih</span>
+        </button>
+        <button id="drawTool" class="tool draw-tool">
+          <span class="tool-icon">✏️</span>
+          <span class="tool-label">Pensil</span>
+        </button>
+        <button id="colorTool" class="tool color-tool hidden" type="button">
+          <span class="tool-icon">🎨</span>
+          <span class="tool-label">Warna</span>
+        </button>
+      </div>
+
+      <div class="stage-card">
+        <div id="stageShell" class="stage-shell"></div>
+      </div>
+
+      <div class="tool-rail rail-right" aria-label="Alat kanan">
+        <button id="eraserTool" class="tool">
+          <span class="tool-icon">🧽</span>
+          <span class="tool-label">Hapus</span>
+        </button>
+        <button id="resetSlideBtn" class="tool">
+          <span class="tool-icon">🔄</span>
+          <span class="tool-label">Reset</span>
+        </button>
+        <button id="soundBtn" class="tool">
+          <span class="tool-icon">🔊</span>
+          <span class="tool-label">Suara</span>
+        </button>
+      </div>
+
+      <button id="nextBtn" class="side-nav right" aria-label="Berikutnya">›</button>
+    </main>
+  </section>
+
+  <!-- Toast & Modals -->
+  <div id="toast" class="toast"></div>
+  <div id="modalRoot"></div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+  <script src="egk-trace-color-fix.js"></script>
+  <script src="egk-pathpoint-player-safe.js"></script>
+  <script>
+    // Generate floating decorations
+    const deco = document.getElementById('decoLayer');
+    const items = ['⭐','🌟','✨','💫','🎈','🎉','🌈','🦋','🌺','🎀','🍭','🎊'];
+    for(let i=0;i<18;i++){
+      const d = document.createElement('div');
+      d.className = 'float-deco';
+      d.textContent = items[i % items.length];
+      d.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*6}s;animation-duration:${5+Math.random()*6}s;font-size:${16+Math.random()*20}px;opacity:${0.15+Math.random()*0.2}`;
+      deco.appendChild(d);
+    }
+  </script>
+
+<div id="pageNav" class="page-nav"></div>
+
+<div id="slideDropdown" class="slide-dropdown hidden"></div>
+</body>
+
+</html>

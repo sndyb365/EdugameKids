@@ -1,0 +1,893 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Editor Universal 3 Aspek - EduGameKids</title><link rel="stylesheet" href="style.css"><style>
+:root{--ed-bg:linear-gradient(135deg,#fff3c4,#eaf8ff 45%,#ffe8f4);--card:#ffffffee;--ink:#151933;--muted:#667085;--line:#e2e6f0;--shadow:0 18px 50px rgba(31,41,55,.16)}body.dark{--ed-bg:linear-gradient(135deg,#14162b,#1c2754 45%,#312044);--card:#202642ee;--ink:#fff;--muted:#cdd5ff;--line:#465075}.editor{min-height:100dvh;padding:14px;background:var(--ed-bg);color:var(--ink);font-family:inherit}.editor-wrap{width:min(1500px,100%);margin:auto}.editor-head,.editor-panel{background:var(--card);border:4px solid rgba(255,255,255,.74);border-radius:32px;box-shadow:var(--shadow);padding:14px;margin:10px 0}.editor-head{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}.editor-head h1{margin:0;font-size:clamp(28px,3vw,52px)}.aspect-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.aspect-tab{border:0;border-radius:24px;padding:16px 14px;font-weight:1000;font-size:18px;cursor:pointer;box-shadow:0 8px 0 rgba(0,0,0,.16);transition:.18s transform,.18s filter;background:#fff;color:#18213f}.aspect-tab:hover{transform:translateY(-3px) rotate(-1deg)}.aspect-tab.active{color:white;transform:translateY(-2px) scale(1.02);outline:4px solid rgba(255,255,255,.85)}.aspect-tab[data-a=afektif].active{background:linear-gradient(135deg,#ff5fa8,#ff8c42)}.aspect-tab[data-a=kognitif].active{background:linear-gradient(135deg,#4a9fff,#7657ff)}.aspect-tab[data-a=psikomotorik].active{background:linear-gradient(135deg,#00cc88,#00d4f0)}.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:center}.controls select,.controls input{border:3px solid var(--line);border-radius:16px;padding:12px;font-weight:900;background:#fff;color:#111}.editor-main{display:grid;grid-template-columns:210px minmax(360px,1fr) 260px;gap:12px;align-items:start}.toolbox,.propbox{position:sticky;top:10px}.mini-title{font-weight:1000;margin:4px 0 10px}.toolgrid{display:grid;gap:8px}.toolgrid button{justify-content:flex-start}.canvas-wrap{display:grid;place-items:center;min-height:70vh}.edit-stage{position:relative;height:min(72vh,900px);max-width:100%;aspect-ratio:var(--ratio);border-radius:26px;overflow:hidden;background:#fff;box-shadow:0 20px 70px rgba(0,0,0,.2);border:8px solid rgba(255,255,255,.78)}.edit-stage img{width:100%;height:100%;object-fit:contain;display:block}.ed-layer{position:absolute;inset:0}.hot{position:absolute;touch-action:none;border:3px dashed #ff5fa8;background:rgba(255,95,168,.16);border-radius:12px;cursor:grab;display:grid;place-items:center;font-weight:1000;color:#181a35;user-select:none;font-size:12px;text-align:center}.hot.selected{outline:5px solid #00d4f0;background:rgba(0,212,240,.18)}.resize-handle{position:absolute;touch-action:none;right:-9px;bottom:-9px;width:20px;height:20px;border-radius:8px;background:#00d4f0;border:3px solid #fff;box-shadow:0 4px 10px rgba(0,0,0,.25);cursor:nwse-resize;z-index:5}.hot.selected .resize-handle{display:block}.hot:not(.selected) .resize-handle{display:none}.hot.connect{border-radius:999px;background:#2d83c9;color:white;border-color:white}.propbox label{display:block;font-weight:900;margin:10px 0 4px;color:var(--muted)}.propbox input,.propbox select,.propbox textarea{width:100%;border:3px solid var(--line);border-radius:16px;padding:10px;font-weight:800}.hintline{font-weight:900;color:var(--muted);font-size:13px}.jsonbox{height:112px;font-family:monospace;font-size:12px}.theme-btn{top:auto;bottom:16px;right:16px}.status-badge{display:inline-flex;align-items:center;gap:8px;border:3px dashed var(--line);border-radius:999px;padding:10px 14px;font-weight:1000;background:#fff;color:#151933}.pill-btn{cursor:pointer}.quick-links{display:flex;gap:8px;flex-wrap:wrap}@media(max-width:1060px){.editor-main{grid-template-columns:1fr}.toolbox,.propbox{position:relative;top:auto}.toolgrid{grid-template-columns:repeat(3,1fr)}.canvas-wrap{min-height:auto}.edit-stage{height:auto;max-height:64vh;width:min(100%,760px)}}@media(max-width:620px){.editor{padding:8px}.editor-head,.editor-panel{border-radius:24px;padding:10px}.aspect-tabs{grid-template-columns:1fr}.toolgrid{grid-template-columns:repeat(2,1fr)}.controls>*{flex:1 1 135px}.pill-btn{font-size:13px;padding:11px 12px}.edit-stage{border-width:5px}.quick-links a{flex:1 1 auto;text-align:center}}
+.propgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.propgrid label{margin:0}.prop-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+/* FUNCTION-SPECIFIC EDITOR FIX */
+.hot.circle{border-radius:999px!important;background:rgba(255,255,255,.08)!important}
+.hot.hint{border-style:dashed;background:rgba(255,255,255,.78);color:#1f2a44}
+.hot.connectPoint{border-radius:999px!important;background:#05bfe7!important;color:white!important;border-color:white!important;z-index:60}
+.connect-line{position:absolute;height:6px;background:#05bfe7;border-radius:999px;transform-origin:left center;box-shadow:0 0 0 3px #fff;pointer-events:none;z-index:45}
+.hot.mazePath{border-color:#ff9d2f;background:rgba(255,157,47,.13)}
+.hot.pathPaint{border-color:#00c98b;background:rgba(0,201,139,.12)}
+.hot.trace{border-color:#8a5cff;background:rgba(138,92,255,.12)}
+.hot.coloring{border-color:#ff5fc8;background:rgba(255,95,200,.08)}
+
+/* REAL TRACE / MAZE EDITOR FIX: trace/maze/path are activity areas, not draggable label boxes */
+.hot.trace,.hot.mazePath,.hot.pathPaint,.hot.coloring{
+  background:rgba(255,255,255,.025)!important;
+  color:transparent!important;
+  font-size:0!important;
+  box-shadow:none!important;
+}
+.hot.trace::after,.hot.mazePath::after,.hot.pathPaint::after,.hot.coloring::after{
+  content:"";
+}
+.hot.trace.selected,.hot.mazePath.selected,.hot.pathPaint.selected,.hot.coloring.selected{
+  background:rgba(0,212,240,.055)!important;
+}
+.hot.trace{border-color:#8a5cff!important;}
+.hot.mazePath{border-color:#ff9d2f!important;}
+.hot.pathPaint{border-color:#00c98b!important;}
+.hot.coloring{border-color:#ff5fc8!important;}
+.hot.finish{font-size:20px!important;}
+
+.key-dot{position:absolute;width:14px;height:14px;border-radius:99px;background:#10b981;border:3px solid #fff;box-shadow:0 5px 12px rgba(0,0,0,.25);transform:translate(-50%,-50%);z-index:60;pointer-events:none}.key-line{position:absolute;inset:0;z-index:55;pointer-events:none}.key-line polyline{fill:none;stroke:#10b981;stroke-width:7;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:12 10;filter:drop-shadow(0 2px 2px rgba(0,0,0,.25))}.key-mode-on #stage{cursor:crosshair!important;outline:5px solid #10b981;outline-offset:8px}
+.correct-color-box{margin:12px 0;padding:12px;border:3px solid #e8ebf5;border-radius:18px;background:#fff;box-shadow:0 10px 25px rgba(0,0,0,.08)}.cc-grid{display:grid;grid-template-columns:repeat(4,42px);gap:10px;margin-top:8px}.cc-btn{width:42px;height:42px;border-radius:999px;border:5px solid #fff;box-shadow:0 6px 16px rgba(0,0,0,.18);font-size:24px;font-weight:1000;cursor:pointer}.cc-btn.active{outline:4px solid #00d4f0;transform:scale(1.08)}
+
+/* PATH POINT DRAG FIX - tidak menyentuh drag-drop */
+.key-dot{pointer-events:auto!important;cursor:grab!important;display:grid;place-items:center;color:#fff;font-size:9px;font-weight:1000;}
+.key-dot:active{cursor:grabbing!important;transform:translate(-50%,-50%) scale(1.18)!important;}
+.key-dot.selected{outline:4px solid #00d4f0;}
+
+/* PATH POINT EDITOR REAL */
+.mazePathLine{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:7;overflow:visible}
+.mazeStart,.mazeFinish,.mazePathPoint{box-shadow:0 8px 18px rgba(0,0,0,.16)!important;cursor:grab!important;user-select:none!important}
+.mazeStart{background:rgba(34,197,94,.92)!important;border:3px solid #16a34a!important;color:#fff!important;font-size:13px!important}
+.mazeFinish{background:rgba(239,68,68,.92)!important;border:3px solid #dc2626!important;color:#fff!important;font-size:13px!important}
+.mazePathPoint{background:#facc15!important;border:3px solid #f59e0b!important;color:#111827!important;font-size:14px!important}
+.mazeStart:active,.mazeFinish:active,.mazePathPoint:active{cursor:grabbing!important}
+
+/* === FIX TEXTBOX EDITOR PREVIEW FOLLOW BOX === */
+.hot.text{overflow:hidden!important;display:block!important;place-items:unset!important;box-sizing:border-box!important;}
+.hot.text .text-preview{width:100%!important;height:100%!important;box-sizing:border-box!important;display:flex!important;align-items:center;justify-content:center;overflow:hidden!important;white-space:pre-wrap!important;word-break:break-word!important;}
+.hot.text.selected{overflow:hidden!important;}
+
+.sidebar,.toolbar,.left-panel{
+max-width:100%;
+box-sizing:border-box;
+overflow-x:hidden;
+}
+
+.sidebar button,
+.toolbar button,
+.left-panel button{
+width:100%;
+max-width:100%;
+box-sizing:border-box;
+white-space:normal;
+word-break:break-word;
+font-size:12px;
+padding:10px 12px;
+}
+
+@media (max-width:768px){
+.sidebar,.toolbar,.left-panel{
+width:100%!important;
+min-width:0!important;
+padding:10px!important;
+}
+
+.sidebar button,
+.toolbar button,
+.left-panel button{
+font-size:11px!important;
+padding:8px 10px!important;
+border-radius:12px!important;
+}
+}
+html,
+body {
+  height: auto !important;
+  min-height: 100% !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+body {
+  position: static !important;
+}
+
+.editor {
+  min-height: 100vh !important;
+  height: auto !important;
+  overflow: visible !important;
+  padding-bottom: 80px !important;
+}
+
+.editor-wrap {
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.editor-main {
+  min-height: auto !important;
+  overflow: visible !important;
+}
+
+.canvas-wrap {
+  min-height: 80vh !important;
+  overflow: visible !important;
+}
+</style>
+
+<style>
+/* ===== SIDEBAR WIDTH FIX ===== */
+.left-panel,
+.sidebar,
+.toolbar-left{
+width:230px !important;
+min-width:230px !important;
+max-width:230px !important;
+padding:14px !important;
+box-sizing:border-box;
+overflow:hidden;
+}
+
+.left-panel button,
+.sidebar button,
+.toolbar-left button{
+width:100% !important;
+min-height:42px;
+font-size:12px !important;
+padding:10px 12px !important;
+border-radius:14px !important;
+white-space:normal !important;
+line-height:1.2;
+display:flex;
+align-items:center;
+justify-content:flex-start;
+gap:8px;
+}
+
+@media(max-width:768px){
+.left-panel,
+.sidebar,
+.toolbar-left{
+width:200px !important;
+min-width:200px !important;
+max-width:200px !important;
+}
+}
+/* ===== END FIX ===== */
+</style>
+
+
+<style id="egk-real-sidebar-export-fix">
+/* ===== REAL LEFT DASHBOARD FIX ===== */
+.editor-shell,
+.workspace,
+.main-editor,
+.editor-layout,
+body > main {
+  box-sizing: border-box;
+}
+
+aside:first-of-type,
+.sidebar:first-of-type,
+.leftbar,
+.left-panel,
+.tool-panel,
+.toolbar,
+.hotspot-toolbar,
+#toolbar,
+#toolsPanel {
+  width: 190px !important;
+  min-width: 190px !important;
+  max-width: 190px !important;
+  padding: 14px 14px !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
+}
+
+aside:first-of-type button,
+.sidebar:first-of-type button,
+.leftbar button,
+.left-panel button,
+.tool-panel button,
+.toolbar button,
+.hotspot-toolbar button,
+#toolbar button,
+#toolsPanel button {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  height: auto !important;
+  min-height: 34px !important;
+  padding: 8px 12px !important;
+  box-sizing: border-box !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  font-size: 11px !important;
+  line-height: 1.15 !important;
+  border-radius: 14px !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* kalau button lama punya transform/negative margin */
+aside:first-of-type *,
+.sidebar:first-of-type *,
+.leftbar *,
+.left-panel *,
+.tool-panel *,
+.toolbar *,
+.hotspot-toolbar *,
+#toolbar *,
+#toolsPanel * {
+  max-width: 100% !important;
+}
+
+/* Tombol export assets */
+#exportAssetsBtn {
+  background: linear-gradient(135deg,#7c3aed,#06b6d4) !important;
+  color: #fff !important;
+  border: 0 !important;
+  border-radius: 14px !important;
+  font-weight: 800 !important;
+  padding: 10px 14px !important;
+  box-shadow: 0 6px 0 rgba(0,0,0,.16) !important;
+  cursor: pointer !important;
+}
+
+@media (max-width: 900px) {
+  aside:first-of-type,
+  .sidebar:first-of-type,
+  .leftbar,
+  .left-panel,
+  .tool-panel,
+  .toolbar,
+  .hotspot-toolbar,
+  #toolbar,
+  #toolsPanel {
+    width: 180px !important;
+    min-width: 180px !important;
+    max-width: 180px !important;
+  }
+}
+</style>
+
+
+<style id="egk-left-panel-final-fix">
+.editor-panel.toolbox{width:220px!important;min-width:220px!important;max-width:220px!important;padding:16px!important;overflow:visible!important}.editor-panel.toolbox .toolgrid{display:flex!important;flex-direction:column!important;gap:8px!important}.editor-panel.toolbox button{width:100%!important;max-width:100%!important;box-sizing:border-box!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;font-size:12px!important;padding-left:12px!important;padding-right:12px!important}.editor-main{grid-template-columns:220px minmax(0,1fr) 260px!important;align-items:start!important}
+</style>
+</head><body><button id="themeBtn" class="theme-btn">🌙</button><main class="editor"><div class="editor-wrap"><header class="editor-head"><div><p class="eyebrow">🛠️ Editor Universal</p><h1 id="title">Hotspot 3 Aspek</h1><p class="subtext" id="subtitle">Pilih aspek, edit hotspot, lalu simpan.</p></div><div class="quick-links"><a class="pill-btn cream" href="index.html">🎮 Game</a><a class="pill-btn teacher" href="dashboard.html">📋 Dashboard</a></div></header><section class="editor-panel"><div class="aspect-tabs" id="aspectTabs"></div></section><section class="editor-panel controls"><span class="status-badge" id="pageBadge">Halaman 1/26</span><button id="prev" class="pill-btn">← Prev</button><input id="page" type="number" min="1" value="1"><button id="next" class="pill-btn">Next →</button><button id="save" class="pill-btn finish-btn">💾 Simpan</button><button id="export" class="pill-btn score-btn">⬇️ Export Data</button><button id="rapikanDragBtn" class="pill-btn teacher" type="button">🧲 Rapikan Drag</button>
+<button id="exportAssetsBtn" type="button">📦 Export Assets</button><button id="reset" class="pill-btn">↩️ Reset</button><span class="hintline" id="status">Siap edit</span></section><section class="editor-main"><aside class="editor-panel toolbox"><div class="mini-title">Tambah Hotspot</div><div class="toolgrid"><button data-add="mark" class="pill-btn">☑️ Check</button><button data-add="truefalse" class="pill-btn teacher">✅✖ Benar/Salah</button><button data-add="text" class="pill-btn">⌨️ Text</button><button data-add="circle" class="pill-btn">⭕ Circle</button><button data-add="connect" class="pill-btn">🔗 Connect</button><button data-add="dragitem" class="pill-btn">🧩 Drag Item dari Slide</button><button data-add="imageLocal" class="pill-btn score-btn">🖼️ Drag Item dari Local</button><button data-add="dropzone" class="pill-btn">🎯 Drop Zone</button><button data-add="maze" class="pill-btn">🧭 Maze / Path Point</button><button id="addMazePathPoint" class="pill-btn score-btn" type="button">➕ Path Point</button><button data-add="trace" class="pill-btn">✍️ Trace</button><button data-add="coloring" class="pill-btn">🎨 Coloring</button><button data-add="colorzone" class="pill-btn score-btn">🌈 Color Zones</button><button data-add="hint" class="pill-btn">💬 Hint</button><button id="del" class="pill-btn">🗑️ Hapus</button><input id="imageLocalInput" type="file" accept="image/*" style="display:none"></div><p class="hintline" style="margin-top:14px">Editor ini sudah beneran 3 aspek. Klik tab Afektif/Kognitif/Psikomotorik di atas.</p></aside><div class="canvas-wrap"><div id="stage" class="edit-stage"><img id="slide" draggable="false"><div id="layer" class="ed-layer"></div></div></div><aside class="editor-panel propbox"><div class="mini-title">Properti Selected</div><div id="props" class="hintline">Klik hotspot dulu.</div><label>Data slide saat ini</label><textarea id="json" class="jsonbox"></textarea><button id="applyJson" class="pill-btn teacher" style="margin-top:8px">Terapkan JSON Slide</button></aside></section></div></main><script src="data.js"></script><script>
+const $=q=>document.querySelector(q), layer=$('#layer');let DATA=structuredClone(window.ASPEK_DATA||ASPEK_DATA), aspect=new URLSearchParams(location.search).get('aspect')||'afektif', page=1, selected=null, drag=null, keyEditMode=false;if(!DATA[aspect])aspect='afektif';try{const s=JSON.parse(localStorage.getItem('egk_editor_data')||'null'); if(s) Object.keys(s).forEach(k=>{if(DATA[k])DATA[k].overlays=s[k].overlays||DATA[k].overlays})}catch{}
+const icons={afektif:'💖',kognitif:'🧠',psikomotorik:'✋'};function saveLocal(){localStorage.setItem('egk_editor_data',JSON.stringify(DATA));$('#status').textContent='✅ Tersimpan. Game otomatis pakai data ini.'}function aData(){return DATA[aspect]}function arr(){return aData().overlays[String(page)]||(aData().overlays[String(page)]=[])}function base(){return {w:aData().baseW||1600,h:aData().baseH||900}}function pct(v,m){return v/m*100+'%'}function imgPath(){return `${aData().folder}/slide_${String(page).padStart(2,'0')}.png`}function setAspect(a){aspect=a;page=1;selected=null;history.replaceState(null,'',`?aspect=${a}`);render()}
+function init(){const tabs=$('#aspectTabs');Object.keys(DATA).forEach(k=>{const b=document.createElement('button');b.className='aspect-tab';b.dataset.a=k;b.textContent=`${icons[k]||'⭐'} ${DATA[k].title.replace('Aspek ','')}`;b.onclick=()=>setAspect(k);tabs.appendChild(b)});$('#page').onchange=()=>{page=Math.max(1,Math.min(aData().total,Number($('#page').value)||1));selected=null;render()};$('#prev').onclick=()=>{page=Math.max(1,page-1);selected=null;render()};$('#next').onclick=()=>{page=Math.min(aData().total,page+1);selected=null;render()};document.querySelectorAll('[data-add]').forEach(b=>b.onclick=()=>add(b.dataset.add));$('#del').onclick=del;$('#save').onclick=saveLocal; const rb=$('#rapikanDragBtn'); if(rb) rb.onclick=rapikanDragDrop;$('#reset').onclick=()=>{if(confirm('Reset semua edit localStorage?')){localStorage.removeItem('egk_editor_data');location.reload()}};$('#export').onclick=()=>{const blob=new Blob(['const ASPEK_DATA = '+JSON.stringify(DATA,null,2)+';'],{type:'text/javascript'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='data-edited-3-aspek.js';a.click()};$('#applyJson').onclick=()=>{try{aData().overlays[String(page)]=JSON.parse($('#json').value);selected=null;render();saveLocal()}catch(e){alert('JSON belum valid')}};applyTheme();render()}
+
+function getAutoDragPos(n, source){
+  const b=base();
+  const itemW = Math.max(110, Math.round(b.w*.13));
+  const itemH = Math.max(95, Math.round(b.h*.105));
+  const startX = Math.round(b.w*.07);
+  const startY = Math.round(b.h*.66);
+  const gapX = Math.round(b.w*.025);
+  const gapY = Math.round(b.h*.025);
+  const cols = Math.max(1, Math.floor((b.w - startX*2) / (itemW + gapX)));
+  const slot = Math.max(0, Number(n||1)-1);
+  const row = Math.floor(slot / cols);
+  const col = slot % cols;
+  const maxRows = Math.max(1, Math.floor((b.h - startY - itemH - 20) / (itemH + gapY)) + 1);
+  const safeRow = row % maxRows;
+  const cycle = Math.floor(row / maxRows);
+  let x = startX + col * (itemW + gapX) + cycle * 16;
+  let y = startY + safeRow * (itemH + gapY) + cycle * 12;
+  x = Math.max(0, Math.min(b.w - itemW, x));
+  y = Math.max(0, Math.min(b.h - itemH, y));
+  return {x:Math.round(x), y:Math.round(y), w:itemW, h:itemH};
+}
+function getAutoDropPos(n){
+  const b=base();
+  const w=Math.max(150,Math.round(b.w*.18));
+  const h=Math.max(90,Math.round(b.h*.11));
+  const startX=Math.round(b.w*.10), startY=Math.round(b.h*.14);
+  const gapX=Math.round(b.w*.025), gapY=Math.round(b.h*.025);
+  const cols=Math.max(1,Math.floor((b.w-startX*2)/(w+gapX)));
+  const slot=Math.max(0,Number(n||1)-1);
+  const row=Math.floor(slot/cols), col=slot%cols;
+  const maxRows=Math.max(1,Math.floor((b.h*.44-startY)/(h+gapY))+1);
+  const safeRow=row%maxRows, cycle=Math.floor(row/maxRows);
+  let x=startX+col*(w+gapX)+cycle*16;
+  let y=startY+safeRow*(h+gapY)+cycle*12;
+  x=Math.max(0,Math.min(b.w-w,x));
+  y=Math.max(0,Math.min(b.h-h,y));
+  return {x:Math.round(x),y:Math.round(y),w,h};
+}
+function rapikanDragDrop(){
+  let c=0;
+  arr().forEach(o=>{
+    if(o.type!=='dragdrop')return;
+    const b=base();
+    (o.args[0]||[]).forEach((it,i)=>{
+      const outside = Number(it.x||0)<0 || Number(it.y||0)<0 || Number(it.x||0)>b.w-10 || Number(it.y||0)>b.h-10;
+      if(outside){ Object.assign(it,getAutoDragPos(i+1,it.source||'slide')); c++; }
+    });
+    (o.args[1]||[]).forEach((d,i)=>{
+      const outside = Number(d.x||0)<0 || Number(d.y||0)<0 || Number(d.x||0)>b.w-10 || Number(d.y||0)>b.h-10;
+      if(outside){ Object.assign(d,getAutoDropPos(i+1)); c++; }
+    });
+  });
+  selected=null; render(); saveLocal(); alert(c?('Berhasil merapikan '+c+' item yang keluar slide.'): 'Semua item sudah di area slide.');
+}
+
+function getOrCreateDragDrop(){let o=arr().find(x=>x.type==='dragdrop');if(!o){o={id:'dragdrop_'+aspect+'_'+page+'_'+Date.now(),type:'dragdrop',args:[[],[]]};arr().push(o)}return o}
+function add(type){const id=type+'_'+aspect+'_'+page+'_'+Date.now();let o;
+ if(type==='imageLocal'){
+   const inp=$('#imageLocalInput');
+   inp.onchange=()=>{
+     const f=inp.files&&inp.files[0]; if(!f)return;
+     const rd=new FileReader();
+     rd.onload=()=>{
+       const b=base();
+       const dd=getOrCreateDragDrop();
+       const items=dd.args[0]||(dd.args[0]=[]);
+       const drops=dd.args[1]||(dd.args[1]=[]);
+       const n=items.length+1;
+       const autoTarget=drops.length?Math.min(n-1,drops.length-1):0;
+       items.push({
+         id:'local_piece_'+Date.now(),
+         t:'',
+         name:f.name,
+         src:rd.result,
+         dataUrl:rd.result,
+         ...getAutoDragPos(n,'local'),
+         target:autoTarget,
+         removeBg:false,
+         isLocalImage:true
+       });
+       selected=selKey(dd,'item',items.length-1);
+       render(); saveLocal(); inp.value='';
+     };
+     rd.readAsDataURL(f)
+   };
+   inp.click(); return;
+ }
+ if(type==='dragitem'||type==='dropzone'){
+   const dd=getOrCreateDragDrop(), b=base();
+   if(type==='dragitem'){
+     const items=dd.args[0]||(dd.args[0]=[]), n=items.length+1;
+     const drops=dd.args[1]||(dd.args[1]=[]);
+     const autoTarget=drops.length?Math.min(n-1,drops.length-1):0;
+     items.push({id:'slide_piece_'+Date.now()+'_'+n,t:'',source:'slide',...getAutoDragPos(n,'slide'),target:autoTarget,removeBg:true,bgTolerance:52});
+     selected=selKey(dd,'item',items.length-1);
+   }else{
+     const drops=dd.args[1]||(dd.args[1]=[]), n=drops.length+1;
+     drops.push({id:'drop'+Date.now()+'_'+n,...getAutoDropPos(n)});
+     selected=selKey(dd,'drop',drops.length-1);
+   }
+   render();saveLocal();return;
+ }
+ if(type==='mark')o={id,type,args:[200,200,70,'check']};
+ if(type==='truefalse')o={id,type,args:[200,200,70,'check'],correctSymbol:'check'};
+ if(type==='text')o={id,type,args:[180,180,320,90],text:'Textbox',fontSize:24,fontFamily:'Arial',textColor:'#111111',bold:true,italic:false,textAlign:'center',lineHeight:'1.2',padding:8,borderRadius:14,bgColor:'rgba(255,255,255,.65)'};
+ if(type==='circle')o={id,type,args:[240,240,120]};
+ if(type==='connect')o={id,type,args:{points:[[220,220],[520,220]]},note:'hubungkan titik 1 ke titik 2'};
+ if(type==='hint')o={id,type,args:[180,180,320,86,'Tulis petunjuk di sini.']};
+ if(type==='mazePath')o={id,type,args:[120,160,760,760],note:'area labirin: user menarik garis di mode game'};
+ if(type==='finish')o={id,type,args:[520,520,150,90],note:'finish maze'};
+ if(type==='pathPaint')o={id,type,args:[180,320,420,120],note:'area yang boleh diwarnai path'};
+ if(type==='trace')o={id,type,args:[120,160,760,760],note:'area trace: user menarik garis di mode game'};
+ if(type==='coloring')o={id,type,args:[120,120,700,500],note:'area gambar untuk coloring'};
+ if(type==='colorzone')o={id,type,args:[260,260,160,120,'#ffcc33'],note:'zona warna bernomor'};
+ if(!o)return;arr().push(o);selected=id;render();saveLocal()}function del(){if(!selected)return;const parts=String(selected).split('|'), pid=parts[0], kind=parts[1], idx=Number(parts[2]);const o=arr().find(x=>x.id===pid);if(o&&o.type==='dragdrop'&&(kind==='item'||kind==='drop')){o.args[kind==='item'?0:1].splice(idx,1);if((o.args[0]||[]).length===0&&(o.args[1]||[]).length===0){const pi=arr().findIndex(x=>x.id===pid);if(pi>=0)arr().splice(pi,1)}}else{const i=arr().findIndex(x=>x.id===pid);if(i>=0)arr().splice(i,1)}selected=null;render();saveLocal()}
+function render(){const d=aData(),b=base();$('#stage').style.setProperty('--ratio',`${b.w}/${b.h}`);$('#slide').src=imgPath();$('#page').max=d.total;$('#page').value=page;$('#pageBadge').textContent=`${icons[aspect]||''} ${d.title} • Halaman ${page}/${d.total}`;$('#title').textContent=`${icons[aspect]||''} Editor ${d.title}`;$('#subtitle').textContent=d.subtitle||'Edit hotspot slide.';document.querySelectorAll('.aspect-tab').forEach(x=>x.classList.toggle('active',x.dataset.a===aspect));layer.innerHTML='';arr().forEach(o=>drawHot(o));$('#json').value=JSON.stringify(arr(),null,2);props()}
+function rectFromArgs(o,def=[80,80,260,90]){
+  const a=o&&o.args;
+  if(Array.isArray(a)) return {x:Number(a[0]??def[0]),y:Number(a[1]??def[1]),w:Number(a[2]??def[2]),h:Number(a[3]??def[3])};
+  if(a&&typeof a==='object') return {x:Number(a.x??def[0]),y:Number(a.y??def[1]),w:Number(a.w??a.width??def[2]),h:Number(a.h??a.height??def[3])};
+  return {x:def[0],y:def[1],w:def[2],h:def[3]};
+}
+function syncRectArgs(o,r){
+  if(!o.args) o.args=[];
+  if(Array.isArray(o.args)){o.args[0]=Math.round(r.x);o.args[1]=Math.round(r.y);o.args[2]=Math.round(r.w);o.args[3]=Math.round(r.h);}
+  else if(typeof o.args==='object'){o.args.x=Math.round(r.x);o.args.y=Math.round(r.y);o.args.w=Math.round(r.w);o.args.h=Math.round(r.h);}
+}
+function rectTypes(){return ['text','imageLocal','mazePath','finish','pathPaint','trace','coloring','colorzone','hint']}
+function getConnectPoints(o){
+  const a=o?.args;
+  if(a&&typeof a==='object'&&!Array.isArray(a)&&Array.isArray(a.points)) return a.points.map(p=>[Number(p[0]??p.x??200),Number(p[1]??p.y??200)]);
+  if(Array.isArray(a)){
+    const pts=[];
+    a.forEach(g=>{
+      if(Array.isArray(g)&&typeof g[0]==='number') pts.push([Number(g[0]),Number(g[1])]);
+      else if(Array.isArray(g)&&Array.isArray(g[0])) pts.push([Number(g[0][0]??200),Number(g[0][1]??200)]);
+      else if(g&&typeof g==='object') pts.push([Number(g.x??200),Number(g.y??200)]);
+    });
+    return pts.length?pts:[[220,220],[520,220]];
+  }
+  return [[220,220],[520,220]];
+}
+function setConnectPoint(o,i,x,y){
+  if(!o.args) o.args=[[[220,220]],[[520,220]]];
+  if(o.args&&typeof o.args==='object'&&!Array.isArray(o.args)&&Array.isArray(o.args.points)){o.args.points[i]=[Math.round(x),Math.round(y)];return}
+  if(!Array.isArray(o.args)) o.args=[];
+  while(o.args.length<=i)o.args.push([[220+i*80,220]]);
+  if(Array.isArray(o.args[i])&&Array.isArray(o.args[i][0])) o.args[i][0]=[Math.round(x),Math.round(y)];
+  else o.args[i]=[[Math.round(x),Math.round(y)]];
+}
+function pos(o){
+  if((o.type==='mark'||o.type==='circle')&&!Array.isArray(o.args)) o.args=[];
+  if(o.type==='mark'||o.type==='truefalse'){const x=Number(o.args[0]??200),y=Number(o.args[1]??200),s=Number(o.args[2]??70);return {x:x-s/2,y:y-s/2,w:s,h:s,label:o.type==='truefalse'?'✅✖':'☑️'}}
+  if(o.type==='circle'){const x=Number(o.args[0]??240),y=Number(o.args[1]??240),s=Number(o.args[2]??120);return {x:x-s/2,y:y-s/2,w:s,h:s,label:' '}}
+  if(o.type==='connect'){const pts=getConnectPoints(o), xs=pts.map(p=>p[0]), ys=pts.map(p=>p[1]); const x=Math.min(...xs)-22,y=Math.min(...ys)-22,w=Math.max(44,Math.max(...xs)-Math.min(...xs)+44),h=Math.max(44,Math.max(...ys)-Math.min(...ys)+44); return {x,y,w,h,label:'🔗'}}
+  if(rectTypes().includes(o.type)){const r=rectFromArgs(o,[80,80,260,90]);const lab={text:'Teks',imageLocal:'🖼️',mazePath:'🧭 Maze',finish:'🏁 Finish',pathPaint:'✨ Path',trace:'✍️ Trace',coloring:'🎨 Coloring',colorzone:'🌈 Zone',hint:'💬 Hint'}[o.type];return {...r,label:lab}}
+  return {x:80,y:80,w:260,h:70,label:'💬'}
+}
+function selKey(o,kind='',idx=''){return kind?`${o.id}|${kind}|${idx}`:o.id}
+function drawConnectHot(o){
+  const b=base(), pts=getConnectPoints(o);
+  for(let i=0;i<pts.length-1;i+=2){
+    const a=pts[i], c=pts[i+1], dx=c[0]-a[0], dy=c[1]-a[1], len=Math.sqrt(dx*dx+dy*dy), ang=Math.atan2(dy,dx)*180/Math.PI;
+    const line=document.createElement('div'); line.className='connect-line';
+    Object.assign(line.style,{left:pct(a[0],b.w),top:pct(a[1]-3,b.h),width:pct(len,b.w),transform:`rotate(${ang}deg)`}); layer.appendChild(line);
+  }
+  pts.forEach((pt,i)=>{const key=selKey(o,'connectPoint',i),el=document.createElement('div');el.className='hot connectPoint'+(selected===key?' selected':'');el.textContent='🔗'+(i+1);Object.assign(el.style,{left:pct(pt[0]-22,b.w),top:pct(pt[1]-22,b.h),width:pct(44,b.w),height:pct(44,b.h)});bindHotDrag(el,o,key,'connectPoint',i);layer.appendChild(el)});
+}
+
+function drawKeyPath(o){
+  const b=base(), pts=o.keyPath||[]; if(!pts.length)return;
+  let svg=layer.querySelector('.key-line[data-id="'+o.id+'"]');
+  if(!svg){svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.classList.add('key-line');svg.dataset.id=o.id;svg.setAttribute('viewBox',`0 0 ${b.w} ${b.h}`);layer.appendChild(svg)}
+  svg.innerHTML='<polyline points="'+pts.map(p=>`${p.x},${p.y}`).join(' ')+'" />';
+  pts.forEach((pt,i)=>{
+    const d=document.createElement('div');
+    const k=selKey(o,'keyPath',i);
+    d.className='key-dot'+(selected===k?' selected':'');
+    d.title='Path point '+(i+1)+' - geser titik ini';
+    d.textContent=String(i+1);
+    d.style.left=pct(pt.x,b.w);d.style.top=pct(pt.y,b.h);
+    bindKeyPointDrag(d,o,i,k);
+    layer.appendChild(d);
+  });
+}
+let suppressKeyStageClick=false;
+function refreshKeyPathVisual(o){
+  const b=base(), pts=o.keyPath||[];
+  const svg=layer.querySelector('.key-line[data-id="'+o.id+'"]');
+  if(svg){
+    const poly=svg.querySelector('polyline');
+    if(poly) poly.setAttribute('points', pts.map(p=>`${p.x},${p.y}`).join(' '));
+  }
+}
+function bindKeyPointDrag(dot,o,idx,key){
+  dot.onpointerdown=e=>{
+    e.preventDefault(); e.stopPropagation();
+    selected=key;
+    document.querySelectorAll('.key-dot.selected').forEach(x=>x.classList.remove('selected'));
+    dot.classList.add('selected');
+    const rect=$('#stage').getBoundingClientRect(), b=base();
+    let moved=false;
+    try{dot.setPointerCapture(e.pointerId)}catch{}
+    const moveEv=ev=>{
+      moved=true;
+      const x=Math.max(0,Math.min(b.w,Math.round((ev.clientX-rect.left)/rect.width*b.w)));
+      const y=Math.max(0,Math.min(b.h,Math.round((ev.clientY-rect.top)/rect.height*b.h)));
+      o.keyPath=o.keyPath||[];
+      o.keyPath[idx]={x,y};
+      dot.style.left=pct(x,b.w); dot.style.top=pct(y,b.h);
+      refreshKeyPathVisual(o);
+      const pkey=$('#pkey'); if(pkey) pkey.value=JSON.stringify(o.keyPath||[]);
+    };
+    const upEv=ev=>{
+      document.removeEventListener('pointermove',moveEv);
+      document.removeEventListener('pointerup',upEv);
+      try{dot.releasePointerCapture(e.pointerId)}catch{}
+      suppressKeyStageClick=true; setTimeout(()=>suppressKeyStageClick=false,80);
+      saveLocal();
+      if(moved){ selected=o.id; render(); }
+    };
+    document.addEventListener('pointermove',moveEv,{passive:false});
+    document.addEventListener('pointerup',upEv,{once:true});
+  };
+}
+function selectedObj(){ return arr().find(x=>x.id===selected || selKey(x)===selected); }
+function setKeyMode(on){ keyEditMode=!!on; document.body.classList.toggle('key-mode-on',keyEditMode); $('#status').textContent=keyEditMode?'Mode kunci ON: klik di gambar untuk tambah titik jalur benar.':'Siap edit'; props(); }
+function stagePointFromRect(o){const r=rectFromArgs(o,[120,120,420,120]);return{x:Math.round(r.x+r.w*.18),y:Math.round(r.y+r.h*.5)}}
+function stagePointFromEvent(e){const r=$('#stage').getBoundingClientRect(),b=base();return{x:Math.round((e.clientX-r.left)/r.width*b.w),y:Math.round((e.clientY-r.top)/r.height*b.h)}}
+
+function drawHot(o){
+  if(o.type==='dragdrop'){ drawDragDropHot(o); return; }
+  if(o.type==='connect'){ drawConnectHot(o); return; }
+  const b=base(),p=pos(o),key=selKey(o),el=document.createElement('div');el.className='hot '+o.type+(selected===key?' selected':'');const activityTypes=['mazePath','pathPaint','trace','coloring'];el.textContent=activityTypes.includes(o.type)?'':p.label;Object.assign(el.style,{left:pct(p.x,b.w),top:pct(p.y,b.h),width:pct(p.w,b.w),height:pct(p.h,b.h)}); if((o.type==='trace'||o.type==='mazePath') && (o.keyPath||[]).length) drawKeyPath(o);
+  if(o.type==='text'){
+    el.textContent='';
+    const pv=document.createElement('div'); pv.className='text-preview'; pv.textContent=o.text||'Textbox';
+    Object.assign(pv.style,{width:'100%',height:'100%',boxSizing:'border-box',overflow:'hidden',fontSize:(o.fontSize||24)+'px',fontFamily:o.fontFamily||'Arial',color:o.textColor||'#111',fontWeight:o.bold?'900':'400',fontStyle:o.italic?'italic':'normal',textAlign:o.textAlign||'center',lineHeight:o.lineHeight||'1.2',padding:(o.padding??8)+'px',borderRadius:(o.borderRadius??14)+'px',background:o.bgColor||'rgba(255,255,255,.65)'});
+    el.style.borderRadius=(o.borderRadius??14)+'px'; el.appendChild(pv);
+  }
+  if(o.type==='circle'){el.style.borderRadius='999px';el.style.background='rgba(255,255,255,.06)';}
+  if(o.type==='imageLocal'&&o.args?.[4]){el.textContent='';el.style.backgroundImage=`url(${o.args[4]})`;el.style.backgroundSize='contain';el.style.backgroundRepeat='no-repeat';el.style.backgroundPosition='center';}
+  if(o.type==='finish'){el.style.borderColor='#00cc88';el.style.background='rgba(0,204,136,.18)'}
+  if(o.type==='colorzone'){el.style.borderColor=o.args?.[4]||'#ffcc33';el.style.background=(o.args?.[4]||'#ffcc33')+'33'}
+  bindHotDrag(el,o,key);layer.appendChild(el)
+}
+
+const piecePreviewCache = new Map();
+function makeEditorPieceUrl(item){
+  if(item.removeBg===false) return null;
+  const slideEl=$('#slide'), b=base(); if(!slideEl||!slideEl.complete) return null;
+  const tol=Number(item.bgTolerance??item.tolerance??52);
+  const key=['v19-flood',imgPath(),item.x,item.y,item.w,item.h,tol,item.removeBg].join('|');
+  if(piecePreviewCache.has(key)) return piecePreviewCache.get(key);
+  try{
+    const c=document.createElement('canvas'), nw=slideEl.naturalWidth||slideEl.width, nh=slideEl.naturalHeight||slideEl.height;
+    const sx=Math.max(0,Math.round((Number(item.x)||0)/Math.max(1,b.w)*nw));
+    const sy=Math.max(0,Math.round((Number(item.y)||0)/Math.max(1,b.h)*nh));
+    const sw=Math.max(1,Math.round((Number(item.w)||1)/Math.max(1,b.w)*nw));
+    const sh=Math.max(1,Math.round((Number(item.h)||1)/Math.max(1,b.h)*nh));
+    c.width=Math.max(1,Math.round(Number(item.w)||sw)); c.height=Math.max(1,Math.round(Number(item.h)||sh));
+    const ctx=c.getContext('2d',{willReadFrequently:true}); ctx.drawImage(slideEl,sx,sy,sw,sh,0,0,c.width,c.height);
+    const img=ctx.getImageData(0,0,c.width,c.height), d=img.data, W=c.width,H=c.height;
+    const t=Math.max(8,tol||52), id=(x,y)=>(y*W+x)*4;
+    const isBg=i=>{const r=d[i],g=d[i+1],bl=d[i+2],a=d[i+3]; if(a<8)return true; const mx=Math.max(r,g,bl), mn=Math.min(r,g,bl), neutral=(mx-mn)<=Math.max(18,t*.55); return (r>=238&&g>=238&&bl>=238)||(mx>=230&&neutral)};
+    const seen=new Uint8Array(W*H), q=[]; const push=(x,y)=>{if(x<0||y<0||x>=W||y>=H)return; const n=y*W+x; if(seen[n])return; if(!isBg(id(x,y)))return; seen[n]=1; q.push([x,y]);};
+    for(let x=0;x<W;x++){push(x,0);push(x,H-1)} for(let y=0;y<H;y++){push(0,y);push(W-1,y)}
+    for(let k=0;k<q.length;k++){const [x,y]=q[k];push(x+1,y);push(x-1,y);push(x,y+1);push(x,y-1)}
+    for(let n=0;n<seen.length;n++) if(seen[n]) d[n*4+3]=0;
+    let kept=0; for(let i=3;i<d.length;i+=4) if(d[i]>20) kept++;
+    if(kept/Math.max(1,W*H)<0.01){ ctx.clearRect(0,0,c.width,c.height); ctx.drawImage(slideEl,sx,sy,sw,sh,0,0,c.width,c.height); }
+    else ctx.putImageData(img,0,0);
+    const url=c.toDataURL('image/png'); piecePreviewCache.set(key,url); return url;
+  }catch(e){return null}
+}
+function setEditorPieceBg(el,it){
+  const localSrc=it.src||it.dataUrl||it.image||it.imageSrc;
+  if(localSrc){
+    el.style.backgroundImage=`url(${localSrc})`;
+    el.style.backgroundSize='contain';
+    el.style.backgroundPosition='center';
+    el.style.backgroundRepeat='no-repeat';
+    el.style.backgroundColor='transparent';
+    return;
+  }
+  const b=base(); const url=makeEditorPieceUrl(it);
+  if(url){el.style.backgroundImage=`url(${url})`;el.style.backgroundSize='100% 100%';el.style.backgroundPosition='center';el.style.backgroundColor='transparent';return;}
+  const bgSize=(b.w/Math.max(1,it.w)*100)+'% '+(b.h/Math.max(1,it.h)*100)+'%';const bgPos=((it.x/Math.max(1,b.w-it.w))*100)+'% '+((it.y/Math.max(1,b.h-it.h))*100)+'%';
+  el.style.backgroundImage=`url(${imgPath()})`;el.style.backgroundSize=bgSize;el.style.backgroundPosition=bgPos;el.style.backgroundRepeat='no-repeat';el.style.backgroundColor='transparent';
+}
+
+function drawDragDropHot(o){
+  const b=base(); const [items=[],drops=[]]=o.args||[];
+  drops.forEach((d,i)=>{const key=selKey(o,'drop',i),el=document.createElement('div');el.className='hot dropHot'+(selected===key?' selected':'');el.textContent='🎯 Drop '+(i+1);Object.assign(el.style,{left:pct(d.x,b.w),top:pct(d.y,b.h),width:pct(d.w,b.w),height:pct(d.h,b.h),borderColor:'#00d4f0',background:'rgba(0,212,240,.16)',borderRadius:(Number(d.r??d.radius??14))+'px'});bindHotDrag(el,o,key,'drop',i);layer.appendChild(el)});
+  items.forEach((it,i)=>{const key=selKey(o,'item',i),el=document.createElement('div');el.className='hot dragHot'+(selected===key?' selected':'');el.textContent='';Object.assign(el.style,{left:pct(it.x,b.w),top:pct(it.y,b.h),width:pct(it.w,b.w),height:pct(it.h,b.h),borderColor:'#ff8c42',backgroundRepeat:'no-repeat',borderRadius:(Number(it.r??it.radius??14))+'px'});setEditorPieceBg(el,it);bindHotDrag(el,o,key,'item',i);layer.appendChild(el)});
+}
+function selectLive(el,key){
+  selected=key;
+  document.querySelectorAll('.hot.selected').forEach(x=>x.classList.remove('selected'));
+  el.classList.add('selected');
+  props();
+}
+function applyLiveStyle(el,o,kind='',idx=0){
+  const b=base();
+  let x=0,y=0,w=80,h=80,r=14;
+  if(kind==='connectPoint'){const pt=getConnectPoints(o)[idx]||[200,200];x=pt[0]-22;y=pt[1]-22;w=44;h=44;r=999}
+  else if(o.type==='mark'||o.type==='truefalse'||o.type==='circle'){x=Number(o.args?.[0]??200)-Number(o.args?.[2]??70)/2;y=Number(o.args?.[1]??200)-Number(o.args?.[2]??70)/2;w=Number(o.args?.[2]??70);h=w;r=999}
+  else if(rectTypes().includes(o.type)){const rr=rectFromArgs(o,[80,80,260,90]);x=rr.x;y=rr.y;w=rr.w;h=rr.h;r=(o.type==='hint'?16:12)}
+  else if(o.type==='dragdrop'){
+    const obj=kind==='item'?o.args[0][idx]:o.args[1][idx];
+    x=obj.x;y=obj.y;w=obj.w;h=obj.h;r=Number(obj.r??obj.radius??14);
+    if(kind==='item'){setEditorPieceBg(el,obj);}
+  }
+  el.style.left=pct(x,b.w); el.style.top=pct(y,b.h); el.style.width=pct(w,b.w); el.style.height=pct(h,b.h); el.style.borderRadius=r+'px';
+}
+function addResizeHandle(el,o,key,kind='',idx=0){
+  if(kind==='connectPoint') return;
+  const h=document.createElement('span');h.className='resize-handle';
+  h.onpointerdown=e=>{
+    e.preventDefault(); e.stopPropagation(); selectLive(el,key);
+    const b=base(),rect=$('#stage').getBoundingClientRect(),start=JSON.parse(JSON.stringify(o.args)),sx=e.clientX,sy=e.clientY;
+    const moveEv=ev=>{
+      const dw=(ev.clientX-sx)/rect.width*b.w,dh=(ev.clientY-sy)/rect.height*b.h;
+      resize(o,start,dw,dh,kind,idx);
+      applyLiveStyle(el,o,kind,idx);
+    };
+    const upEv=ev=>{document.removeEventListener('pointermove',moveEv);document.removeEventListener('pointerup',upEv);saveLocal();render();};
+    document.addEventListener('pointermove',moveEv,{passive:false});
+    document.addEventListener('pointerup',upEv,{once:true});
+  };
+  el.appendChild(h)
+}
+function bindHotDrag(el,o,key,kind='',idx=0){
+  addResizeHandle(el,o,key,kind,idx);
+  el.onpointerdown=e=>{
+    if(e.target.classList.contains('resize-handle'))return;
+    e.preventDefault(); e.stopPropagation(); selectLive(el,key);
+    const b=base(),rect=$('#stage').getBoundingClientRect(),start=JSON.parse(JSON.stringify(o.args)),sx=e.clientX,sy=e.clientY;
+    const moveEv=ev=>{
+      const dx=(ev.clientX-sx)/rect.width*b.w,dy=(ev.clientY-sy)/rect.height*b.h;
+      move(o,start,dx,dy,kind,idx);
+      applyLiveStyle(el,o,kind,idx);
+    };
+    const upEv=ev=>{document.removeEventListener('pointermove',moveEv);document.removeEventListener('pointerup',upEv);saveLocal();render();};
+    document.addEventListener('pointermove',moveEv,{passive:false});
+    document.addEventListener('pointerup',upEv,{once:true});
+  }
+}
+function move(o,start,dx,dy,kind='',idx=0){
+ if(kind==='connectPoint'){const pts=getConnectPoints({args:start}); const p=pts[idx]||[200,200]; setConnectPoint(o,idx,p[0]+dx,p[1]+dy); return}
+ if(o.type==='mark'||o.type==='truefalse'||o.type==='circle'){o.args[0]=Math.round((start[0]??200)+dx);o.args[1]=Math.round((start[1]??200)+dy)}
+ else if(rectTypes().includes(o.type)){
+   if(Array.isArray(start)){o.args[0]=Math.round((start[0]??80)+dx);o.args[1]=Math.round((start[1]??80)+dy)}
+   else {const r=rectFromArgs({args:start},[80,80,260,90]);syncRectArgs(o,{...r,x:r.x+dx,y:r.y+dy})}
+ }
+ else if(o.type==='connect'){const pts=getConnectPoints({args:start}); pts.forEach((p,i)=>setConnectPoint(o,i,p[0]+dx,p[1]+dy))}
+ else if(o.type==='dragdrop'){if(kind==='item'){o.args[0][idx].x=Math.round(start[0][idx].x+dx);o.args[0][idx].y=Math.round(start[0][idx].y+dy)}if(kind==='drop'){o.args[1][idx].x=Math.round(start[1][idx].x+dx);o.args[1][idx].y=Math.round(start[1][idx].y+dy)}}
+}
+function selectedParentId(){return String(selected||'').split('|')[0]}
+function resize(o,start,dw,dh,kind='',idx=0){
+ const min=30;
+ if(o.type==='mark'||o.type==='truefalse'||o.type==='circle'){o.args[2]=Math.max(min,Math.round((start[2]??70)+Math.max(dw,dh)))}
+ else if(rectTypes().includes(o.type)){
+   if(Array.isArray(start)){o.args[2]=Math.max(min,Math.round((start[2]??260)+dw));o.args[3]=Math.max(min,Math.round((start[3]??90)+dh))}
+   else {const r=rectFromArgs({args:start},[80,80,260,90]);syncRectArgs(o,{...r,w:Math.max(min,r.w+dw),h:Math.max(min,r.h+dh)})}
+ }
+ else if(o.type==='dragdrop'){if(kind==='item'){o.args[0][idx].w=Math.max(min,Math.round(start[0][idx].w+dw));o.args[0][idx].h=Math.max(min,Math.round(start[0][idx].h+dh))}if(kind==='drop'){o.args[1][idx].w=Math.max(min,Math.round(start[1][idx].w+dw));o.args[1][idx].h=Math.max(min,Math.round(start[1][idx].h+dh))}}
+}
+function props(){
+ const o=arr().find(x=>x.id===selectedParentId());
+ if(!o){$('#props').innerHTML='Klik hotspot dulu.';return}
+ const parts=String(selected||'').split('|'), kind=parts[1], idx=Number(parts[2]);
+ let child=null;
+ if(o.type==='dragdrop' && (kind==='item'||kind==='drop')) child=o.args[kind==='item'?0:1]?.[idx];
+ if(child){
+   const drops=o.args[1]||[];
+   const targetOptions=drops.map((d,i)=>`<option value="${i}" ${String(child.target??'')===String(i)?'selected':''}>Drop ${i+1} ${d.id?'- '+d.id:''}</option>`).join('');
+   $('#props').innerHTML=`
+    <p class="hintline" style="margin:0 0 8px">Yang dipilih: <b>${kind==='item'?'🧩 Drag Item':'🎯 Drop Zone'} ${idx+1}</b>${kind==='item' ? ' — sumber: <b>' + ((child.src||child.dataUrl||child.image||child.imageSrc) ? 'Local Image' : 'Crop Slide') + '</b>' : ''}</p>
+    <label>ID kecil</label><input id="cid" value="${child.id||''}">
+    <div class="propgrid">
+      <label>X<input id="cx" type="number" value="${Math.round(child.x||0)}"></label>
+      <label>Y<input id="cy" type="number" value="${Math.round(child.y||0)}"></label>
+      <label>Width<input id="cw" type="number" value="${Math.round(child.w||80)}"></label>
+      <label>Height<input id="ch" type="number" value="${Math.round(child.h||80)}"></label>
+      <label>Rounded<input id="cr" type="number" min="0" max="120" value="${Math.round(child.r??child.radius??14)}"></label>
+      ${kind==='item'?`<label>Target<select id="ctarget">${targetOptions}</select></label><label>Remove BG<select id="cremove"><option value="true" ${(child.removeBg!==false)?'selected':''}>ON</option><option value="false" ${(child.removeBg===false)?'selected':''}>OFF</option></select></label><label>Tolerance<input id="ctol" type="number" min="0" max="100" value="${Math.round(child.bgTolerance??child.tolerance??52)}"></label>`:''}
+    </div>
+    ${kind==='item'?'<p class="hintline">Target = Drop Zone yang benar. Drag Item 1 biasanya ke Drop 1, Drag Item 2 ke Drop 2, dst. Saat benar di game, gambar tetap muncul di drop dan item asal hilang.</p>':'<p class="hintline">Atur ukuran drop zone biar pas dengan kotak kosong puzzle.</p>'}
+    <div class="prop-actions"><button id="applyChild" class="pill-btn finish-btn">✅ Terapkan Ukuran</button><button id="copyChild" class="pill-btn">📋 Copy</button></div>
+    <label>JSON DragDrop penuh</label><textarea id="pargs" style="height:120px">${JSON.stringify(o.args)}</textarea>
+    <button id="applyProps" class="pill-btn teacher" style="margin-top:8px">Terapkan JSON</button>`;
+   const applyChild=()=>{child.id=$('#cid').value.trim()||child.id;child.x=Number($('#cx').value)||0;child.y=Number($('#cy').value)||0;child.w=Math.max(20,Number($('#cw').value)||80);child.h=Math.max(20,Number($('#ch').value)||80);child.r=Math.max(0,Number($('#cr').value)||0);if(kind==='item'&&$('#ctarget')){child.target=Number($('#ctarget').value)||0; child.removeBg=($('#cremove')?.value!=='false'); child.bgTolerance=Math.max(0,Math.min(100,Number($('#ctol')?.value)||52));} piecePreviewCache.clear(); render();selected=selKey(o,kind,idx);saveLocal();};
+   $('#applyChild').onclick=applyChild;
+   ['#cx','#cy','#cw','#ch','#cr','#cid','#ctarget','#cremove','#ctol'].forEach(q=>{const el=$(q); if(el) el.onchange=applyChild});
+   $('#copyChild').onclick=()=>navigator.clipboard?.writeText(JSON.stringify(child,null,2));
+   $('#applyProps').onclick=()=>{try{o.args=JSON.parse($('#pargs').value);render();saveLocal()}catch(e){alert('JSON DragDrop belum valid')}};
+   return;
+ }
+ if(o.type==='text'){
+   const r=rectFromArgs(o,[180,180,320,90]);
+   $('#props').innerHTML=`
+    <label>ID</label><input id="pid" value="${o.id}">
+    <label>Isi teks / placeholder</label><textarea id="ptext" style="height:76px">${o.text||''}</textarea>
+    <div class="propgrid">
+      <label>X<input id="px" type="number" value="${Math.round(r.x)}"></label><label>Y<input id="py" type="number" value="${Math.round(r.y)}"></label>
+      <label>Width<input id="pw" type="number" value="${Math.round(r.w)}"></label><label>Height<input id="ph" type="number" value="${Math.round(r.h)}"></label>
+      <label>Font Size<input id="pfs" type="number" min="8" max="120" value="${o.fontSize||24}"></label><label>Font<select id="pff"><option ${(!o.fontFamily||o.fontFamily==='Arial')?'selected':''}>Arial</option><option ${(o.fontFamily==='Poppins')?'selected':''}>Poppins</option><option ${(o.fontFamily==='Comic Sans MS')?'selected':''}>Comic Sans MS</option><option ${(o.fontFamily==='Times New Roman')?'selected':''}>Times New Roman</option></select></label>
+      <label>Color<input id="pcolor" type="color" value="${o.textColor||'#111111'}"></label><label>Align<select id="palign"><option value="left" ${o.textAlign==='left'?'selected':''}>Left</option><option value="center" ${(!o.textAlign||o.textAlign==='center')?'selected':''}>Center</option><option value="right" ${o.textAlign==='right'?'selected':''}>Right</option></select></label>
+      <label>Line Height<input id="plh" value="${o.lineHeight||'1.2'}"></label><label>Padding<input id="ppad" type="number" value="${o.padding??8}"></label>
+      <label>Rounded<input id="prad" type="number" value="${o.borderRadius??14}"></label><label>BG Color<input id="pbg" value="${o.bgColor||'rgba(255,255,255,.65)'}"></label>
+      <label>Bold<select id="pbold"><option value="true" ${o.bold?'selected':''}>ON</option><option value="false" ${!o.bold?'selected':''}>OFF</option></select></label><label>Italic<select id="pitalic"><option value="false" ${!o.italic?'selected':''}>OFF</option><option value="true" ${o.italic?'selected':''}>ON</option></select></label>
+    </div>
+    <p class="prop-mini">Ini seperti mini word processor: size, font, bold, italic, align, spacing, padding, rounded textbox.</p>
+    <button id="applyText" class="pill-btn finish-btn" style="margin-top:8px">Terapkan Text Style</button>
+    <label>Args</label><textarea id="pargs" style="height:90px">${JSON.stringify(o.args)}</textarea>`;
+   const applyText=()=>{o.id=$('#pid').value.trim()||o.id; syncRectArgs(o,{x:Number($('#px').value)||0,y:Number($('#py').value)||0,w:Math.max(20,Number($('#pw').value)||80),h:Math.max(20,Number($('#ph').value)||40)}); o.text=$('#ptext').value; o.fontSize=Number($('#pfs').value)||24; o.fontFamily=$('#pff').value; o.textColor=$('#pcolor').value||'#111111'; o.textAlign=$('#palign').value; o.lineHeight=$('#plh').value||'1.2'; o.padding=Number($('#ppad').value)||0; o.borderRadius=Number($('#prad').value)||0; o.bgColor=$('#pbg').value||'transparent'; o.bold=$('#pbold').value==='true'; o.italic=$('#pitalic').value==='true'; selected=o.id; render(); saveLocal();};
+   $('#applyText').onclick=applyText; ['#pid','#ptext','#px','#py','#pw','#ph','#pfs','#pff','#pcolor','#palign','#plh','#ppad','#prad','#pbg','#pbold','#pitalic'].forEach(q=>{$(q).onchange=applyText});
+   $('#pargs').onchange=()=>{try{o.args=JSON.parse($('#pargs').value);render();saveLocal()}catch(e){alert('Args belum valid')}};
+   return;
+ }
+ if(o.type==='connect'){
+   const pts=getConnectPoints(o);
+   $('#props').innerHTML=`<label>ID</label><input id="pid" value="${o.id}"><p class="hintline">Connect pakai titik. Klik + Titik untuk tambah pasangan/titik, lalu geser titik biru di canvas.</p><div class="prop-actions"><button id="addPt" class="pill-btn score-btn">➕ Titik</button><button id="removePt" class="pill-btn">➖ Titik</button></div><label>Points</label><textarea id="ppts" style="height:120px">${JSON.stringify(pts)}</textarea><button id="applyConnect" class="pill-btn finish-btn" style="margin-top:8px">Terapkan Connect</button>`;
+   $('#addPt').onclick=()=>{const last=pts[pts.length-1]||[220,220]; pts.push([last[0]+90,last[1]]); o.args={points:pts}; selected=selKey(o,'connectPoint',pts.length-1); render(); saveLocal();};
+   $('#removePt').onclick=()=>{pts.pop(); if(!pts.length)pts.push([220,220]); o.args={points:pts}; selected=o.id; render(); saveLocal();};
+   $('#applyConnect').onclick=()=>{try{o.id=$('#pid').value.trim()||o.id; o.args={points:JSON.parse($('#ppts').value)}; selected=o.id; render(); saveLocal()}catch(e){alert('Points belum valid')}};
+   return;
+ }
+ if(['mazePath','pathPaint','trace','coloring','colorzone','hint','finish'].includes(o.type)){
+   const r=rectFromArgs(o,[120,120,420,120]);
+   const txt=(o.args&&Array.isArray(o.args)?(o.args[4]||''):(o.text||o.note||''));
+   const keyTools=(o.type==='trace'||o.type==='mazePath')?`<div class="prop-actions" style="margin:10px 0;display:flex;gap:8px;flex-wrap:wrap"><button id="keyModeBtn" class="pill-btn score-btn">${keyEditMode?'✅ Selesai Kunci':'🟢 Buat Kunci Jawaban'}</button><button id="addKeyPtBtn" class="pill-btn finish-btn">➕ Path Point</button><button id="undoKeyBtn" class="pill-btn">↩️ Undo Titik</button><button id="clearKeyBtn" class="pill-btn">🗑️ Hapus Kunci</button></div><label>Kunci Jawaban Path</label><textarea id="pkey" style="height:110px">${JSON.stringify(o.keyPath||[])}</textarea><p class="prop-mini">Klik “Buat Kunci Jawaban”, lalu klik mengikuti jalur benar di gambar. Titik hijau ini disimpan langsung ke hotspot, bukan file terpisah.</p><div class="propgrid"><label>Toleransi<input id="ptol" type="number" value="${o.tolerance||28}"></label><label>Min Score<input id="pmin" type="number" value="${o.minScore||70}"></label></div>`:'';
+   const colorList=[['Merah','#ff5757'],['Kuning','#ffcf33'],['Hijau','#70d84f'],['Biru','#54d3dc'],['Ungu','#b653f2'],['Orange','#ff9b45'],['Hitam','#111111'],['Putih','#ffffff']];
+   const curColor=(o.correctColor||o.answerColor||o.color||(Array.isArray(o.args)&&o.args[4])||'#ffcf33').toLowerCase();
+   const colorTools=(o.type==='colorzone')?`<div class="correct-color-box"><label>🎨 Correct Color / Kunci Warna</label><div class="cc-grid">${colorList.map(c=>`<button type="button" class="cc-btn ${curColor===c[1]?'active':''}" data-cc="${c[1]}" title="${c[0]}" style="background:${c[1]}">${curColor===c[1]?'✓':''}</button>`).join('')}</div><p class="prop-mini">Pilih warna benar untuk zona ini. 1 balon = 1 Color Zone.</p></div>`:'';
+   $('#props').innerHTML=`<label>ID</label><input id="pid" value="${o.id}"><label>Type</label><input value="${o.type}" disabled><div class="propgrid"><label>X<input id="px" type="number" value="${Math.round(r.x)}"></label><label>Y<input id="py" type="number" value="${Math.round(r.y)}"></label><label>Width<input id="pw" type="number" value="${Math.round(r.w)}"></label><label>Height<input id="ph" type="number" value="${Math.round(r.h)}"></label><label>Rounded<input id="prad" type="number" value="${o.radius??18}"></label><label>Color<input id="pcolor" type="color" value="${o.color||'#ff9b22'}"></label></div><label>Label / Instruksi</label><textarea id="ptext" style="height:70px">${txt}</textarea>${colorTools}${keyTools}<p class="prop-mini">Trace/Maze ini AREA AKTIVITAS transparan. Kunci jawaban dibuat langsung di editor dengan titik hijau.</p><button id="applyShape" class="pill-btn finish-btn" style="margin-top:8px">Terapkan Area</button><label>Args</label><textarea id="pargs" style="height:90px">${JSON.stringify(o.args)}</textarea>`;
+   const applyShape=()=>{o.id=$('#pid').value.trim()||o.id; syncRectArgs(o,{x:Number($('#px').value)||0,y:Number($('#py').value)||0,w:Math.max(20,Number($('#pw').value)||80),h:Math.max(20,Number($('#ph').value)||40)}); o.radius=Number($('#prad').value)||0; o.color=$('#pcolor').value||'#ff9b22'; o.text=$('#ptext').value; if(Array.isArray(o.args)&&o.args.length>4)o.args[4]=o.text; selected=o.id; render(); saveLocal();};
+   if(o.type==='colorzone'){document.querySelectorAll('.cc-btn').forEach(btn=>btn.onclick=()=>{const c=btn.dataset.cc;o.correctColor=c;o.answerColor=c;o.color=c;if(Array.isArray(o.args)){o.args[4]=c}else{o.args=[r.x,r.y,r.w,r.h,c]}selected=o.id;render();saveLocal();});}
+   $('#applyShape').onclick=applyShape; ['#pid','#px','#py','#pw','#ph','#prad','#pcolor','#ptext'].forEach(q=>{$(q).onchange=applyShape});
+   $('#pargs').onchange=()=>{try{o.args=JSON.parse($('#pargs').value);render();saveLocal()}catch(e){alert('Args belum valid')}};
+   if(o.type==='trace'||o.type==='mazePath'){
+     $('#keyModeBtn').onclick=()=>setKeyMode(!keyEditMode);
+     $('#addKeyPtBtn').onclick=()=>{o.keyPath=o.keyPath||[]; const last=o.keyPath[o.keyPath.length-1]||stagePointFromRect(o); o.keyPath.push({x:Math.min(base().w,last.x+80),y:last.y}); selected=selKey(o,'keyPath',o.keyPath.length-1); render(); saveLocal();};
+     $('#undoKeyBtn').onclick=()=>{o.keyPath=(o.keyPath||[]);o.keyPath.pop();render();saveLocal();};
+     $('#clearKeyBtn').onclick=()=>{o.keyPath=[];render();saveLocal();};
+     $('#pkey').onchange=()=>{try{o.keyPath=JSON.parse($('#pkey').value);render();saveLocal()}catch(e){alert('Kunci path belum valid')}};
+     $('#ptol').onchange=()=>{o.tolerance=Number($('#ptol').value)||28;saveLocal();};
+     $('#pmin').onchange=()=>{o.minScore=Number($('#pmin').value)||70;saveLocal();};
+   }
+   return;
+ }
+
+ if(o.type==='truefalse'){
+   const mode=(o.correctSymbol||o.args?.[3]||'check');
+   $('#props').innerHTML=`<label>ID</label><input id="pid" value="${o.id}"><label>Type</label><input value="Benar / Salah" disabled><div class="propgrid"><label>X<input id="px" type="number" value="${Math.round(Number(o.args?.[0]??200))}"></label><label>Y<input id="py" type="number" value="${Math.round(Number(o.args?.[1]??200))}"></label><label>Size<input id="ps" type="number" value="${Math.round(Number(o.args?.[2]??70))}"></label><label>Kunci Jawaban<select id="pcorrect"><option value="check" ${mode==='check'?'selected':''}>✅ Centang</option><option value="cross" ${mode==='cross'?'selected':''}>❌ Silang</option></select></label></div><p class="prop-mini">Tipe ini beda dari Check biasa. Di game anak pilih tombol ✅ atau ❌ lalu klik area ini.</p><button id="applyTF" class="pill-btn finish-btn" style="margin-top:8px">Terapkan Benar/Salah</button><label>Args</label><textarea id="pargs" style="height:90px">${JSON.stringify(o.args)}</textarea>`;
+   const apply=()=>{o.id=$('#pid').value.trim()||o.id; o.args=[Number($('#px').value)||0,Number($('#py').value)||0,Math.max(20,Number($('#ps').value)||70),$('#pcorrect').value]; o.correctSymbol=$('#pcorrect').value; selected=o.id; render(); saveLocal();};
+   $('#applyTF').onclick=apply; ['#pid','#px','#py','#ps','#pcorrect'].forEach(q=>{$(q).onchange=apply});
+   $('#pargs').onchange=()=>{try{o.args=JSON.parse($('#pargs').value);o.correctSymbol=o.args?.[3]||o.correctSymbol||'check';render();saveLocal()}catch(e){alert('Args belum valid')}};
+   return;
+ }
+ const extra=o.type==='dragdrop'?'<p class="hintline">Klik salah satu kotak 🧩/🎯 dulu supaya keluar pengaturan X, Y, Width, Height, Rounded, dan Target. Bisa juga resize pakai handle biru kecil di pojok kanan bawah.</p>':'';
+ $('#props').innerHTML=`<label>ID</label><input id="pid" value="${o.id}"><label>Type</label><input value="${o.type}" disabled>${extra}<label>Args</label><textarea id="pargs" style="height:160px">${JSON.stringify(o.args)}</textarea><button id="applyProps" class="pill-btn finish-btn" style="margin-top:8px">Terapkan</button>`;
+ $('#applyProps').onclick=()=>{try{o.id=$('#pid').value.trim()||o.id;o.args=JSON.parse($('#pargs').value);selected=o.id;render();saveLocal()}catch(e){alert('Args harus JSON valid')}}
+}
+
+$('#stage').addEventListener('click',e=>{
+  if(!keyEditMode || suppressKeyStageClick || e.target.closest('.key-dot'))return;
+  const o=selectedObj();
+  if(!o || !['trace','mazePath'].includes(o.type)){alert('Pilih hotspot Trace atau Maze Path dulu.'); setKeyMode(false); return;}
+  e.preventDefault(); e.stopPropagation();
+  const pt=stagePointFromEvent(e); o.keyPath=o.keyPath||[]; o.keyPath.push(pt); selected=o.id; render(); saveLocal(); setKeyMode(true);
+},true);
+
+function applyTheme(){const d=localStorage.getItem('egk_theme')==='dark';document.body.classList.toggle('dark',d);$('#themeBtn').textContent=d?'☀️':'🌙'}$('#themeBtn').onclick=()=>{localStorage.setItem('egk_theme',document.body.classList.contains('dark')?'light':'dark');applyTheme()};init();
+</script><script src="egk-pathpoint-editor-safe.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const btn=document.getElementById('exportAssetsBtn');
+  if(btn){
+    btn.onclick=()=>{
+      alert('Gunakan Export Assets untuk menyimpan imported images ke assets/imported/ saat export project.');
+    }
+  }
+})
+</script>
+
+<script>
+async function downloadImportedAssets(){
+  alert('Fitur export assets aktif. Imported images akan disimpan ke assets/imported/ saat export project.');
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  const btn=document.getElementById('exportAssetsBtn');
+  if(btn){
+    btn.onclick=downloadImportedAssets;
+  }
+});
+</script>
+
+
+<script id="egk-export-assets-real-js">
+(function(){
+  function collectDataUrls(obj, found){
+    if(!obj || typeof obj !== 'object') return;
+    if(typeof obj.src === 'string' && obj.src.startsWith('data:image')){
+      found.push({item:obj, key:'src', dataUrl:obj.src});
+    }
+    if(typeof obj.dataUrl === 'string' && obj.dataUrl.startsWith('data:image')){
+      found.push({item:obj, key:'dataUrl', dataUrl:obj.dataUrl});
+    }
+    if(Array.isArray(obj)){
+      obj.forEach(v=>collectDataUrls(v, found));
+    } else {
+      Object.keys(obj).forEach(k=>collectDataUrls(obj[k], found));
+    }
+  }
+
+  function dataUrlToBlob(dataUrl){
+    const parts = dataUrl.split(',');
+    const meta = parts[0] || '';
+    const mime = (meta.match(/data:([^;]+)/)||[])[1] || 'image/png';
+    const bin = atob(parts[1] || '');
+    const arr = new Uint8Array(bin.length);
+    for(let i=0;i<bin.length;i++) arr[i] = bin.charCodeAt(i);
+    return new Blob([arr], {type:mime});
+  }
+
+  function extFromDataUrl(dataUrl){
+    const mime = ((dataUrl.match(/^data:([^;]+)/)||[])[1] || 'image/png').toLowerCase();
+    if(mime.includes('jpeg') || mime.includes('jpg')) return 'jpg';
+    if(mime.includes('webp')) return 'webp';
+    if(mime.includes('gif')) return 'gif';
+    if(mime.includes('svg')) return 'svg';
+    return 'png';
+  }
+
+  function getMainDataObject(){
+    // editor.html pakai variable lokal bernama DATA, bukan window.HOTSPOTS.
+    // Jadi ambil DATA aktif editor dulu.
+    try { if (typeof DATA !== 'undefined' && DATA) return DATA; } catch(e) {}
+    try { if (window.DATA) return window.DATA; } catch(e) {}
+    try { if (window.ASPEK_DATA) return window.ASPEK_DATA; } catch(e) {}
+    try { if (typeof ASPEK_DATA !== 'undefined' && ASPEK_DATA) return ASPEK_DATA; } catch(e) {}
+    try { if (window.HOTSPOTS) return window.HOTSPOTS; } catch(e) {}
+    try { if (window.hotspots) return window.hotspots; } catch(e) {}
+    try { if (window.slidesData) return window.slidesData; } catch(e) {}
+    return null;
+  }
+
+  function makeDataJs(data){
+    // Format sesuai file data.js project ini.
+    return 'const ASPEK_DATA = ' + JSON.stringify(data, null, 2) + ';';
+  }
+
+  async function ensureJSZip(){
+    if(window.JSZip) return window.JSZip;
+    await new Promise((resolve, reject)=>{
+      const s=document.createElement('script');
+      s.src='https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js';
+      s.onload=resolve;
+      s.onerror=reject;
+      document.head.appendChild(s);
+    });
+    return window.JSZip;
+  }
+
+  window.egkExportAssets = async function(){
+    try{ if(typeof saveLocal==='function') saveLocal(); }catch(e){}
+    const data = getMainDataObject();
+    if(!data){
+      alert('Data editor tidak ketemu. Reload editor dulu, lalu coba lagi.');
+      return;
+    }
+
+    const found = [];
+    collectDataUrls(data, found);
+
+    if(!found.length){
+      alert('Belum ada image local/base64 yang perlu diexport. Kalau drag dari slide, cukup upload folder assets slide asli.');
+      return;
+    }
+
+    let JSZip;
+    try{
+      JSZip = await ensureJSZip();
+    }catch(e){
+      alert('JSZip gagal dimuat. Hubungkan internet atau tambahkan jszip.min.js lokal.');
+      return;
+    }
+
+    const zip = new JSZip();
+    const importedFolder = zip.folder('assets').folder('imported');
+
+    found.forEach((entry, idx)=>{
+      const ext = extFromDataUrl(entry.dataUrl);
+      const filename = 'img_' + String(idx+1).padStart(3,'0') + '.' + ext;
+      importedFolder.file(filename, dataUrlToBlob(entry.dataUrl));
+      entry.item[entry.key] = 'assets/imported/' + filename;
+      if(entry.key === 'dataUrl') entry.item.src = 'assets/imported/' + filename;
+    });
+
+    zip.file('hotspot-data.exported.js', makeDataJs(data));
+
+    const blob = await zip.generateAsync({type:'blob'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'egk-imported-assets.zip';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(()=>URL.revokeObjectURL(a.href), 1500);
+
+    alert('Export selesai. ZIP berisi assets/imported dan hotspot-data.exported.js. Pakai file exported itu untuk deploy.');
+  };
+
+  document.addEventListener('DOMContentLoaded', function(){
+    const btn = document.getElementById('exportAssetsBtn');
+    if(btn) btn.addEventListener('click', window.egkExportAssets);
+  });
+})();
+</script>
+
+</body></html>

@@ -1,0 +1,2274 @@
+/* ═══════════════════════════════════════════════
+   EduGameKids – Joyful Kids UI  v3.0
+   ═══════════════════════════════════════════════ */
+
+/* ── Google Fonts fallback ── */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap');
+
+/* ── CSS Variables ── */
+:root {
+  --ink: #2d1b69;
+  --muted: #6b5b95;
+  --paper: rgba(255,255,255,.92);
+  --line: rgba(45,27,105,.14);
+  --shadow-soft: 0 8px 32px rgba(45,27,105,.15);
+  --shadow-hard: 0 12px 0 rgba(45,27,105,.18);
+  --pink: #ff5fa8;
+  --pink-dark: #e0428a;
+  --orange: #ff8c42;
+  --yellow: #ffe566;
+  --green: #00cc88;
+  --green-dark: #00a870;
+  --cyan: #00d4f0;
+  --blue: #4a9fff;
+  --blue-dark: #2c7ee8;
+  --purple: #9b59b6;
+  --red: #ff4757;
+  --cream: #fffbe6;
+  --r: 28px;
+  --font-head: 'Fredoka One', 'Comic Sans MS', cursive;
+  --font-body: 'Nunito', 'Comic Sans MS', system-ui, sans-serif;
+}
+
+/* ── Dark Mode ── */
+body.dark {
+  --ink: #f0ecff;
+  --muted: #c4b5fd;
+  --paper: rgba(22,14,50,.88);
+  --line: rgba(255,255,255,.14);
+}
+
+/* ── Reset & Base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { min-height: 100%; overflow-x: hidden; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background:
+    radial-gradient(ellipse at 10% 15%, #ffe8fa 0, transparent 40%),
+    radial-gradient(ellipse at 88% 8%, #d4f0ff 0, transparent 38%),
+    radial-gradient(ellipse at 80% 90%, #e8ffe4 0, transparent 40%),
+    radial-gradient(ellipse at 5% 88%, #fff3b0 0, transparent 38%),
+    linear-gradient(160deg, #fff9fe, #f5f0ff 45%, #f0faff);
+  transition: background .4s, color .3s;
+}
+
+body.dark {
+  background:
+    radial-gradient(ellipse at 10% 15%, rgba(120,40,180,.25) 0, transparent 40%),
+    radial-gradient(ellipse at 88% 8%, rgba(0,120,200,.18) 0, transparent 38%),
+    radial-gradient(ellipse at 80% 90%, rgba(0,180,120,.15) 0, transparent 40%),
+    linear-gradient(160deg, #0e0820, #12082e 50%, #080e20);
+}
+
+/* ── Floating decorations ── */
+#decoLayer { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.float-deco {
+  position: absolute;
+  animation: floatDeco linear infinite;
+  user-select: none;
+  pointer-events: none;
+}
+@keyframes floatDeco {
+  0%   { transform: translateY(0px) rotate(0deg) scale(1); }
+  33%  { transform: translateY(-22px) rotate(12deg) scale(1.08); }
+  66%  { transform: translateY(10px) rotate(-8deg) scale(.95); }
+  100% { transform: translateY(0px) rotate(0deg) scale(1); }
+}
+
+/* ── Theme Button ── */
+.theme-btn {
+  position: fixed; right: 16px; bottom: 16px; z-index: 200;
+  width: 54px; height: 54px; border-radius: 18px;
+  border: 3px solid rgba(255,255,255,.85);
+  background: var(--paper);
+  box-shadow: var(--shadow-soft), var(--shadow-hard);
+  cursor: pointer; font-size: 24px;
+  transition: transform .18s;
+}
+.theme-btn:hover { transform: scale(1.12) rotate(12deg); }
+
+/* ── Screens ── */
+button, a, input, textarea { font-family: var(--font-body); }
+.screen { display: none; min-height: 100dvh; position: relative; z-index: 1; }
+.screen.active { display: grid; }
+
+/* ══════════════════════════════
+   WELCOME SCREEN
+══════════════════════════════ */
+#welcome {
+  place-items: center;
+  padding: 16px;
+  background: none;
+}
+
+.stars-bg {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    radial-gradient(1.5px 1.5px at 15% 20%, #ffb3d9 0, transparent 100%),
+    radial-gradient(1.5px 1.5px at 75% 12%, #b3d9ff 0, transparent 100%),
+    radial-gradient(1.5px 1.5px at 40% 78%, #ffe4b3 0, transparent 100%),
+    radial-gradient(1px 1px at 85% 65%, #b3ffda 0, transparent 100%);
+  background-size: 300px 300px;
+  opacity: .6;
+}
+
+.welcome-card {
+  position: relative; z-index: 2;
+  width: min(680px, calc(100% - 24px));
+  padding: 32px 36px;
+  border-radius: 40px;
+  background: var(--paper);
+  border: 4px solid rgba(255,255,255,.9);
+  box-shadow: var(--shadow-soft), var(--shadow-hard), 0 0 0 1px rgba(255,255,255,.5) inset;
+  backdrop-filter: blur(20px);
+  text-align: center;
+  overflow: hidden;
+}
+
+/* top wavy decoration */
+.welcome-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 8px;
+  background: linear-gradient(90deg, var(--pink), var(--yellow), var(--green), var(--cyan), var(--blue), var(--purple), var(--pink));
+  border-radius: 40px 40px 0 0;
+}
+
+/* Mascot */
+.welcome-top { display: flex; justify-content: center; margin-bottom: 14px; position: relative; }
+.mascot-wrap { position: relative; }
+.mascot-bubble {
+  width: 100px; height: 100px;
+  background: linear-gradient(135deg, var(--yellow), var(--pink));
+  border-radius: 32px;
+  display: grid; place-items: center;
+  font-size: 52px;
+  box-shadow: 0 10px 0 rgba(200,100,0,.2), 0 18px 30px rgba(200,80,100,.25);
+  animation: mascotBounce 2s ease-in-out infinite;
+}
+.welcome-sparkles {
+  position: absolute; top: -8px; right: -16px;
+  font-size: 28px;
+  animation: sparkleFloat 1.4s ease-in-out infinite alternate;
+}
+@keyframes mascotBounce {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-10px) rotate(3deg); }
+}
+@keyframes sparkleFloat {
+  from { transform: scale(.8) rotate(-10deg); opacity: .7; }
+  to { transform: scale(1.2) rotate(10deg); opacity: 1; }
+}
+
+/* Rainbow title */
+.rainbow-title {
+  font-family: var(--font-head);
+  font-size: clamp(38px, 8vw, 72px);
+  line-height: 1;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, var(--pink) 0%, var(--orange) 30%, var(--yellow) 50%, var(--green) 70%, var(--blue) 90%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  margin-bottom: 6px;
+}
+.rainbow-title span { -webkit-text-fill-color: transparent; }
+
+.welcome-sub {
+  font-size: 18px; font-weight: 800; color: var(--muted);
+  margin-bottom: 22px;
+}
+
+/* Form */
+.form-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 20px; }
+.form-field { display: flex; flex-direction: column; text-align: left; }
+.field-label { font-size: 13px; font-weight: 900; color: var(--muted); margin-bottom: 6px; }
+.form-field input {
+  border: 3px solid var(--line);
+  border-radius: 18px;
+  padding: 13px 14px;
+  background: rgba(255,255,255,.85);
+  font-size: 16px; font-weight: 800; color: var(--ink);
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.form-field input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 4px rgba(74,159,255,.2);
+}
+
+/* CTA Button */
+.big-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 36px;
+  border-radius: 50px; border: none;
+  background: linear-gradient(135deg, var(--pink), var(--orange));
+  color: white; font-size: 22px; font-weight: 900; font-family: var(--font-head);
+  box-shadow: 0 8px 0 var(--pink-dark), 0 12px 24px rgba(255,95,168,.4);
+  cursor: pointer;
+  transition: transform .15s, box-shadow .15s;
+  letter-spacing: .3px;
+}
+.big-cta:hover { transform: translateY(-3px); box-shadow: 0 11px 0 var(--pink-dark), 0 18px 28px rgba(255,95,168,.45); }
+.big-cta:active { transform: translateY(4px); box-shadow: 0 4px 0 var(--pink-dark), 0 6px 16px rgba(255,95,168,.3); }
+.cta-icon { font-size: 26px; }
+
+.welcome-note { margin-top: 12px; font-size: 13px; color: var(--muted); font-weight: 700; }
+
+/* ══════════════════════════════
+   LOBBY SCREEN
+══════════════════════════════ */
+#lobby { display: none; place-items: start center; padding: 16px; }
+#lobby.active { display: grid; }
+
+.lobby-wrap { width: min(1240px, calc(100% - 24px)); }
+
+/* Header */
+.lobby-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  padding: 18px 22px;
+  border-radius: 28px;
+  background: var(--paper);
+  border: 3px solid rgba(255,255,255,.85);
+  box-shadow: var(--shadow-soft), var(--shadow-hard);
+  margin-bottom: 18px;
+  backdrop-filter: blur(14px);
+}
+.lobby-hello { display: flex; align-items: center; gap: 14px; }
+.hello-avatar {
+  width: 64px; height: 64px;
+  background: linear-gradient(135deg, var(--yellow), var(--orange));
+  border-radius: 20px;
+  display: grid; place-items: center; font-size: 34px;
+  box-shadow: 0 6px 0 rgba(200,120,0,.2);
+  flex-shrink: 0;
+}
+.lobby-head h2 {
+  font-family: var(--font-head);
+  font-size: clamp(22px, 3.5vw, 38px); line-height: 1; color: var(--ink);
+}
+.subtext { font-weight: 800; color: var(--muted); font-size: 14px; margin-top: 3px; }
+
+.head-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.lobby-title-wrap { text-align: center; margin-bottom: 18px; }
+.lobby-subtitle {
+  font-family: var(--font-head);
+  font-size: clamp(26px, 4vw, 44px);
+  background: linear-gradient(135deg, var(--purple), var(--blue));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.lobby-hint { font-weight: 800; color: var(--muted); font-size: 15px; margin-top: 4px; }
+
+/* Mission Cards */
+.cards3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+.mission-card {
+  border-radius: 36px;
+  padding: 28px 24px;
+  background: var(--paper);
+  border: 4px solid rgba(255,255,255,.9);
+  box-shadow: var(--shadow-soft);
+  display: flex; flex-direction: column; gap: 10px;
+  cursor: pointer;
+  transition: transform .22s cubic-bezier(.34,1.56,.64,1), box-shadow .22s;
+  position: relative; overflow: hidden;
+  min-height: 380px;
+}
+.mission-card:hover {
+  transform: translateY(-10px) rotate(-1.5deg);
+  box-shadow: 0 24px 48px rgba(45,27,105,.2);
+}
+.mission-card:active { transform: translateY(-2px) rotate(0deg); }
+
+/* Color themes */
+.mission-card.pink { background: linear-gradient(155deg, #fff0f8, #ffe4f4); border-color: #ffc5e3; }
+.mission-card.green { background: linear-gradient(155deg, #f0fff8, #e0fff2); border-color: #a0f0cc; }
+.mission-card.blue  { background: linear-gradient(155deg, #f0f5ff, #e4efff); border-color: #b0ceff; }
+
+/* Decorative background emoji */
+.card-bg-deco {
+  position: absolute; right: -10px; top: -10px;
+  font-size: 90px; opacity: .1;
+  transform: rotate(15deg);
+  pointer-events: none;
+}
+.card-icon { font-size: 64px; line-height: 1; }
+.mission-card h3 {
+  font-family: var(--font-head);
+  font-size: 32px; color: var(--ink); line-height: 1;
+}
+.mission-card p { font-size: 15px; font-weight: 800; color: var(--muted); flex: 1; }
+
+/* Progress */
+.progress-wrap { display: flex; flex-direction: column; gap: 5px; }
+.progress-label { font-size: 12px; font-weight: 900; color: var(--muted); }
+.progress { height: 14px; background: rgba(0,0,0,.08); border-radius: 99px; overflow: hidden; }
+.prog-bar { display: block; height: 100%; width: 5%; border-radius: 99px; transition: width .6s ease; }
+.pink .prog-bar  { background: linear-gradient(90deg, var(--pink), var(--orange)); }
+.green .prog-bar { background: linear-gradient(90deg, var(--green), var(--cyan)); }
+.blue .prog-bar  { background: linear-gradient(90deg, var(--blue), var(--purple)); }
+
+.card-btn {
+  border: none; border-radius: 20px;
+  padding: 13px 20px;
+  font-size: 17px; font-weight: 900; font-family: var(--font-head);
+  color: white; cursor: pointer;
+  transition: transform .15s, box-shadow .15s;
+  letter-spacing: .2px;
+}
+.pink .card-btn  { background: linear-gradient(135deg,var(--pink),var(--orange)); box-shadow: 0 6px 0 var(--pink-dark); }
+.green .card-btn { background: linear-gradient(135deg,var(--green),var(--cyan)); box-shadow: 0 6px 0 var(--green-dark); }
+.blue .card-btn  { background: linear-gradient(135deg,var(--blue),var(--purple)); box-shadow: 0 6px 0 var(--blue-dark); }
+.card-btn:hover { transform: translateY(-2px); }
+.card-btn:active { transform: translateY(3px); }
+
+/* ══════════════════════════════
+   PILL BUTTONS (shared)
+══════════════════════════════ */
+.pill-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  border: 2.5px solid var(--line); border-radius: 20px;
+  background: var(--paper); color: var(--ink);
+  font-weight: 900; font-size: 14px;
+  padding: 10px 16px;
+  text-decoration: none;
+  box-shadow: 0 4px 0 rgba(45,27,105,.12);
+  cursor: pointer;
+  transition: transform .15s, box-shadow .15s;
+  white-space: nowrap;
+}
+.pill-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 0 rgba(45,27,105,.15); }
+.pill-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 rgba(45,27,105,.1); }
+
+.pill-btn.edit    { border-color: var(--yellow); background: #fffbe6; }
+.pill-btn.teacher { border-color: var(--blue);   background: #eef4ff; }
+.pill-btn.score-btn  { background: linear-gradient(135deg,var(--yellow),var(--orange)); color: var(--ink); border: none; box-shadow: 0 4px 0 rgba(200,120,0,.25); }
+.pill-btn.finish-btn { background: linear-gradient(135deg,var(--green),var(--cyan)); color: white; border: none; box-shadow: 0 4px 0 var(--green-dark); }
+.pill-btn.home-btn   { background: linear-gradient(135deg,#f0f0f0,#e0e0e0); border: none; box-shadow: 0 4px 0 #bbb; }
+body.dark .pill-btn.home-btn { background: linear-gradient(135deg,#333,#222); color: #eee; box-shadow: 0 4px 0 #111; }
+
+/* ══════════════════════════════
+   PLAY SCREEN
+══════════════════════════════ */
+#play { display: none; grid-template-rows: auto auto 1fr; gap: 8px; padding: 8px; }
+#play.active { display: grid; }
+
+/* Game Header */
+.game-header {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 12px 18px;
+  border-radius: 24px;
+  background: var(--paper);
+  border: 3px solid rgba(255,255,255,.85);
+  box-shadow: var(--shadow-soft), var(--shadow-hard);
+  backdrop-filter: blur(14px);
+}
+.brandbox { display: flex; align-items: center; gap: 12px; }
+.logo {
+  width: 66px; height: 66px; border-radius: 22px;
+  background: linear-gradient(135deg, var(--yellow), var(--pink));
+  display: grid; place-items: center; font-size: 38px;
+  box-shadow: 0 7px 0 rgba(200,80,100,.25);
+  flex-shrink: 0;
+}
+.brand-text h2 {
+  font-family: var(--font-head);
+  font-size: clamp(20px, 3vw, 34px); line-height: 1; color: var(--ink);
+}
+.student-badge {
+  font-size: 12px; font-weight: 800; color: var(--muted);
+  margin-top: 3px;
+}
+
+.top-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+/* Tools Bar */
+.tools-bar {
+  display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
+  padding: 10px 14px;
+  border-radius: 24px;
+  background: rgba(255,255,255,.7);
+  border: 2.5px solid rgba(255,255,255,.6);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 4px 18px rgba(45,27,105,.1);
+}
+
+.tool {
+  display: inline-flex; align-items: center; gap: 7px;
+  border: 2.5px solid var(--line); border-radius: 18px;
+  background: var(--paper); color: var(--ink);
+  font-size: 14px; font-weight: 900;
+  padding: 9px 15px;
+  box-shadow: 0 4px 0 rgba(45,27,105,.1);
+  cursor: pointer;
+  transition: transform .15s, box-shadow .15s, background .15s;
+}
+.tool:hover { transform: translateY(-2px); }
+.tool-icon { font-size: 18px; }
+.tool.active {
+  background: linear-gradient(135deg, var(--yellow), var(--orange));
+  color: white; border-color: transparent;
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 rgba(200,100,0,.3);
+}
+.draw-tool.active { background: linear-gradient(135deg, var(--blue), var(--purple)); }
+
+/* Stage Area */
+.stage-area {
+  display: grid;
+  grid-template-columns: 100px minmax(0,1fr) 100px;
+  align-items: center;
+  gap: 10px;
+  min-height: 0;
+}
+.stage-card {
+  min-height: 0;
+  display: grid; place-items: center; gap: 8px;
+}
+.stage-shell {
+  width: 100%;
+  height: calc(100dvh - 200px);
+  min-height: 420px;
+  display: grid; place-items: center;
+}
+.stage {
+  position: relative; display: inline-block;
+  max-width: 100%; max-height: 100%;
+  animation: slideIn .22s ease;
+}
+.slide-img {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100dvh - 240px);
+  width: auto; height: auto;
+  border-radius: 24px;
+  box-shadow: var(--shadow-soft), 0 0 0 4px rgba(255,255,255,.6);
+  background: white;
+  user-select: none;
+}
+.draw-canvas, .overlay-layer {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  border-radius: 24px;
+}
+.draw-canvas { z-index: 4; touch-action: none; }
+.overlay-layer { z-index: 5; pointer-events: none; }
+
+/* Nav Buttons */
+.side-nav {
+  width: 80px; height: 80px;
+  border: none; border-radius: 50%;
+  font-size: 62px; line-height: 1; font-family: var(--font-head);
+  color: white; cursor: pointer;
+  transition: transform .15s, box-shadow .15s;
+  flex-shrink: 0;
+}
+.side-nav.left  { background: linear-gradient(135deg,var(--pink),var(--orange)); box-shadow: 0 8px 0 var(--pink-dark), var(--shadow-soft); }
+.side-nav.right { background: linear-gradient(135deg,var(--green),var(--cyan)); box-shadow: 0 8px 0 var(--green-dark), var(--shadow-soft); }
+.side-nav:hover { transform: scale(1.08); }
+.side-nav:active { transform: scale(.96) translateY(4px); }
+.side-nav:disabled { opacity: .35; filter: grayscale(1); pointer-events: none; }
+
+/* Page chip */
+.page-chip {
+  padding: 10px 28px;
+  border-radius: 50px;
+  background: var(--paper);
+  border: 3px solid rgba(255,255,255,.8);
+  font-size: 22px; font-weight: 900; font-family: var(--font-head);
+  box-shadow: 0 5px 0 rgba(45,27,105,.12);
+  color: var(--purple);
+}
+
+/* ══════════════════════════════
+   INTERACTIVE OVERLAYS
+══════════════════════════════ */
+.mark, .circleMark {
+  position: absolute; pointer-events: auto;
+  border: 3px solid rgba(74,159,255,.6);
+  background: rgba(255,255,255,.25);
+  cursor: pointer;
+  transition: transform .12s, background .12s;
+}
+.mark:hover { background: rgba(255,220,50,.35); border-color: var(--yellow); }
+
+.mark[data-v="check"]::after {
+  content: "✓"; position: absolute; inset: -12%;
+  display: grid; place-items: center;
+  color: #00cc66; font-size: 150%; font-weight: 900;
+  text-shadow: 0 2px 6px rgba(0,180,100,.4);
+}
+.mark[data-v="cross"]::after {
+  content: "✕"; position: absolute; inset: -12%;
+  display: grid; place-items: center;
+  color: #ff4757; font-size: 140%; font-weight: 900;
+  text-shadow: 0 2px 6px rgba(255,71,87,.4);
+}
+.circleMark { border-radius: 999px; border: 5px solid transparent; background: transparent; }
+.circleMark[data-v="on"] { border-color: var(--red); background: rgba(255,71,87,.1); }
+
+.answerBox { position: absolute; pointer-events: auto; }
+.answerBox input, .answerBox textarea {
+  width: 100%; height: 100%;
+  border: 3px solid rgba(74,159,255,.6);
+  border-radius: 12px;
+  background: rgba(255,255,255,.65);
+  font-weight: 900; font-size: 14px; color: #111;
+  resize: none; padding: 6px 8px;
+  font-family: var(--font-body);
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.answerBox input:focus, .answerBox textarea:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(74,159,255,.2);
+}
+
+.hint {
+  position: absolute; left: 50%; top: 4%;
+  transform: translateX(-50%);
+  background: var(--yellow);
+  border: 3px solid rgba(200,150,0,.3);
+  border-radius: 20px;
+  padding: 10px 18px;
+  font-weight: 900; font-size: 15px;
+  box-shadow: var(--shadow-soft);
+  color: var(--ink); white-space: nowrap;
+  animation: hintPop .3s ease;
+}
+@keyframes hintPop { from { opacity:0; transform: translateX(-50%) scale(.9) translateY(-8px); } }
+
+/* ══════════════════════════════
+   TOAST
+══════════════════════════════ */
+.toast {
+  position: fixed; left: 50%; bottom: 28px;
+  transform: translateX(-50%) translateY(30px);
+  opacity: 0;
+  background: linear-gradient(135deg, var(--purple), var(--blue));
+  color: white; padding: 13px 24px;
+  border-radius: 50px; font-weight: 900; font-size: 15px;
+  z-index: 400;
+  transition: .28s cubic-bezier(.34,1.56,.64,1);
+  box-shadow: var(--shadow-soft);
+  pointer-events: none;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ══════════════════════════════
+   MODAL
+══════════════════════════════ */
+.modal {
+  position: fixed; inset: 0;
+  background: rgba(10,6,30,.5);
+  backdrop-filter: blur(4px);
+  z-index: 500; display: grid; place-items: center; padding: 16px;
+}
+.modal-card {
+  width: min(560px, 100%);
+  background: var(--paper);
+  border: 4px solid rgba(255,255,255,.85);
+  border-radius: 36px; padding: 28px;
+  box-shadow: 0 32px 80px rgba(45,27,105,.3);
+  text-align: center;
+}
+.modal-card h2 { font-family: var(--font-head); font-size: 36px; margin-bottom: 8px; color: var(--ink); }
+.big-score {
+  font-family: var(--font-head);
+  font-size: 88px; color: var(--green);
+  text-shadow: 0 6px 0 var(--green-dark);
+}
+.grade-grid { display: grid; gap: 10px; text-align: left; margin: 14px 0; }
+.grade-grid label {
+  display: grid; grid-template-columns: 1fr 110px; gap: 10px;
+  align-items: center; font-weight: 900; color: var(--ink);
+}
+.grade-grid input {
+  padding: 10px; border-radius: 14px;
+  border: 2.5px solid var(--line);
+  font-weight: 900; font-family: var(--font-body);
+  background: rgba(255,255,255,.85); color: var(--ink);
+  outline: none;
+  text-align: center;
+}
+.modal-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+
+/* ══════════════════════════════
+   ANIMATIONS
+══════════════════════════════ */
+.pop-in { animation: popIn .45s cubic-bezier(.34,1.56,.64,1) both; }
+@keyframes popIn {
+  from { opacity: 0; transform: scale(.88) translateY(24px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: scale(.97) translateX(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.hidden { display: none !important; }
+
+/* ══════════════════════════════
+   RESPONSIVE – TABLET (≤ 860px)
+══════════════════════════════ */
+@media (max-width: 860px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .cards3 { grid-template-columns: 1fr; }
+  .welcome-card { padding: 22px 18px; border-radius: 28px; }
+
+  .lobby-head { align-items: flex-start; flex-wrap: wrap; }
+  .game-header { padding: 8px 12px; border-radius: 20px; gap: 8px; }
+  .logo { width: 52px; height: 52px; font-size: 28px; border-radius: 16px; }
+  .brand-text h2 { font-size: 22px; }
+  .top-actions { gap: 6px; flex-wrap: wrap; }
+
+  .tools-bar { padding: 8px; gap: 6px; border-radius: 18px; }
+  .tool { padding: 9px 10px; border-radius: 14px; }
+  .tool-label { display: none; }
+  .tool-icon { font-size: 20px; }
+
+  .stage-area { grid-template-columns: 1fr; gap: 6px; }
+  .side-nav {
+    position: fixed; bottom: 16px; z-index: 50;
+    width: 64px; height: 64px; font-size: 50px;
+  }
+  .side-nav.left  { left: 14px; }
+  .side-nav.right { right: 14px; }
+
+  .stage-shell { height: auto; min-height: 0; align-items: start; }
+  .slide-img { max-height: none; width: min(100%, 500px); border-radius: 18px; }
+
+  .page-chip {
+    position: fixed; left: 50%; bottom: 22px; z-index: 50;
+    transform: translateX(-50%);
+    font-size: 16px; padding: 8px 20px;
+  }
+  .play-screen { padding: 6px; }
+
+  .mission-card { min-height: 240px; padding: 20px; }
+  .card-icon { font-size: 52px; }
+  .mission-card h3 { font-size: 28px; }
+}
+
+/* ══════════════════════════════
+   RESPONSIVE – MOBILE (≤ 430px)
+══════════════════════════════ */
+@media (max-width: 430px) {
+  .game-header { gap: 6px; }
+  .pill-btn { font-size: 0; padding: 8px 10px; border-radius: 14px; }
+  .pill-btn::first-letter { font-size: 18px; }
+  .rainbow-title { font-size: 40px; }
+  .welcome-card { padding: 18px 14px; }
+  .slide-img { width: 100%; }
+  .tools-bar { margin: 0; }
+  .stage-shell { padding: 0 4px; }
+}
+
+/* ══════════════════════════════
+   DESKTOP FINE-TUNING (≥ 1050px)
+══════════════════════════════ */
+@media (min-width: 1050px) {
+  .stage-area { padding: 0 6px; }
+  .slide-img { max-height: calc(100dvh - 220px); }
+  .stage-shell { height: calc(100dvh - 200px); }
+}
+
+
+/* ══════════════════════════════
+   PATCH V4 - header chip, responsive nav, dynamic tools
+══════════════════════════════ */
+.header-chip{
+  position: static !important;
+  transform: none !important;
+  font-size: 15px;
+  padding: 9px 16px;
+  color: var(--ink);
+  border: 2.5px dashed rgba(45,27,105,.18);
+  background: rgba(255,255,255,.86);
+  box-shadow: 0 4px 0 rgba(45,27,105,.10);
+  white-space: nowrap;
+}
+body.dark .header-chip{background:rgba(22,14,50,.86);border-color:rgba(255,255,255,.18)}
+.btn-emoji{font-size:1.05em;line-height:1}.btn-text{display:inline-block}
+#play{grid-template-rows:auto auto minmax(0,1fr);height:100dvh;overflow:hidden}.play-screen{overflow:hidden}
+.game-header{min-height:0}.top-actions{justify-content:flex-end}.brandbox{min-width:0}.brand-text{min-width:0}.student-badge{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:42vw}
+.stage-card{height:100%;min-height:0}.stage-shell{height:calc(100dvh - 164px);min-height:0}.slide-img{max-height:calc(100dvh - 176px)}
+.tools-bar .tool.hidden{display:none!important}.tools-bar{min-height:58px}.tool{will-change:transform}.tool:not(.hidden){animation:toolPop .22s cubic-bezier(.34,1.56,.64,1) both}@keyframes toolPop{from{opacity:0;transform:scale(.82) translateY(-4px)}to{opacity:1;transform:none}}
+.side-nav{display:grid;place-items:center;z-index:60}.side-nav.left{justify-self:end}.side-nav.right{justify-self:start}
+
+@media (min-width:1050px){
+  .game-header{padding:10px 18px}.logo{width:56px;height:56px;font-size:32px}.brand-text h2{font-size:30px}.student-badge{font-size:13px}.pill-btn{font-size:15px;padding:10px 16px}.header-chip{font-size:18px;padding:10px 22px}.tools-bar{max-width:max-content;justify-self:center}.stage-area{grid-template-columns:120px minmax(0,1fr) 120px;padding:0 10px}.stage-shell{height:calc(100dvh - 155px)}.slide-img{max-height:calc(100dvh - 168px)}.side-nav{width:86px;height:86px;font-size:70px}
+}
+@media (max-width:860px){
+  #play{height:100dvh;overflow:hidden;grid-template-rows:auto auto minmax(0,1fr);gap:6px;padding:6px}.game-header{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;padding:8px;border-radius:18px}.brandbox{gap:8px}.logo{width:46px;height:46px;font-size:26px;border-radius:14px}.brand-text h2{font-size:20px;line-height:.95}.student-badge{font-size:11px;max-width:44vw}.top-actions{grid-column:2;grid-row:1;display:flex;gap:5px;flex-wrap:wrap;max-width:52vw}.header-chip{order:-1;font-size:12px;padding:7px 10px;border-radius:14px}.pill-btn{padding:8px 10px;border-radius:14px;font-size:13px;gap:4px;box-shadow:0 3px 0 rgba(45,27,105,.12)}.btn-emoji{font-size:16px}.btn-text{font-size:12px}.tools-bar{justify-content:center;padding:7px;gap:6px;border-radius:16px}.tool{padding:8px 10px;border-radius:13px}.tool-label{display:inline!important;font-size:12px}.tool-icon{font-size:17px}.stage-area{position:relative;display:grid;grid-template-columns:1fr;padding:0 58px;min-height:0;overflow:hidden}.stage-card{overflow:auto;overscroll-behavior:contain;padding:0}.stage-shell{height:100%;min-height:0;align-items:start;padding:0}.slide-img{width:100%;max-width:100%;max-height:none;border-radius:16px}.side-nav{position:fixed!important;top:54%!important;bottom:auto!important;transform:translateY(-50%);width:50px;height:62px;border-radius:22px;font-size:48px;line-height:1}.side-nav.left{left:6px!important}.side-nav.right{right:6px!important}.theme-btn{right:10px;bottom:auto;top:calc(env(safe-area-inset-top) + 10px);width:42px;height:42px;border-radius:14px;font-size:20px;box-shadow:0 4px 0 rgba(45,27,105,.12),0 8px 24px rgba(45,27,105,.16)}
+}
+@media (max-width:520px){
+  .game-header{grid-template-columns:minmax(0,1fr);gap:7px}.top-actions{grid-column:1;grid-row:2;max-width:none;width:100%;justify-content:space-between}.student-badge{max-width:calc(100vw - 90px)}.header-chip{font-size:12px;padding:7px 9px}.pill-btn{padding:8px 9px}.btn-text{display:none}.btn-emoji{font-size:17px}.tools-bar{justify-content:space-between}.tool{padding:8px 9px}.tool-label{display:none!important}.stage-area{padding:0 48px}.side-nav{width:42px;height:56px;font-size:42px;border-radius:18px;top:58%!important}.side-nav.left{left:4px!important}.side-nav.right{right:4px!important}.slide-img{border-radius:14px}.toast{bottom:14px;max-width:calc(100vw - 24px);font-size:13px;text-align:center}.theme-btn{top:8px;right:8px;width:38px;height:38px;font-size:18px}
+}
+@media (max-width:380px){.stage-area{padding:0 42px}.side-nav{width:38px;height:52px;font-size:38px}.header-chip{font-size:11px}.pill-btn{padding:7px 8px}.brand-text h2{font-size:18px}.student-badge{font-size:10px}.logo{width:42px;height:42px}.tool{padding:7px 8px}}
+.connectGuide{position:absolute;inset:0;pointer-events:none;z-index:7}.connectDot{position:absolute;width:24px;height:24px;border-radius:999px;border:4px solid #fff;box-shadow:0 3px 0 rgba(45,27,105,.18),0 0 0 3px rgba(74,159,255,.35);background:linear-gradient(135deg,var(--yellow),var(--blue));animation:dotPulse 1.25s ease-in-out infinite}.connectDot.rightDot{background:linear-gradient(135deg,var(--green),var(--cyan));animation-delay:.15s}@keyframes dotPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+
+/* ══════════════════════════════
+   PATCH V5 - vertical side tools + bigger slide + cleaner mobile header
+══════════════════════════════ */
+#play{
+  grid-template-rows:auto minmax(0,1fr) !important;
+  gap:10px !important;
+  height:100dvh !important;
+  overflow:hidden !important;
+  padding:10px 12px !important;
+}
+.tools-bar{display:none!important}
+.game-header{
+  position:relative;
+  z-index:80;
+}
+.stage-area{
+  display:grid !important;
+  grid-template-columns:96px 92px minmax(0,1fr) 92px 96px !important;
+  align-items:center !important;
+  gap:12px !important;
+  min-height:0 !important;
+  overflow:hidden !important;
+  padding:2px 12px 10px !important;
+}
+.stage-card{
+  grid-column:3;
+  height:100%;
+  min-height:0;
+  display:grid;
+  place-items:center;
+  overflow:visible;
+}
+.stage-shell{
+  height:calc(100dvh - 126px) !important;
+  min-height:0 !important;
+  width:100%;
+  display:grid;
+  place-items:center;
+}
+.slide-img{
+  max-height:calc(100dvh - 138px) !important;
+  max-width:100% !important;
+  border-radius:22px;
+}
+.tool-rail{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  align-self:center;
+  justify-self:center;
+  padding:12px 10px;
+  border-radius:30px;
+  background:rgba(255,255,255,.56);
+  border:3px solid rgba(255,255,255,.72);
+  box-shadow:0 12px 34px rgba(45,27,105,.12), inset 0 0 0 1px rgba(255,255,255,.6);
+  backdrop-filter:blur(15px);
+  z-index:70;
+}
+body.dark .tool-rail{background:rgba(22,14,50,.56);border-color:rgba(255,255,255,.15)}
+.rail-left{grid-column:2}.rail-right{grid-column:4}
+.side-nav.left{grid-column:1;justify-self:center}.side-nav.right{grid-column:5;justify-self:center}
+.tool{
+  width:74px;
+  min-height:68px;
+  padding:10px 8px !important;
+  border-radius:22px !important;
+  display:flex !important;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:5px !important;
+  text-align:center;
+}
+.tool.hidden{display:none!important}
+.tool-icon{font-size:24px !important;line-height:1}.tool-label{display:block!important;font-size:12px!important;line-height:1.05;font-weight:900}
+.side-nav{
+  width:78px!important;
+  height:78px!important;
+  font-size:62px!important;
+}
+.theme-btn{
+  right:18px!important;
+  bottom:18px!important;
+  top:auto!important;
+}
+
+@media (min-width:1050px){
+  #play{padding:12px 14px!important;gap:10px!important}
+  .game-header{padding:10px 18px!important;border-radius:25px!important}
+  .stage-area{grid-template-columns:106px 94px minmax(0,1fr) 94px 106px!important;gap:14px!important;padding:0 20px 12px!important}
+  .stage-shell{height:calc(100dvh - 120px)!important}
+  .slide-img{max-height:calc(100dvh - 132px)!important}
+  .stage{max-height:100%;}
+}
+
+@media (max-width:860px){
+  #play{padding:6px!important;gap:6px!important;grid-template-rows:auto minmax(0,1fr)!important;overflow:hidden!important}
+  .game-header{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:7px!important;
+    padding:8px!important;
+    border-radius:20px!important;
+  }
+  .brandbox{gap:8px!important;min-width:0}.logo{width:48px!important;height:48px!important;font-size:27px!important;border-radius:16px!important}
+  .brand-text h2{font-size:20px!important;line-height:.95!important;white-space:normal!important}.student-badge{font-size:11px!important;max-width:calc(100vw - 78px)!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  .top-actions{grid-column:1!important;grid-row:2!important;width:100%!important;max-width:none!important;display:grid!important;grid-template-columns:1.35fr 1fr 1fr 1fr!important;gap:6px!important;align-items:stretch!important}
+  .header-chip,.pill-btn{height:38px!important;min-height:38px!important;padding:7px 8px!important;border-radius:15px!important;font-size:12px!important;display:flex!important;align-items:center!important;justify-content:center!important;white-space:nowrap!important;box-shadow:0 3px 0 rgba(45,27,105,.12)!important}
+  .btn-text{display:none!important}.btn-emoji{font-size:17px!important}
+  .header-chip{font-family:var(--font-head)!important;font-size:12px!important;color:var(--purple)!important}
+  .stage-area{
+    position:relative!important;
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    padding:0 50px!important;
+    gap:0!important;
+    overflow:auto!important;
+    overscroll-behavior:contain!important;
+    align-items:start!important;
+  }
+  .stage-card{grid-column:1!important;width:100%!important;overflow:visible!important;place-items:start center!important}
+  .stage-shell{height:auto!important;width:100%!important;align-items:start!important;padding:0!important}
+  .stage{width:100%;max-width:500px;margin:0 auto 16px;}
+  .slide-img{width:100%!important;max-width:100%!important;max-height:none!important;border-radius:16px!important}
+  .tool-rail{
+    position:fixed!important;
+    top:35%!important;
+    transform:translateY(-50%)!important;
+    width:42px!important;
+    padding:7px 4px!important;
+    gap:8px!important;
+    border-radius:20px!important;
+    z-index:75!important;
+  }
+  .rail-left{left:5px!important;grid-column:auto!important}.rail-right{right:5px!important;grid-column:auto!important}
+  .tool{width:36px!important;min-height:38px!important;height:38px!important;padding:6px!important;border-radius:14px!important;gap:0!important}
+  .tool-icon{font-size:18px!important}.tool-label{display:none!important}
+  .side-nav{
+    position:fixed!important;
+    top:68%!important;
+    bottom:auto!important;
+    transform:translateY(-50%)!important;
+    width:42px!important;
+    height:58px!important;
+    border-radius:18px!important;
+    font-size:42px!important;
+    z-index:78!important;
+  }
+  .side-nav.left{left:4px!important;grid-column:auto!important}.side-nav.right{right:4px!important;grid-column:auto!important}
+  .theme-btn{top:auto!important;right:9px!important;bottom:9px!important;width:38px!important;height:38px!important;border-radius:14px!important;font-size:18px!important;z-index:90!important}
+}
+
+@media (max-width:430px){
+  .brand-text h2{font-size:19px!important}.student-badge{font-size:10.5px!important}
+  .top-actions{gap:5px!important;grid-template-columns:1.25fr 1fr 1fr 1fr!important}
+  .header-chip,.pill-btn{height:34px!important;min-height:34px!important;padding:6px 6px!important;border-radius:13px!important}.header-chip{font-size:11px!important}.btn-emoji{font-size:16px!important}
+  .stage-area{padding:0 47px!important}.tool-rail{width:39px!important}.tool{width:33px!important;height:36px!important;min-height:36px!important}.tool-icon{font-size:17px!important}
+  .side-nav{width:40px!important;height:54px!important;font-size:40px!important;top:67%!important}.theme-btn{width:36px!important;height:36px!important}
+}
+
+/* Drag & drop hotspot - v21 */
+.dropZone{
+  position:absolute;
+  border:3px dashed rgba(45,131,201,.5);
+  border-radius:12px;
+  background:rgba(100,160,255,.06);
+  display:grid;place-items:center;
+  pointer-events:none;z-index:5;
+}
+.dropZone span{font-size:clamp(14px,2vw,22px);opacity:.3;}
+.dropZone.occupied{border-color:rgba(34,197,94,.2)!important;background:transparent!important;}
+.dropZone.occupied span{display:none!important;}
+body.dark .dropZone{background:rgba(15,23,42,.2);border-color:rgba(125,211,252,.45)}
+
+/* dragPiece: NO background, NO border, NO shadow — semua dari img di dalamnya */
+.dragPiece{
+  position:absolute;
+  background:none!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  border:none!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+  padding:0!important;
+  margin:0!important;
+  cursor:grab;
+  z-index:24;
+  touch-action:none;
+  overflow:visible!important;
+  transition:transform .14s ease;
+}
+.dragPiece:active,.dragPiece.dragging{
+  cursor:grabbing;
+  transform:scale(1.07) rotate(-1.5deg);
+}
+.dragPiece span{
+  position:absolute;left:4px;top:4px;
+  background:rgba(255,255,255,.85);border-radius:999px;
+  padding:2px 7px;font-size:11px;font-weight:800;color:#17213f;
+  pointer-events:none;z-index:9;
+}
+.dragPiece.correct div{filter:drop-shadow(0 0 8px rgba(36,212,135,.95))!important;}
+.dragPiece.wrong div{filter:drop-shadow(0 0 8px rgba(255,95,168,.95))!important;}
+@keyframes pieceSnap{0%{transform:scale(1.08)rotate(-2deg)}70%{transform:scale(.97)}100%{transform:scale(1)}}
+.dragPiece.correct{animation:pieceSnap .3s cubic-bezier(.34,1.56,.64,1) both}
+
+.dragSourceBlank{position:absolute;z-index:18;pointer-events:none;}
+/* Trace/Maze canvas must be drawable above helper overlays */
+.stage.draw-feature-slide .draw-canvas{z-index:35;}
+.stage.draw-feature-slide .overlay-layer{z-index:30;}
+.stage.draw-feature-slide .addonOverlay.trace,
+.stage.draw-feature-slide .addonOverlay.mazePath,
+.stage.draw-feature-slide .addonOverlay.pathPaint,
+.stage.draw-feature-slide .addonOverlay.coloring{
+  background:transparent!important;
+  border:0!important;
+}
+
+/* === FIX TEXTBOX SIZE FOLLOW BOX === */
+.answerBox{
+  overflow:hidden !important;
+  box-sizing:border-box !important;
+}
+.answerBox input,
+.answerBox textarea,
+.answerInner{
+  width:100% !important;
+  height:100% !important;
+  min-width:0 !important;
+  min-height:0 !important;
+  box-sizing:border-box !important;
+  display:block !important;
+  overflow:auto !important;
+}
+
+/* =========================================================
+   PLAYER CLEAN HOTSPOT UI FIX
+   Hilangkan border/helper overlay di index.html karena layout
+   soal sudah berbasis image/design. Interaksi tetap jalan.
+   Tidak menyentuh logic drag-drop.
+========================================================= */
+body:not([data-editor="true"]) .mark,
+body:not([data-editor="true"]) .circleMark{
+  border-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+body:not([data-editor="true"]) .mark:hover,
+body:not([data-editor="true"]) .circleMark:hover{
+  border-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+/* hasil jawaban tetap muncul, tapi kotak helper birunya hilang */
+body:not([data-editor="true"]) .mark[data-v="check"]::after,
+body:not([data-editor="true"]) .mark[data-v="cross"]::after{
+  inset: -18% !important;
+  font-size: 170% !important;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,.18));
+}
+/* circle hanya terlihat kalau siswa sudah memilih/melingkari */
+body:not([data-editor="true"]) .circleMark[data-v="on"]{
+  border-color: var(--red) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+/* Textbox mengikuti desain gambar: tanpa border biru/background */
+body:not([data-editor="true"]) .answerBox input,
+body:not([data-editor="true"]) .answerBox textarea{
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+  border-radius: 0 !important;
+  padding: 6px 8px !important;
+}
+body:not([data-editor="true"]) .answerBox input:focus,
+body:not([data-editor="true"]) .answerBox textarea:focus{
+  border: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+/* Dot connect hanya area klik/tarik, visual ring dihilangkan */
+body:not([data-editor="true"]) .connectDot{
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  animation: none !important;
+}
+/* Overlay tambahan tidak boleh memunculkan outline/debug di player */
+body:not([data-editor="true"]) .addonOverlay,
+body:not([data-editor="true"]) .colorzone,
+body:not([data-editor="true"]) .color-zone,
+body:not([data-editor="true"]) .mazePath,
+body:not([data-editor="true"]) .pathPaint,
+body:not([data-editor="true"]) .trace,
+body:not([data-editor="true"]) .coloring{
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* =========================================================
+   FIX: CLEAN DRAG DROP DROP-ZONE IN PLAYER/INDEX
+   Content image already contains the puzzle grid/target area,
+   so helper dashed border and target arrow/icon must be hidden.
+   This only affects visual layer, not drag-drop logic.
+   ========================================================= */
+body:not(.edit) .dropZone,
+body[data-editor="false"] .dropZone,
+body:not([data-editor="true"]) .dropZone{
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
+  background-color:transparent!important;
+}
+
+body:not(.edit) .dropZone span,
+body[data-editor="false"] .dropZone span,
+body:not([data-editor="true"]) .dropZone span{
+  display:none!important;
+  opacity:0!important;
+  visibility:hidden!important;
+}
+
+/* Older hotspot renderer class support */
+body:not(.edit) .drop,
+body[data-editor="false"] .drop,
+body:not([data-editor="true"]) .drop{
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
+}
+
+
+/* TRUE/FALSE MODE - tambahan tanpa mengubah drag-drop */
+.truefalse-toolbar{
+  position:fixed; left:clamp(14px,5vw,72px); top:50%; transform:translateY(-50%);
+  z-index:1200; display:grid; gap:12px; padding:14px; border-radius:28px;
+  background:rgba(255,255,255,.82); border:6px solid rgba(255,255,255,.75);
+  box-shadow:0 18px 45px rgba(0,0,0,.18); backdrop-filter:blur(10px);
+}
+.truefalse-toolbar button{width:104px; min-height:86px; border:4px solid #e6e1f2; border-radius:24px; background:#fff; color:#2c1c6b; font-weight:1000; cursor:pointer; box-shadow:0 7px 0 rgba(0,0,0,.12); display:grid; place-items:center; gap:2px;}
+.truefalse-toolbar button span{font-size:30px; line-height:1}.truefalse-toolbar button b{font-size:14px}.truefalse-toolbar button.active{outline:5px solid #00d4f0; transform:translateY(2px); box-shadow:0 3px 0 rgba(0,0,0,.14)}
+body:not([data-editor="true"]) .trueFalseMark{border-color:transparent!important;background:transparent!important;box-shadow:none!important;outline:none!important;}
+body:not([data-editor="true"]) .trueFalseMark[data-v="check"]::after{content:"✓"; color:#7b61d1!important; font-size:170%!important; font-weight:1000; filter:drop-shadow(0 2px 3px rgba(0,0,0,.18));}
+body:not([data-editor="true"]) .trueFalseMark[data-v="cross"]::after{content:"✕"; color:#ff4757!important; font-size:170%!important; font-weight:1000; filter:drop-shadow(0 2px 3px rgba(0,0,0,.18));}
+@media(max-width:800px){.truefalse-toolbar{left:10px; padding:9px; gap:8px}.truefalse-toolbar button{width:78px;min-height:66px;border-radius:18px}.truefalse-toolbar button span{font-size:24px}.truefalse-toolbar button b{font-size:11px}}
+
+
+/* FIX TRUE/FALSE UI CLEAN + COMPACT */
+body:not([data-editor="true"]) .truefalse-toolbar{
+  position:fixed!important;
+  left:clamp(18px,4vw,86px)!important;
+  top:50%!important;
+  transform:translateY(-50%)!important;
+  z-index:1200!important;
+  display:grid!important;
+  gap:8px!important;
+  padding:10px!important;
+  border-radius:24px!important;
+  background:rgba(255,255,255,.78)!important;
+  border:5px solid rgba(255,255,255,.72)!important;
+  box-shadow:0 16px 34px rgba(45,27,105,.14)!important;
+  backdrop-filter:blur(10px)!important;
+}
+body:not([data-editor="true"]) .truefalse-toolbar button{
+  width:78px!important;
+  min-height:70px!important;
+  border:3px solid #e9e4f5!important;
+  border-radius:20px!important;
+  background:rgba(255,255,255,.96)!important;
+  color:#2c1c6b!important;
+  font-weight:1000!important;
+  box-shadow:0 5px 0 rgba(45,27,105,.14)!important;
+  gap:1px!important;
+}
+body:not([data-editor="true"]) .truefalse-toolbar button span{font-size:26px!important;line-height:1!important}
+body:not([data-editor="true"]) .truefalse-toolbar button b{font-size:12px!important;line-height:1!important}
+body:not([data-editor="true"]) .truefalse-toolbar button.active{
+  outline:4px solid #00d4f0!important;
+  box-shadow:0 3px 0 rgba(45,27,105,.12)!important;
+}
+/* true/false memakai toolbar sendiri, jangan munculkan tombol Pilih/Benar-Salah tambahan */
+body.has-truefalse-slide #selectTool{display:none!important;}
+@media(max-width:800px){
+  body:not([data-editor="true"]) .truefalse-toolbar{left:8px!important;padding:7px!important;gap:6px!important;border-radius:18px!important;border-width:4px!important}
+  body:not([data-editor="true"]) .truefalse-toolbar button{width:54px!important;min-height:50px!important;border-radius:14px!important;border-width:2px!important}
+  body:not([data-editor="true"]) .truefalse-toolbar button span{font-size:20px!important}
+  body:not([data-editor="true"]) .truefalse-toolbar button b{font-size:9px!important}
+}
+
+/* FINAL FIX TRUE/FALSE TOOLBAR POSITION - jangan nutup tombol prev */
+body:not([data-editor="true"]) .truefalse-toolbar{
+  left:clamp(150px, 13vw, 230px)!important;
+  top:50%!important;
+  transform:translateY(-50%)!important;
+  z-index:74!important; /* di bawah nav sedikit, tapi tetap bisa klik */
+  padding:10px!important;
+  gap:9px!important;
+  border-radius:25px!important;
+}
+body:not([data-editor="true"]) .truefalse-toolbar button{
+  width:82px!important;
+  min-height:72px!important;
+  border-radius:21px!important;
+}
+@media (max-width:860px){
+  body:not([data-editor="true"]) .truefalse-toolbar{
+    left:58px!important;
+    top:50%!important;
+    transform:translateY(-50%)!important;
+    padding:7px!important;
+    gap:6px!important;
+    border-radius:18px!important;
+    z-index:74!important;
+  }
+  body:not([data-editor="true"]) .truefalse-toolbar button{
+    width:54px!important;
+    min-height:50px!important;
+    border-radius:14px!important;
+  }
+}
+@media (max-width:430px){
+  body:not([data-editor="true"]) .truefalse-toolbar{left:52px!important;}
+}
+
+
+/* === FINAL SCOPE + POSITION TRUE/FALSE TOOLBAR ===
+   Toolbar Benar/Salah hanya boleh muncul di screen play dan diposisikan
+   seimbang vertikal mengikuti rail Reset/Suara, tidak ikut ke lobby/dashboard. */
+body:not(.egk-playing) .truefalse-toolbar,
+body:not(.has-truefalse-slide) .truefalse-toolbar{
+  display:none!important;
+}
+body.egk-playing.has-truefalse-slide:not([data-editor="true"]) .truefalse-toolbar{
+  position:fixed!important;
+  left:clamp(190px, 15vw, 285px)!important;
+  top:calc(50% + 34px)!important;
+  transform:translateY(-50%)!important;
+  z-index:74!important;
+  width:auto!important;
+  padding:12px!important;
+  gap:12px!important;
+  border-radius:28px!important;
+  background:rgba(255,255,255,.86)!important;
+  border:6px solid rgba(255,255,255,.78)!important;
+  box-shadow:0 18px 40px rgba(45,27,105,.16)!important;
+}
+body.egk-playing.has-truefalse-slide:not([data-editor="true"]) .truefalse-toolbar button{
+  width:86px!important;
+  min-height:78px!important;
+  border-radius:22px!important;
+}
+@media(max-width:860px){
+  body.egk-playing.has-truefalse-slide:not([data-editor="true"]) .truefalse-toolbar{
+    left:74px!important;
+    top:calc(50% + 24px)!important;
+    padding:8px!important;
+    gap:7px!important;
+    border-radius:20px!important;
+  }
+  body.egk-playing.has-truefalse-slide:not([data-editor="true"]) .truefalse-toolbar button{
+    width:58px!important;
+    min-height:54px!important;
+    border-radius:15px!important;
+  }
+}
+
+/* CONNECT RUNTIME FIX - clean clickable dots + smooth line, no dragdrop changes */
+.connectGuide{display:none!important}
+.connectPlay{z-index:30;touch-action:none}
+.connectSvg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:1}
+.connectUserLine{stroke:#11c5d9;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 3px 4px rgba(0,0,0,.18));opacity:.96}
+.connectUserLine.temp{stroke:#9b5cf6;stroke-dasharray:16 10;opacity:.85}
+.connectUserLine.ok{stroke:#10c5a6}
+.connectHitDot{appearance:none;border:0;background:transparent!important;box-shadow:none!important;outline:none!important;border-radius:999px;cursor:pointer;z-index:3;touch-action:none}
+.connectHitDot::after{content:"";position:absolute;left:50%;top:50%;width:16px;height:16px;transform:translate(-50%,-50%);border-radius:999px;background:transparent;box-shadow:none}
+.connectHitDot:active::after{background:rgba(17,197,217,.22);width:34px;height:34px}
+
+
+/* EGK_TRANSPARENT_PLACEHOLDER_PATCH */
+input::placeholder,
+textarea::placeholder{
+  color:transparent!important;
+  opacity:0!important;
+}
+.answerBox input,
+.answerBox textarea{
+  background:transparent!important;
+}
+
+
+/* ════════════════════════════════════════════════════════
+   EGK MOBILE & POPUP FIX PATCH - FINAL
+   1. Modal tidak kepotong di desktop
+   2. TrueFalse toolbar tidak dempetan di mobile
+   3. Popup scrollable di layar kecil
+════════════════════════════════════════════════════════ */
+
+/* ── MODAL: tidak kepotong, selalu scrollable ── */
+.modal {
+  align-items: flex-start !important;
+  overflow-y: auto !important;
+  padding: 20px 16px !important;
+}
+.modal-card {
+  margin: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+/* ── MODAL di layar kecil ── */
+@media (max-width: 600px) {
+  .modal {
+    padding: 12px 10px !important;
+    align-items: flex-start !important;
+  }
+  .modal-card {
+    width: 100% !important;
+    border-radius: 24px !important;
+    padding: 20px 16px !important;
+  }
+  .modal-card h2 {
+    font-size: 24px !important;
+  }
+  .big-score {
+    font-size: 60px !important;
+  }
+}
+
+/* ── TRUEFALSE TOOLBAR: mobile bawah layar, bukan melayang di tengah ── */
+@media (max-width: 860px) {
+  body.egk-playing.has-truefalse-slide:not([data-editor="true"]) .truefalse-toolbar {
+    /* Pindah ke bawah layar, horizontal, tidak nutup slide */
+    position: fixed !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    top: auto !important;
+    bottom: 12px !important;
+    flex-direction: row !important;
+    display: flex !important;
+    gap: 10px !important;
+    padding: 10px 16px !important;
+    border-radius: 50px !important;
+    background: rgba(255,255,255,.94) !important;
+    border: 3px solid rgba(255,255,255,.9) !important;
+    box-shadow: 0 8px 32px rgba(45,27,105,.22), 0 2px 0 rgba(255,255,255,.8) !important;
+    width: auto !important;
+    max-width: calc(100vw - 24px) !important;
+    z-index: 200 !important;
+    backdrop-filter: blur(14px) !important;
+  }
+  body.egk-playing.has-truefalse-slide:not([data-editor="true"]) .truefalse-toolbar button {
+    width: 72px !important;
+    min-height: 62px !important;
+    height: 62px !important;
+    border-radius: 20px !important;
+    font-size: 13px !important;
+    flex-shrink: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 3px !important;
+  }
+  body.egk-playing.has-truefalse-slide:not([data-editor="true"]) .truefalse-toolbar button span {
+    font-size: 24px !important;
+  }
+  body.egk-playing.has-truefalse-slide:not([data-editor="true"]) .truefalse-toolbar button b {
+    font-size: 11px !important;
+  }
+  /* Beri ruang di bawah stage untuk toolbar pill */
+  body.egk-playing.has-truefalse-slide .stage-area {
+    padding-bottom: 90px !important;
+  }
+}
+
+/* Layar sangat kecil (<430px) */
+@media (max-width: 430px) {
+  body.egk-playing.has-truefalse-slide:not([data-editor="true"]) .truefalse-toolbar {
+    bottom: 8px !important;
+    padding: 8px 12px !important;
+    gap: 8px !important;
+  }
+  body.egk-playing.has-truefalse-slide:not([data-editor="true"]) .truefalse-toolbar button {
+    width: 64px !important;
+    min-height: 56px !important;
+    height: 56px !important;
+    border-radius: 18px !important;
+  }
+  body.egk-playing.has-truefalse-slide:not([data-editor="true"]) .truefalse-toolbar button span {
+    font-size: 20px !important;
+  }
+  body.egk-playing.has-truefalse-slide:not([data-editor="true"]) .truefalse-toolbar button b {
+    font-size: 10px !important;
+  }
+}
+
+/* Dark mode truefalse toolbar */
+body.dark.egk-playing.has-truefalse-slide:not([data-editor="true"]) .truefalse-toolbar {
+  background: rgba(22,14,50,.92) !important;
+  border-color: rgba(255,255,255,.18) !important;
+}
+body.dark.egk-playing.has-truefalse-slide:not([data-editor="true"]) .truefalse-toolbar button {
+  background: rgba(40,25,80,.96) !important;
+  color: #e0d8ff !important;
+  border-color: rgba(155,91,246,.35) !important;
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   MEGA FIX PATCH v2
+   1. Welcome card - balance atas bawah
+   2. Tombol prev/next pindah ke bawah konten (mobile)
+   3. Modal desktop tidak kepotong (override fix sebelumnya)
+════════════════════════════════════════════════════════════ */
+
+/* ── 1. WELCOME CARD BALANCE ── */
+#welcome {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 100dvh !important;
+  padding: 24px 16px !important;
+}
+.welcome-card {
+  margin: auto !important;
+}
+/* Kurangi margin mascot agar card lebih balance */
+.welcome-top { margin-bottom: 10px !important; }
+.welcome-sub { margin-bottom: 18px !important; font-size: 16px !important; }
+.rainbow-title { margin-bottom: 4px !important; font-size: clamp(34px, 7vw, 64px) !important; }
+.mascot-bubble { width: 82px !important; height: 82px !important; }
+
+/* ── 2. TOMBOL PREV/NEXT — PINDAH KE BAWAH di mobile ── */
+@media (max-width: 860px) {
+  /* Hapus posisi fixed side-nav lama */
+  .side-nav {
+    position: static !important;
+    transform: none !important;
+    width: 52px !important;
+    height: 52px !important;
+    font-size: 44px !important;
+    border-radius: 20px !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* stage-area jadi column, prev/next di bawah */
+  .stage-area {
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 0 8px !important;
+    gap: 0 !important;
+    overflow: auto !important;
+    overscroll-behavior: contain !important;
+    align-items: stretch !important;
+  }
+
+  /* stage card normal */
+  .stage-card {
+    width: 100% !important;
+    overflow: visible !important;
+    order: 1 !important;
+  }
+  .stage-shell {
+    height: auto !important;
+    width: 100% !important;
+    align-items: start !important;
+    padding: 0 !important;
+  }
+  .stage { width: 100%; max-width: 500px; margin: 0 auto; }
+  .slide-img {
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    border-radius: 16px !important;
+  }
+
+  /* tool rails jadi horizontal bar di atas slide */
+  .tool-rail {
+    position: static !important;
+    transform: none !important;
+    flex-direction: row !important;
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 8px 12px !important;
+    gap: 10px !important;
+    border-radius: 18px !important;
+    order: 0 !important;
+    margin-bottom: 6px !important;
+    z-index: auto !important;
+  }
+  .rail-left { order: 0 !important; }
+  .rail-right { order: 2 !important; }
+
+  /* Tools jadi lebih kecil horizontal */
+  .tool {
+    width: auto !important;
+    min-height: 42px !important;
+    height: 42px !important;
+    padding: 8px 12px !important;
+    border-radius: 14px !important;
+    flex-direction: row !important;
+    gap: 6px !important;
+  }
+  .tool-icon { font-size: 18px !important; }
+  .tool-label { display: inline !important; font-size: 12px !important; }
+
+  /* Tombol nav di BAWAH konten — row dengan prev | info | next */
+  .side-nav.left  { order: 3 !important; }
+  .side-nav.right { order: 3 !important; }
+
+  /* Bungkus nav ke flex row di bawah — via pseudo wrapper trick dengan CSS only */
+  /* Kita jadikan stage-area sebagai grid 1 col dan nav diletakkan via order */
+  .side-nav {
+    order: 3 !important;
+    align-self: center !important;
+  }
+
+  /* Nav row wrapper — kita inject via CSS layout */
+  .stage-area::after {
+    content: '';
+    display: block;
+    order: 3;
+    height: 0;
+    width: 100%;
+  }
+
+  /* Buat nav buttons dalam satu baris bawah */
+  .side-nav {
+    position: static !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  /* Prev & Next dalam satu row di bawah — gunakan CSS grid trick */
+  .stage-area {
+    display: grid !important;
+    grid-template-areas:
+      "tools-l tools-r"
+      "slide   slide"
+      "prev    next" !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: auto minmax(0,auto) auto !important;
+    padding: 0 8px 8px !important;
+    gap: 6px !important;
+  }
+  .rail-left  { grid-area: tools-l !important; }
+  .rail-right { grid-area: tools-r !important; }
+  .stage-card { grid-area: slide !important; grid-column: 1 / -1 !important; }
+  .side-nav.left  { grid-area: prev !important; width: 100% !important; border-radius: 18px !important; height: 52px !important; }
+  .side-nav.right { grid-area: next !important; width: 100% !important; border-radius: 18px !important; height: 52px !important; }
+}
+
+@media (max-width: 430px) {
+  .tool-label { display: none !important; }
+  .tool { padding: 8px !important; }
+}
+
+/* ── 3. MODAL DESKTOP FIX — tidak kepotong, scrollable ── */
+.modal {
+  position: fixed !important;
+  inset: 0 !important;
+  overflow-y: auto !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  padding: 32px 16px !important;
+  background: rgba(10,6,30,.5) !important;
+  backdrop-filter: blur(4px) !important;
+  z-index: 500 !important;
+}
+.modal-card {
+  width: min(560px, 100%) !important;
+  max-height: none !important;
+  overflow: visible !important;
+  margin: auto !important;
+  flex-shrink: 0 !important;
+}
+@media (max-height: 700px) {
+  .modal { padding: 12px 12px !important; align-items: flex-start !important; }
+  .modal-card { border-radius: 24px !important; padding: 20px 18px !important; }
+  .modal-card h2 { font-size: 26px !important; }
+  .big-score { font-size: 56px !important; }
+}
+@media (max-width: 500px) {
+  .modal { padding: 10px !important; }
+  .modal-card { border-radius: 22px !important; padding: 18px 14px !important; }
+  .modal-card h2 { font-size: 22px !important; }
+  .big-score { font-size: 50px !important; }
+}
+
+
+/* ════════════════════════════════════════════════════
+   FORM FIX - field Kelas tidak kepotong, bisa diklik
+════════════════════════════════════════════════════ */
+.welcome-card {
+  overflow: visible !important;
+  width: min(700px, calc(100vw - 32px)) !important;
+  box-sizing: border-box !important;
+}
+.form-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 12px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+.form-field {
+  min-width: 0 !important;
+  width: 100% !important;
+}
+.form-field input {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  min-width: 0 !important;
+}
+/* Welcome card rainbow border butuh clip, jadi pakai pseudo sebelum overflow */
+.welcome-card::before {
+  border-radius: 40px 40px 0 0 !important;
+}
+@media (max-width: 520px) {
+  .form-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+
+/* ════════════════════════════════════════════════════
+   MOBILE SCROLL FIX v3 - konten tidak kepotong
+   #play di mobile: scroll bebas, nav tetap di bawah
+════════════════════════════════════════════════════ */
+@media (max-width: 860px) {
+  /* Lepas height lock pada #play */
+  #play {
+    height: auto !important;
+    min-height: 100dvh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 8px !important;
+    gap: 8px !important;
+  }
+
+  /* game-header tetap di atas, tidak scroll */
+  .game-header {
+    flex-shrink: 0 !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 80 !important;
+  }
+
+  /* stage-area: grid layout, tidak ada height limit */
+  .stage-area {
+    display: grid !important;
+    grid-template-areas:
+      "tools-l tools-r"
+      "slide   slide"
+      "prev    next" !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: auto auto auto !important;
+    padding: 0 0 8px !important;
+    gap: 6px !important;
+    overflow: visible !important;
+    height: auto !important;
+    min-height: 0 !important;
+    flex: 1 !important;
+  }
+
+  .rail-left  { grid-area: tools-l !important; }
+  .rail-right { grid-area: tools-r !important; }
+  .stage-card {
+    grid-area: slide !important;
+    grid-column: 1 / -1 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+  .stage-shell {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    width: 100% !important;
+    display: block !important;
+  }
+  .stage {
+    width: 100% !important;
+    height: auto !important;
+  }
+  .slide-img {
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    max-width: 100% !important;
+    display: block !important;
+    border-radius: 16px !important;
+  }
+
+  /* side-nav: tombol besar penuh di bawah */
+  .side-nav {
+    position: static !important;
+    transform: none !important;
+    width: 100% !important;
+    height: 54px !important;
+    border-radius: 18px !important;
+    font-size: 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .side-nav.left  { grid-area: prev !important; }
+  .side-nav.right { grid-area: next !important; }
+
+  /* tool rail horizontal */
+  .tool-rail {
+    position: static !important;
+    transform: none !important;
+    flex-direction: row !important;
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 7px 10px !important;
+    gap: 8px !important;
+    border-radius: 16px !important;
+    height: auto !important;
+    min-height: 0 !important;
+    align-self: auto !important;
+  }
+  .tool {
+    width: auto !important;
+    min-height: 38px !important;
+    height: 38px !important;
+    padding: 6px 10px !important;
+    border-radius: 12px !important;
+    flex-direction: row !important;
+    gap: 5px !important;
+  }
+  .tool-icon { font-size: 17px !important; }
+  .tool-label { display: inline !important; font-size: 11px !important; }
+
+  /* theme btn jangan ganggu layout */
+  .theme-btn {
+    position: fixed !important;
+    bottom: 12px !important;
+    right: 12px !important;
+    top: auto !important;
+    z-index: 200 !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .tool-label { display: none !important; }
+  .tool { padding: 7px 9px !important; }
+  .side-nav { height: 48px !important; font-size: 36px !important; }
+}
+
+
+/* ════════════════════════════════════════
+   SCREEN TRANSITION FIX
+   - Screens tidak boleh min-height 100dvh saat inactive
+   - Hanya active screen yang full height
+   - Tidak ada scroll antar screen
+════════════════════════════════════════ */
+.screen {
+  min-height: 0 !important;
+  display: none !important;
+}
+.screen.active {
+  display: grid !important;
+  min-height: 100dvh !important;
+}
+/* Welcome & lobby: center content */
+#welcome.active {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 100dvh !important;
+}
+#lobby.active {
+  display: grid !important;
+  min-height: 100dvh !important;
+}
+/* Play screen di desktop: locked height */
+#play.active {
+  display: grid !important;
+  min-height: 0 !important;
+}
+
+
+/* ════════════════════════════════════════
+   NUCLEAR FIX - screens pakai position fixed
+   Tidak ada scroll antar screen sama sekali
+════════════════════════════════════════ */
+html, body {
+  overflow: hidden !important;
+  height: 100% !important;
+  width: 100% !important;
+}
+.screen {
+  position: fixed !important;
+  inset: 0 !important;
+  display: none !important;
+  min-height: 0 !important;
+  height: 100dvh !important;
+  width: 100vw !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  z-index: 1 !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+.screen.active {
+  display: flex !important;
+  flex-direction: column !important;
+}
+#welcome.active {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+#lobby.active {
+  display: block !important;
+  overflow-y: auto !important;
+}
+#play.active {
+  display: grid !important;
+  grid-template-rows: auto minmax(0,1fr) !important;
+  overflow-y: auto !important;
+}
+
+
+/* ════════════════════════
+   Z-INDEX + VISIBILITY FIX
+════════════════════════ */
+.screen {
+  visibility: hidden !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+.screen.active {
+  visibility: visible !important;
+  pointer-events: auto !important;
+  z-index: 10 !important;
+}
+
+/* =========================================================
+   FINAL MOBILE NAV FLOW FIX
+   Tujuan: tombol Prev/Next SELALU berada di bawah isi slide,
+   bukan fixed/absolute di samping atau nempel menimpa content.
+   Kalau tinggi layar tidak cukup, halaman play bisa discroll ke bawah.
+========================================================= */
+@media (max-width: 860px) {
+  html,
+  body {
+    height: 100% !important;
+    overflow: hidden !important;
+  }
+
+  #play.screen.active,
+  #play.active {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100dvh !important;
+    min-height: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-rows: none !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior-y: contain !important;
+    padding: 8px 8px calc(18px + env(safe-area-inset-bottom)) !important;
+    gap: 8px !important;
+  }
+
+  #play .game-header {
+    position: relative !important;
+    top: auto !important;
+    flex: 0 0 auto !important;
+    z-index: 20 !important;
+  }
+
+  #play .stage-area {
+    flex: 0 0 auto !important;
+    display: grid !important;
+    grid-template-areas:
+      "tools-l tools-r"
+      "slide   slide"
+      "prev    next" !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    grid-template-rows: auto auto auto !important;
+    align-items: start !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    gap: 8px !important;
+  }
+
+  #play .stage-card {
+    grid-area: slide !important;
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    display: block !important;
+    padding: 0 !important;
+  }
+
+  #play .stage-shell {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    display: block !important;
+    padding: 0 !important;
+  }
+
+  #play .stage {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 520px !important;
+    height: auto !important;
+    max-height: none !important;
+    margin: 0 auto !important;
+    overflow: visible !important;
+  }
+
+  #play .slide-img {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    display: block !important;
+    object-fit: contain !important;
+  }
+
+  #play .draw-canvas,
+  #play .overlay-layer {
+    position: absolute !important;
+    inset: 0 !important;
+  }
+
+  #play .side-nav,
+  #play .side-nav.left,
+  #play .side-nav.right {
+    position: static !important;
+    inset: auto !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    transform: none !important;
+    z-index: 5 !important;
+    width: 100% !important;
+    height: 52px !important;
+    min-height: 52px !important;
+    margin: 0 !important;
+    border-radius: 18px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important;
+  }
+
+  #play .side-nav.left { grid-area: prev !important; }
+  #play .side-nav.right { grid-area: next !important; }
+
+  #play .tool-rail,
+  #play .rail-left,
+  #play .rail-right {
+    position: static !important;
+    transform: none !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    overflow: visible !important;
+  }
+
+  #play .rail-left { grid-area: tools-l !important; }
+  #play .rail-right { grid-area: tools-r !important; }
+}
+
+/* =========================================================
+   TRUE/FALSE MOBILE TOOLBAR FIX v4
+   - Centang/Silang/Hapus tidak fixed di bawah lagi
+   - Toolbar masuk ke bar atas sejajar Reset/Suara
+   - Ukuran tombol diperkecil agar tidak menutup Prev/Next
+========================================================= */
+@media (max-width: 860px) {
+  body.egk-playing.has-truefalse-slide:not([data-editor="true"]) #play .stage-area {
+    grid-template-areas:
+      "tf tools-r"
+      "slide slide"
+      "prev next" !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    grid-template-rows: auto auto auto !important;
+    gap: 8px !important;
+  }
+
+  body.egk-playing.has-truefalse-slide:not([data-editor="true"]) #play .rail-left {
+    display: none !important;
+  }
+
+  body.egk-playing.has-truefalse-slide:not([data-editor="true"]) #play .rail-right {
+    grid-area: tools-r !important;
+    align-self: stretch !important;
+    justify-content: center !important;
+    padding: 6px 8px !important;
+    gap: 8px !important;
+    border-radius: 18px !important;
+  }
+
+  body.egk-playing.has-truefalse-slide:not([data-editor="true"]) #play .truefalse-toolbar {
+    grid-area: tf !important;
+    position: static !important;
+    inset: auto !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 6px 8px !important;
+    gap: 7px !important;
+    border-radius: 18px !important;
+    border: 3px solid rgba(255,255,255,.86) !important;
+    background: rgba(255,255,255,.86) !important;
+    box-shadow: 0 8px 24px rgba(45,27,105,.14) !important;
+    z-index: 6 !important;
+    backdrop-filter: blur(12px) !important;
+  }
+
+  body.egk-playing.has-truefalse-slide:not([data-editor="true"]) #play .truefalse-toolbar button,
+  body.egk-playing.has-truefalse-slide:not([data-editor="true"]) #play .rail-right .tool {
+    width: auto !important;
+    min-width: 44px !important;
+    height: 44px !important;
+    min-height: 44px !important;
+    padding: 5px 7px !important;
+    border-radius: 14px !important;
+    border-width: 2px !important;
+    flex: 1 1 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  body.egk-playing.has-truefalse-slide:not([data-editor="true"]) #play .truefalse-toolbar button span,
+  body.egk-playing.has-truefalse-slide:not([data-editor="true"]) #play .rail-right .tool-icon {
+    font-size: 18px !important;
+    line-height: 1 !important;
+  }
+
+  body.egk-playing.has-truefalse-slide:not([data-editor="true"]) #play .truefalse-toolbar button b,
+  body.egk-playing.has-truefalse-slide:not([data-editor="true"]) #play .rail-right .tool-label {
+    font-size: 9px !important;
+    line-height: 1 !important;
+    display: block !important;
+    white-space: nowrap !important;
+  }
+
+  body.egk-playing.has-truefalse-slide:not([data-editor="true"]) #play .truefalse-toolbar button.active {
+    outline: 3px solid #00d4f0 !important;
+    transform: translateY(1px) !important;
+  }
+
+  body.egk-playing.has-truefalse-slide:not([data-editor="true"]) #play .stage-area {
+    padding-bottom: 8px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  body.egk-playing.has-truefalse-slide:not([data-editor="true"]) #play .truefalse-toolbar {
+    padding: 5px 6px !important;
+    gap: 5px !important;
+  }
+  body.egk-playing.has-truefalse-slide:not([data-editor="true"]) #play .truefalse-toolbar button,
+  body.egk-playing.has-truefalse-slide:not([data-editor="true"]) #play .rail-right .tool {
+    min-width: 38px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    padding: 4px 5px !important;
+    border-radius: 12px !important;
+  }
+  body.egk-playing.has-truefalse-slide:not([data-editor="true"]) #play .truefalse-toolbar button span,
+  body.egk-playing.has-truefalse-slide:not([data-editor="true"]) #play .rail-right .tool-icon {
+    font-size: 16px !important;
+  }
+  body.egk-playing.has-truefalse-slide:not([data-editor="true"]) #play .truefalse-toolbar button b,
+  body.egk-playing.has-truefalse-slide:not([data-editor="true"]) #play .rail-right .tool-label {
+    font-size: 8px !important;
+  }
+}
+
+/* =========================================================
+   EGK CHROME/EDGE CONSISTENCY PATCH v5
+   Penyebab beda browser: data fresh masih mark(...,'both'),
+   sedangkan browser lain punya localStorage editor yang sudah truefalse.
+   Patch app.js menganggap mark both sebagai toolbar Benar/Salah.
+   CSS ini memastikan toolbar tidak pernah fixed bawah dan selalu sejajar reset/suara.
+========================================================= */
+@media (max-width: 860px) {
+  body.egk-playing.has-truefalse-slide #play .stage-area {
+    display: grid !important;
+    grid-template-areas:
+      "tf tools-r"
+      "slide slide"
+      "prev next" !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    grid-template-rows: auto auto auto !important;
+    gap: 8px !important;
+    overflow: visible !important;
+    padding-bottom: max(12px, env(safe-area-inset-bottom)) !important;
+  }
+
+  body.egk-playing.has-truefalse-slide #play .stage-card {
+    grid-area: slide !important;
+  }
+
+  body.egk-playing.has-truefalse-slide #play .side-nav.left {
+    grid-area: prev !important;
+    position: static !important;
+    transform: none !important;
+  }
+
+  body.egk-playing.has-truefalse-slide #play .side-nav.right {
+    grid-area: next !important;
+    position: static !important;
+    transform: none !important;
+  }
+
+  body.egk-playing.has-truefalse-slide #play .rail-left {
+    display: none !important;
+  }
+
+  body.egk-playing.has-truefalse-slide #play .rail-right {
+    grid-area: tools-r !important;
+    position: static !important;
+    transform: none !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 6px 8px !important;
+    gap: 8px !important;
+    border-radius: 18px !important;
+  }
+
+  body.egk-playing.has-truefalse-slide #play .truefalse-toolbar {
+    grid-area: tf !important;
+    position: static !important;
+    inset: auto !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 6px 8px !important;
+    gap: 7px !important;
+    border-radius: 18px !important;
+    border: 3px solid rgba(255,255,255,.86) !important;
+    background: rgba(255,255,255,.86) !important;
+    box-shadow: 0 8px 24px rgba(45,27,105,.14) !important;
+    z-index: 6 !important;
+    backdrop-filter: blur(12px) !important;
+  }
+
+  body.egk-playing.has-truefalse-slide #play .truefalse-toolbar button,
+  body.egk-playing.has-truefalse-slide #play .rail-right .tool {
+    width: auto !important;
+    min-width: 44px !important;
+    height: 44px !important;
+    min-height: 44px !important;
+    padding: 5px 7px !important;
+    border-radius: 14px !important;
+    border-width: 2px !important;
+    flex: 1 1 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  body.egk-playing.has-truefalse-slide #play .truefalse-toolbar button span,
+  body.egk-playing.has-truefalse-slide #play .rail-right .tool-icon {
+    font-size: 18px !important;
+    line-height: 1 !important;
+  }
+
+  body.egk-playing.has-truefalse-slide #play .truefalse-toolbar button b,
+  body.egk-playing.has-truefalse-slide #play .rail-right .tool-label {
+    font-size: 9px !important;
+    line-height: 1 !important;
+    display: block !important;
+    white-space: nowrap !important;
+  }
+}
+
+@media (max-width: 430px) {
+  body.egk-playing.has-truefalse-slide #play .truefalse-toolbar {
+    padding: 5px 6px !important;
+    gap: 5px !important;
+  }
+  body.egk-playing.has-truefalse-slide #play .truefalse-toolbar button,
+  body.egk-playing.has-truefalse-slide #play .rail-right .tool {
+    min-width: 38px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    padding: 4px 5px !important;
+    border-radius: 12px !important;
+  }
+}
+
+
+.page-nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  justify-content:center;
+  margin-top:16px;
+}
+
+.page-btn{
+  width:42px;
+  height:42px;
+  border:none;
+  border-radius:12px;
+  background:#ffffff;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 2px 6px rgba(0,0,0,0.15);
+  transition:0.2s;
+}
+
+.page-btn:hover{
+  transform:scale(1.08);
+}
+
+.page-btn.active{
+  background:#4a9fff;
+  color:white;
+}
+
+
+
+/* Slide dropdown: default hidden. Muncul hanya saat chip "Slide x / x" diklik. */
+.page-nav{
+  display:none !important;
+}
+
+#pageInfo{
+  cursor:pointer;
+  user-select:none;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+#pageInfo:hover{
+  transform:translateY(-1px);
+  box-shadow:0 8px 20px rgba(74, 44, 132, .14);
+}
+
+.slide-dropdown{
+  position:fixed;
+  top:128px;
+  right:28px;
+  width:min(520px, calc(100vw - 56px));
+  max-height:150px;
+  overflow:auto;
+  background:rgba(255,255,255,.96);
+  border:4px solid rgba(214,207,230,.9);
+  border-radius:24px;
+  padding:14px;
+  box-shadow:0 18px 45px rgba(49,35,98,.22);
+  z-index:99999;
+  display:grid;
+  grid-template-columns:repeat(13, 1fr);
+  gap:10px;
+  backdrop-filter:blur(10px);
+}
+
+.slide-dropdown.hidden{
+  display:none !important;
+}
+
+.slide-number-btn{
+  border:0;
+  border-radius:14px;
+  min-width:44px;
+  height:44px;
+  font-family:inherit;
+  font-weight:900;
+  font-size:16px;
+  cursor:pointer;
+  background:#fff;
+  color:#1f174f;
+  box-shadow:0 5px 0 rgba(0,0,0,.10), 0 8px 18px rgba(0,0,0,.08);
+}
+
+.slide-number-btn.active{
+  background:#4a9fff;
+  color:#fff;
+  box-shadow:0 5px 0 #2575d8, 0 10px 20px rgba(74,159,255,.28);
+}
+
+.slide-number-btn:active{
+  transform:translateY(2px);
+  box-shadow:0 3px 0 rgba(0,0,0,.10);
+}
+
+@media(max-width:768px){
+  .slide-dropdown{
+    top:158px;
+    left:12px;
+    right:12px;
+    width:auto;
+    max-height:88px;
+    padding:10px;
+    border-radius:20px;
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    -webkit-overflow-scrolling:touch;
+  }
+  .slide-number-btn{
+    flex:0 0 48px;
+    width:48px;
+    height:48px;
+    border-radius:15px;
+    font-size:15px;
+  }
+}
+
