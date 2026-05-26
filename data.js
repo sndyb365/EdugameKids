@@ -376,8 +376,8 @@ const ASPEK_DATA = {
           "args": {
             "points": [
               [
-                468,
-                596
+                469,
+                576
               ],
               [
                 669,
@@ -5304,7 +5304,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_3_1779467300218",
           "type": "text",
           "args": [
-            805,
+            834,
             275,
             175,
             149
@@ -5325,8 +5325,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_3_1779467311282",
           "type": "text",
           "args": [
-            796,
-            489,
+            819,
+            491,
             187,
             141
           ],
@@ -5346,7 +5346,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_3_1779467320114",
           "type": "text",
           "args": [
-            810,
+            835,
             708,
             171,
             131
@@ -5367,7 +5367,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_3_1779467332794",
           "type": "text",
           "args": [
-            812,
+            841,
             910,
             179,
             137
@@ -5390,8 +5390,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_4_1779467506299",
           "type": "text",
           "args": [
-            66,
-            418,
+            110,
+            419,
             154,
             113
           ],
@@ -5411,7 +5411,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_4_1779467513762",
           "type": "text",
           "args": [
-            260,
+            300,
             421,
             141,
             105
@@ -5432,8 +5432,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_4_1779467522587",
           "type": "text",
           "args": [
-            446,
-            417,
+            490,
+            416,
             130,
             112
           ],
@@ -5453,7 +5453,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_4_1779467528426",
           "type": "text",
           "args": [
-            649,
+            685,
             419,
             140,
             110
@@ -5474,7 +5474,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_4_1779467533579",
           "type": "text",
           "args": [
-            70,
+            108,
             714,
             144,
             121
@@ -5495,7 +5495,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_4_1779467540179",
           "type": "text",
           "args": [
-            264,
+            296,
             710,
             130,
             123
@@ -5516,8 +5516,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_4_1779467545002",
           "type": "text",
           "args": [
-            440,
-            702,
+            490,
+            699,
             144,
             148
           ],
@@ -5537,8 +5537,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_4_1779467550827",
           "type": "text",
           "args": [
-            653,
-            716,
+            692,
+            704,
             131,
             141
           ],
@@ -5558,8 +5558,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_4_1779467556939",
           "type": "text",
           "args": [
-            84,
-            1007,
+            106,
+            1001,
             136,
             143
           ],
@@ -5579,8 +5579,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_4_1779467561139",
           "type": "text",
           "args": [
-            268,
-            1009,
+            294,
+            998,
             124,
             141
           ],
@@ -5600,8 +5600,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_4_1779467566051",
           "type": "text",
           "args": [
-            448,
-            1009,
+            479,
+            998,
             132,
             137
           ],
@@ -5621,8 +5621,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_4_1779467571540",
           "type": "text",
           "args": [
-            647,
-            990,
+            678,
+            999,
             132,
             131
           ],
@@ -5706,10 +5706,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_6_1779467697138",
           "type": "text",
           "args": [
-            610,
+            631,
             358,
-            345,
-            98
+            80,
+            86
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -5727,9 +5727,9 @@ const ASPEK_DATA = {
           "id": "text_kognitif_6_1779467702419",
           "type": "text",
           "args": [
-            579,
-            595,
-            381,
+            608,
+            593,
+            90,
             96
           ],
           "text": "Textbox",
@@ -5750,8 +5750,197 @@ const ASPEK_DATA = {
           "args": [
             607,
             896,
-            361,
-            104
+            88,
+            99
+          ],
+          "text": "Textbox",
+          "fontSize": 24,
+          "fontFamily": "Arial",
+          "textColor": "#111111",
+          "bold": true,
+          "italic": false,
+          "textAlign": "center",
+          "lineHeight": "1.2",
+          "padding": 8,
+          "borderRadius": 14,
+          "bgColor": "rgba(255,255,255,.65)"
+        },
+        {
+          "id": "text_kognitif_6_1779805580873",
+          "type": "text",
+          "args": [
+            717,
+            367,
+            91,
+            72
+          ],
+          "text": "Textbox",
+          "fontSize": 24,
+          "fontFamily": "Arial",
+          "textColor": "#111111",
+          "bold": true,
+          "italic": false,
+          "textAlign": "center",
+          "lineHeight": "1.2",
+          "padding": 8,
+          "borderRadius": 14,
+          "bgColor": "rgba(255,255,255,.65)"
+        },
+        {
+          "id": "text_kognitif_6_1779805589461",
+          "type": "text",
+          "args": [
+            796,
+            366,
+            95,
+            79
+          ],
+          "text": "Textbox",
+          "fontSize": 24,
+          "fontFamily": "Arial",
+          "textColor": "#111111",
+          "bold": true,
+          "italic": false,
+          "textAlign": "center",
+          "lineHeight": "1.2",
+          "padding": 8,
+          "borderRadius": 14,
+          "bgColor": "rgba(255,255,255,.65)"
+        },
+        {
+          "id": "text_kognitif_6_1779805599987",
+          "type": "text",
+          "args": [
+            896,
+            360,
+            81,
+            80
+          ],
+          "text": "Textbox",
+          "fontSize": 24,
+          "fontFamily": "Arial",
+          "textColor": "#111111",
+          "bold": true,
+          "italic": false,
+          "textAlign": "center",
+          "lineHeight": "1.2",
+          "padding": 8,
+          "borderRadius": 14,
+          "bgColor": "rgba(255,255,255,.65)"
+        },
+        {
+          "id": "text_kognitif_6_1779805620797",
+          "type": "text",
+          "args": [
+            708,
+            601,
+            90,
+            82
+          ],
+          "text": "Textbox",
+          "fontSize": 24,
+          "fontFamily": "Arial",
+          "textColor": "#111111",
+          "bold": true,
+          "italic": false,
+          "textAlign": "center",
+          "lineHeight": "1.2",
+          "padding": 8,
+          "borderRadius": 14,
+          "bgColor": "rgba(255,255,255,.65)"
+        },
+        {
+          "id": "text_kognitif_6_1779805628029",
+          "type": "text",
+          "args": [
+            806,
+            600,
+            88,
+            94
+          ],
+          "text": "Textbox",
+          "fontSize": 24,
+          "fontFamily": "Arial",
+          "textColor": "#111111",
+          "bold": true,
+          "italic": false,
+          "textAlign": "center",
+          "lineHeight": "1.2",
+          "padding": 8,
+          "borderRadius": 14,
+          "bgColor": "rgba(255,255,255,.65)"
+        },
+        {
+          "id": "text_kognitif_6_1779805640361",
+          "type": "text",
+          "args": [
+            896,
+            605,
+            96,
+            80
+          ],
+          "text": "Textbox",
+          "fontSize": 24,
+          "fontFamily": "Arial",
+          "textColor": "#111111",
+          "bold": true,
+          "italic": false,
+          "textAlign": "center",
+          "lineHeight": "1.2",
+          "padding": 8,
+          "borderRadius": 14,
+          "bgColor": "rgba(255,255,255,.65)"
+        },
+        {
+          "id": "text_kognitif_6_1779805652684",
+          "type": "text",
+          "args": [
+            709,
+            897,
+            96,
+            84
+          ],
+          "text": "Textbox",
+          "fontSize": 24,
+          "fontFamily": "Arial",
+          "textColor": "#111111",
+          "bold": true,
+          "italic": false,
+          "textAlign": "center",
+          "lineHeight": "1.2",
+          "padding": 8,
+          "borderRadius": 14,
+          "bgColor": "rgba(255,255,255,.65)"
+        },
+        {
+          "id": "text_kognitif_6_1779805660790",
+          "type": "text",
+          "args": [
+            797,
+            893,
+            102,
+            94
+          ],
+          "text": "Textbox",
+          "fontSize": 24,
+          "fontFamily": "Arial",
+          "textColor": "#111111",
+          "bold": true,
+          "italic": false,
+          "textAlign": "center",
+          "lineHeight": "1.2",
+          "padding": 8,
+          "borderRadius": 14,
+          "bgColor": "rgba(255,255,255,.65)"
+        },
+        {
+          "id": "text_kognitif_6_1779805672206",
+          "type": "text",
+          "args": [
+            892,
+            900,
+            100,
+            84
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -5792,7 +5981,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_7_1779467728186",
           "type": "text",
           "args": [
-            559,
+            552,
             545,
             97,
             99
@@ -5813,7 +6002,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_7_1779467733075",
           "type": "text",
           "args": [
-            559,
+            554,
             672,
             111,
             90
@@ -5834,7 +6023,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_7_1779467738579",
           "type": "text",
           "args": [
-            564,
+            558,
             805,
             92,
             86
@@ -5855,7 +6044,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_7_1779467743219",
           "type": "text",
           "args": [
-            558,
+            553,
             925,
             103,
             97
@@ -5876,7 +6065,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_7_1779467748074",
           "type": "text",
           "args": [
-            556,
+            551,
             1051,
             93,
             96
@@ -5897,8 +6086,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_7_1779467754075",
           "type": "text",
           "args": [
-            565,
-            1176,
+            553,
+            1179,
             114,
             92
           ],
@@ -5918,7 +6107,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_7_1779803648726",
           "type": "text",
           "args": [
-            648,
+            643,
             422,
             112,
             92
@@ -5939,7 +6128,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_7_1779803660410",
           "type": "text",
           "args": [
-            755,
+            750,
             424,
             107,
             89
@@ -5960,8 +6149,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_7_1779803671524",
           "type": "text",
           "args": [
-            860,
-            421,
+            855,
+            422,
             113,
             96
           ],
@@ -5981,7 +6170,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_7_1779803686124",
           "type": "text",
           "args": [
-            659,
+            654,
             554,
             97,
             82
@@ -6002,7 +6191,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_7_1779803695171",
           "type": "text",
           "args": [
-            770,
+            765,
             550,
             98,
             86
@@ -6023,7 +6212,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_7_1779803706014",
           "type": "text",
           "args": [
-            874,
+            869,
             548,
             97,
             85
@@ -6044,7 +6233,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_7_1779803722786",
           "type": "text",
           "args": [
-            660,
+            655,
             675,
             88,
             82
@@ -6065,7 +6254,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_7_1779803736040",
           "type": "text",
           "args": [
-            761,
+            754,
             680,
             103,
             81
@@ -6086,7 +6275,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_7_1779803743886",
           "type": "text",
           "args": [
-            874,
+            868,
             682,
             91,
             80
@@ -6107,7 +6296,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_7_1779803765376",
           "type": "text",
           "args": [
-            666,
+            660,
             804,
             94,
             81
@@ -6128,7 +6317,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_7_1779803774820",
           "type": "text",
           "args": [
-            771,
+            766,
             809,
             89,
             74
@@ -6149,7 +6338,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_7_1779803783119",
           "type": "text",
           "args": [
-            878,
+            871,
             801,
             92,
             86
@@ -6170,7 +6359,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_7_1779803799958",
           "type": "text",
           "args": [
-            669,
+            664,
             929,
             97,
             88
@@ -6191,7 +6380,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_7_1779803810075",
           "type": "text",
           "args": [
-            771,
+            763,
             926,
             97,
             86
@@ -6212,7 +6401,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_7_1779803819287",
           "type": "text",
           "args": [
-            871,
+            866,
             935,
             96,
             75
@@ -6233,7 +6422,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_7_1779803835002",
           "type": "text",
           "args": [
-            663,
+            657,
             1053,
             109,
             88
@@ -6254,8 +6443,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_7_1779803844994",
           "type": "text",
           "args": [
-            774,
-            1059,
+            767,
+            1057,
             98,
             86
           ],
@@ -6275,7 +6464,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_7_1779803851768",
           "type": "text",
           "args": [
-            879,
+            871,
             1061,
             110,
             84
@@ -6297,7 +6486,7 @@ const ASPEK_DATA = {
           "type": "text",
           "args": [
             669,
-            1176,
+            1182,
             101,
             93
           ],
@@ -6318,7 +6507,7 @@ const ASPEK_DATA = {
           "type": "text",
           "args": [
             764,
-            1173,
+            1178,
             92,
             98
           ],
@@ -6339,7 +6528,7 @@ const ASPEK_DATA = {
           "type": "text",
           "args": [
             869,
-            1180,
+            1187,
             104,
             86
           ],
@@ -6588,8 +6777,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_9_1779467901554",
           "type": "text",
           "args": [
-            120,
-            681,
+            131,
+            679,
             111,
             92
           ],
@@ -6609,7 +6798,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_9_1779467911443",
           "type": "text",
           "args": [
-            234,
+            243,
             680,
             91,
             90
@@ -6630,10 +6819,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_9_1779467921362",
           "type": "text",
           "args": [
-            331,
-            666,
-            133,
-            105
+            361,
+            677,
+            91,
+            81
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -6651,8 +6840,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_9_1779467945780",
           "type": "text",
           "args": [
-            563,
-            677,
+            580,
+            680,
             116,
             85
           ],
@@ -6672,8 +6861,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_9_1779467962875",
           "type": "text",
           "args": [
-            669,
-            664,
+            686,
+            667,
             110,
             103
           ],
@@ -6693,8 +6882,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_9_1779467969157",
           "type": "text",
           "args": [
-            775,
-            677,
+            804,
+            683,
             133,
             75
           ],
@@ -6714,7 +6903,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_9_1779467991818",
           "type": "text",
           "args": [
-            118,
+            134,
             962,
             112,
             64
@@ -6735,7 +6924,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_9_1779468008003",
           "type": "text",
           "args": [
-            231,
+            237,
             936,
             96,
             104
@@ -6756,10 +6945,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_9_1779468015156",
           "type": "text",
           "args": [
-            330,
-            954,
-            178,
-            68
+            349,
+            953,
+            147,
+            77
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -6777,7 +6966,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_9_1779468049467",
           "type": "text",
           "args": [
-            577,
+            582,
             953,
             87,
             89
@@ -6798,8 +6987,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_9_1779468056442",
           "type": "text",
           "args": [
-            675,
-            956,
+            684,
+            955,
             103,
             73
           ],
@@ -6819,8 +7008,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_9_1779468062859",
           "type": "text",
           "args": [
-            767,
-            953,
+            798,
+            952,
             179,
             84
           ],
@@ -6840,8 +7029,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_9_1779468069179",
           "type": "text",
           "args": [
-            120,
-            1245,
+            133,
+            1247,
             112,
             89
           ],
@@ -6861,8 +7050,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_9_1779468076204",
           "type": "text",
           "args": [
-            230,
-            1253,
+            235,
+            1254,
             98,
             73
           ],
@@ -6882,8 +7071,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_9_1779468085707",
           "type": "text",
           "args": [
-            330,
-            1244,
+            354,
+            1243,
             183,
             86
           ],
@@ -6903,7 +7092,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_9_1779468092003",
           "type": "text",
           "args": [
-            571,
+            580,
             1238,
             109,
             104
@@ -6924,7 +7113,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_9_1779468096467",
           "type": "text",
           "args": [
-            665,
+            681,
             1258,
             120,
             62
@@ -6945,8 +7134,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_9_1779468105363",
           "type": "text",
           "args": [
-            788,
-            1238,
+            799,
+            1244,
             171,
             78
           ],
@@ -7186,8 +7375,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_11_1779468252339",
           "type": "text",
           "args": [
-            704,
-            675,
+            707,
+            669,
             101,
             100
           ],
@@ -7375,7 +7564,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_11_1779468301667",
           "type": "text",
           "args": [
-            800,
+            803,
             929,
             115,
             106
@@ -7396,7 +7585,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_11_1779468307131",
           "type": "text",
           "args": [
-            63,
+            67,
             1205,
             119,
             100
@@ -7438,7 +7627,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_11_1779468321171",
           "type": "text",
           "args": [
-            270,
+            283,
             1209,
             117,
             88
@@ -7459,8 +7648,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_11_1779468327013",
           "type": "text",
           "args": [
-            376,
-            1191,
+            393,
+            1192,
             107,
             117
           ],
@@ -7522,7 +7711,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_11_1779468348883",
           "type": "text",
           "args": [
-            694,
+            705,
             1203,
             115,
             96
@@ -7748,10 +7937,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_13_1779468438435",
           "type": "text",
           "args": [
-            74,
-            520,
-            185,
-            78
+            123,
+            533,
+            132,
+            66
           ],
           "text": "te\n",
           "fontSize": 17,
@@ -7769,10 +7958,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_13_1779468447819",
           "type": "text",
           "args": [
-            220,
-            539,
-            129,
-            96
+            249,
+            536,
+            128,
+            61
           ],
           "text": "Te\n\n",
           "fontSize": 17,
@@ -7790,10 +7979,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_13_1779468490756",
           "type": "text",
           "args": [
-            317,
-            540,
-            154,
-            96
+            370,
+            533,
+            120,
+            66
           ],
           "text": "Textbox",
           "fontSize": 17,
@@ -7811,10 +8000,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_13_1779468501548",
           "type": "text",
           "args": [
-            498,
-            527,
-            177,
-            63
+            560,
+            531,
+            125,
+            71
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -7832,7 +8021,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_13_1779468511859",
           "type": "text",
           "args": [
-            674,
+            687,
             534,
             125,
             68
@@ -7853,8 +8042,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_13_1779468523523",
           "type": "text",
           "args": [
-            778,
-            527,
+            804,
+            532,
             167,
             59
           ],
@@ -7874,10 +8063,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_13_1779468533035",
           "type": "text",
           "args": [
-            60,
-            779,
-            179,
-            51
+            120,
+            770,
+            95,
+            63
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -7895,10 +8084,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_13_1779468540875",
           "type": "text",
           "args": [
-            210,
+            251,
             765,
-            169,
-            60
+            106,
+            75
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -7916,10 +8105,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_13_1779468545861",
           "type": "text",
           "args": [
-            347,
-            748,
-            171,
-            94
+            368,
+            753,
+            114,
+            89
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -7937,10 +8126,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_13_1779468555411",
           "type": "text",
           "args": [
-            523,
-            747,
-            170,
-            95
+            559,
+            752,
+            121,
+            100
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -7958,10 +8147,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_13_1779468561403",
           "type": "text",
           "args": [
-            641,
-            770,
-            179,
-            56
+            688,
+            761,
+            135,
+            77
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -7979,10 +8168,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_13_1779468566531",
           "type": "text",
           "args": [
-            765,
+            804,
             757,
-            183,
-            82
+            141,
+            88
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -8000,10 +8189,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_13_1779468571653",
           "type": "text",
           "args": [
-            61,
+            120,
             999,
-            179,
-            61
+            138,
+            65
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -8021,10 +8210,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_13_1779468576196",
           "type": "text",
           "args": [
-            198,
-            990,
-            173,
-            88
+            248,
+            992,
+            131,
+            80
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -8042,10 +8231,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_13_1779468582172",
           "type": "text",
           "args": [
-            338,
+            370,
             992,
-            177,
-            72
+            135,
+            82
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -8063,10 +8252,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_13_1779468588739",
           "type": "text",
           "args": [
-            505,
-            1001,
-            171,
-            61
+            557,
+            994,
+            112,
+            79
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -8084,10 +8273,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_13_1779468596228",
           "type": "text",
           "args": [
-            630,
-            1007,
-            185,
-            53
+            684,
+            1001,
+            104,
+            69
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -8105,8 +8294,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_13_1779468601603",
           "type": "text",
           "args": [
-            786,
-            1009,
+            804,
+            1006,
             164,
             57
           ],
@@ -8126,10 +8315,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_13_1779468606499",
           "type": "text",
           "args": [
-            41,
-            1229,
-            169,
-            70
+            124,
+            1235,
+            126,
+            72
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -8147,9 +8336,9 @@ const ASPEK_DATA = {
           "id": "text_kognitif_13_1779468611979",
           "type": "text",
           "args": [
-            207,
-            1230,
-            179,
+            250,
+            1236,
+            125,
             72
           ],
           "text": "Textbox",
@@ -8168,10 +8357,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_13_1779468618339",
           "type": "text",
           "args": [
-            356,
-            1228,
-            173,
-            63
+            369,
+            1236,
+            148,
+            65
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -8189,10 +8378,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_13_1779468623315",
           "type": "text",
           "args": [
-            505,
-            1228,
-            164,
-            80
+            565,
+            1235,
+            112,
+            76
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -8210,10 +8399,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_13_1779468629228",
           "type": "text",
           "args": [
-            618,
-            1234,
-            183,
-            63
+            683,
+            1237,
+            140,
+            66
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -8231,10 +8420,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_13_1779468634115",
           "type": "text",
           "args": [
-            757,
-            1222,
-            195,
-            98
+            809,
+            1232,
+            148,
+            82
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -8254,8 +8443,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_14_1779468645764",
           "type": "text",
           "args": [
-            724,
-            370,
+            742,
+            375,
             164,
             129
           ],
@@ -8275,8 +8464,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_14_1779468653492",
           "type": "text",
           "args": [
-            726,
-            569,
+            746,
+            566,
             167,
             133
           ],
@@ -8296,8 +8485,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_14_1779468658243",
           "type": "text",
           "args": [
-            745,
-            761,
+            759,
+            764,
             140,
             125
           ],
@@ -8317,8 +8506,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_14_1779468663555",
           "type": "text",
           "args": [
-            731,
-            945,
+            747,
+            952,
             157,
             137
           ],
@@ -8338,8 +8527,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_14_1779468669347",
           "type": "text",
           "args": [
-            732,
-            1148,
+            749,
+            1155,
             150,
             117
           ],
@@ -8453,10 +8642,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_16_1779468712899",
           "type": "text",
           "args": [
-            282,
-            565,
-            158,
-            100
+            316,
+            576,
+            91,
+            69
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -8474,10 +8663,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_16_1779468718227",
           "type": "text",
           "args": [
-            450,
-            569,
-            136,
-            90
+            481,
+            572,
+            79,
+            72
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -8495,10 +8684,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_16_1779468724451",
           "type": "text",
           "args": [
-            614,
-            559,
-            136,
-            110
+            645,
+            569,
+            84,
+            80
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -8516,10 +8705,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_16_1779468731564",
           "type": "text",
           "args": [
-            769,
-            556,
-            144,
-            104
+            801,
+            571,
+            79,
+            66
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -8537,10 +8726,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_16_1779468736219",
           "type": "text",
           "args": [
-            835,
-            649,
-            144,
-            94
+            868,
+            652,
+            77,
+            79
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -8558,10 +8747,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_16_1779468740796",
           "type": "text",
           "args": [
-            782,
-            765,
-            130,
-            92
+            805,
+            764,
+            78,
+            67
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -8579,10 +8768,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_16_1779468746028",
           "type": "text",
           "args": [
-            622,
+            643,
             763,
-            134,
-            96
+            78,
+            72
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -8600,10 +8789,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_16_1779468751532",
           "type": "text",
           "args": [
-            444,
-            755,
-            144,
-            117
+            478,
+            761,
+            79,
+            80
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -8621,10 +8810,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_16_1779468759324",
           "type": "text",
           "args": [
-            288,
-            761,
-            134,
-            110
+            311,
+            765,
+            74,
+            68
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -8642,10 +8831,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_16_1779468764179",
           "type": "text",
           "args": [
-            139,
-            761,
-            158,
-            131
+            159,
+            760,
+            74,
+            72
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -8663,10 +8852,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_16_1779468769059",
           "type": "text",
           "args": [
-            37,
-            847,
-            144,
-            117
+            98,
+            863,
+            75,
+            72
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -8684,10 +8873,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_16_1779468774739",
           "type": "text",
           "args": [
-            123,
-            945,
-            152,
-            123
+            161,
+            955,
+            69,
+            72
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -8705,10 +8894,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_16_1779468780804",
           "type": "text",
           "args": [
-            282,
-            941,
-            136,
-            139
+            303,
+            957,
+            72,
+            68
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -8726,10 +8915,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_16_1779468786059",
           "type": "text",
           "args": [
-            420,
-            935,
-            158,
-            135
+            472,
+            959,
+            69,
+            67
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -8747,10 +8936,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_16_1779468791756",
           "type": "text",
           "args": [
-            608,
-            948,
-            138,
-            121
+            638,
+            956,
+            78,
+            65
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -8768,10 +8957,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_16_1779468802099",
           "type": "text",
           "args": [
-            769,
-            949,
-            152,
-            119
+            803,
+            952,
+            73,
+            74
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -8789,10 +8978,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_16_1779468809468",
           "type": "text",
           "args": [
-            853,
-            1052,
-            146,
-            117
+            874,
+            1044,
+            66,
+            71
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -8810,10 +8999,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_16_1779468814195",
           "type": "text",
           "args": [
-            759,
-            1156,
-            136,
-            108
+            807,
+            1149,
+            66,
+            62
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -8831,10 +9020,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_16_1779468819227",
           "type": "text",
           "args": [
-            597,
-            1152,
-            144,
-            102
+            638,
+            1149,
+            70,
+            73
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -8852,10 +9041,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_16_1779468825139",
           "type": "text",
           "args": [
-            440,
+            471,
             1146,
-            140,
-            117
+            72,
+            70
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -8873,10 +9062,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_16_1779468830723",
           "type": "text",
           "args": [
-            278,
-            1134,
-            150,
-            131
+            309,
+            1149,
+            60,
+            69
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -8894,10 +9083,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_16_1779468835515",
           "type": "text",
           "args": [
-            151,
-            1148,
-            140,
-            127
+            171,
+            1152,
+            62,
+            58
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -9216,7 +9405,7 @@ const ASPEK_DATA = {
           "type": "text",
           "args": [
             725,
-            491,
+            502,
             148,
             115
           ],
@@ -9236,8 +9425,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_21_1779469111260",
           "type": "text",
           "args": [
-            454,
-            711,
+            452,
+            725,
             146,
             104
           ],
@@ -9257,10 +9446,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_21_1779469125739",
           "type": "text",
           "args": [
-            154,
-            794,
-            158,
-            127
+            159,
+            805,
+            141,
+            91
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -9278,10 +9467,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_21_1779469129867",
           "type": "text",
           "args": [
-            449,
-            1011,
-            156,
-            135
+            452,
+            1015,
+            128,
+            103
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -9299,8 +9488,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_21_1779469142436",
           "type": "text",
           "args": [
-            157,
-            923,
+            168,
+            930,
             138,
             117
           ],
