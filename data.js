@@ -5155,7 +5155,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_2_1779467281146",
           "type": "text",
           "args": [
-            19,
+            36,
             1174,
             141,
             140
@@ -5176,8 +5176,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_2_1779799041523",
           "type": "text",
           "args": [
-            146,
-            1175,
+            169,
+            1177,
             139,
             138
           ],
@@ -5197,8 +5197,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_2_1779799067635",
           "type": "text",
           "args": [
-            278,
-            1180,
+            304,
+            1183,
             141,
             140
           ],
@@ -5218,8 +5218,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_2_1779799093003",
           "type": "text",
           "args": [
-            402,
-            1177,
+            438,
+            1178,
             142,
             140
           ],
@@ -5239,8 +5239,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_2_1779799112036",
           "type": "text",
           "args": [
-            535,
-            1175,
+            567,
+            1176,
             140,
             139
           ],
@@ -5260,7 +5260,7 @@ const ASPEK_DATA = {
           "id": "text_kognitif_2_1779799130649",
           "type": "text",
           "args": [
-            666,
+            692,
             1172,
             142,
             137
@@ -5281,8 +5281,8 @@ const ASPEK_DATA = {
           "id": "text_kognitif_2_1779799153391",
           "type": "text",
           "args": [
-            794,
-            1169,
+            829,
+            1170,
             140,
             137
           ],
@@ -5771,10 +5771,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_7_1779467723067",
           "type": "text",
           "args": [
-            536,
-            421,
-            414,
-            94
+            552,
+            424,
+            116,
+            88
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -5792,10 +5792,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_7_1779467728186",
           "type": "text",
           "args": [
-            540,
-            544,
-            408,
-            94
+            559,
+            545,
+            97,
+            99
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -5813,10 +5813,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_7_1779467733075",
           "type": "text",
           "args": [
-            532,
-            667,
-            426,
-            96
+            559,
+            672,
+            111,
+            90
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -5834,9 +5834,9 @@ const ASPEK_DATA = {
           "id": "text_kognitif_7_1779467738579",
           "type": "text",
           "args": [
-            530,
-            804,
-            420,
+            564,
+            805,
+            92,
             86
           ],
           "text": "Textbox",
@@ -5855,10 +5855,10 @@ const ASPEK_DATA = {
           "id": "text_kognitif_7_1779467743219",
           "type": "text",
           "args": [
-            536,
-            927,
-            414,
-            96
+            558,
+            925,
+            103,
+            97
           ],
           "text": "Textbox",
           "fontSize": 24,
@@ -5876,9 +5876,9 @@ const ASPEK_DATA = {
           "id": "text_kognitif_7_1779467748074",
           "type": "text",
           "args": [
-            530,
-            1050,
-            426,
+            556,
+            1051,
+            93,
             96
           ],
           "text": "Textbox",
@@ -5897,10 +5897,451 @@ const ASPEK_DATA = {
           "id": "text_kognitif_7_1779467754075",
           "type": "text",
           "args": [
-            532,
+            565,
             1176,
-            416,
-            102
+            114,
+            92
+          ],
+          "text": "Textbox",
+          "fontSize": 24,
+          "fontFamily": "Arial",
+          "textColor": "#111111",
+          "bold": true,
+          "italic": false,
+          "textAlign": "center",
+          "lineHeight": "1.2",
+          "padding": 8,
+          "borderRadius": 14,
+          "bgColor": "rgba(255,255,255,.65)"
+        },
+        {
+          "id": "text_kognitif_7_1779803648726",
+          "type": "text",
+          "args": [
+            648,
+            422,
+            112,
+            92
+          ],
+          "text": "Textbox",
+          "fontSize": 24,
+          "fontFamily": "Arial",
+          "textColor": "#111111",
+          "bold": true,
+          "italic": false,
+          "textAlign": "center",
+          "lineHeight": "1.2",
+          "padding": 8,
+          "borderRadius": 14,
+          "bgColor": "rgba(255,255,255,.65)"
+        },
+        {
+          "id": "text_kognitif_7_1779803660410",
+          "type": "text",
+          "args": [
+            755,
+            424,
+            107,
+            89
+          ],
+          "text": "Textbox",
+          "fontSize": 24,
+          "fontFamily": "Arial",
+          "textColor": "#111111",
+          "bold": true,
+          "italic": false,
+          "textAlign": "center",
+          "lineHeight": "1.2",
+          "padding": 8,
+          "borderRadius": 14,
+          "bgColor": "rgba(255,255,255,.65)"
+        },
+        {
+          "id": "text_kognitif_7_1779803671524",
+          "type": "text",
+          "args": [
+            860,
+            421,
+            113,
+            96
+          ],
+          "text": "Textbox",
+          "fontSize": 24,
+          "fontFamily": "Arial",
+          "textColor": "#111111",
+          "bold": true,
+          "italic": false,
+          "textAlign": "center",
+          "lineHeight": "1.2",
+          "padding": 8,
+          "borderRadius": 14,
+          "bgColor": "rgba(255,255,255,.65)"
+        },
+        {
+          "id": "text_kognitif_7_1779803686124",
+          "type": "text",
+          "args": [
+            659,
+            554,
+            97,
+            82
+          ],
+          "text": "Textbox",
+          "fontSize": 24,
+          "fontFamily": "Arial",
+          "textColor": "#111111",
+          "bold": true,
+          "italic": false,
+          "textAlign": "center",
+          "lineHeight": "1.2",
+          "padding": 8,
+          "borderRadius": 14,
+          "bgColor": "rgba(255,255,255,.65)"
+        },
+        {
+          "id": "text_kognitif_7_1779803695171",
+          "type": "text",
+          "args": [
+            770,
+            550,
+            98,
+            86
+          ],
+          "text": "Textbox",
+          "fontSize": 24,
+          "fontFamily": "Arial",
+          "textColor": "#111111",
+          "bold": true,
+          "italic": false,
+          "textAlign": "center",
+          "lineHeight": "1.2",
+          "padding": 8,
+          "borderRadius": 14,
+          "bgColor": "rgba(255,255,255,.65)"
+        },
+        {
+          "id": "text_kognitif_7_1779803706014",
+          "type": "text",
+          "args": [
+            874,
+            548,
+            97,
+            85
+          ],
+          "text": "Textbox",
+          "fontSize": 24,
+          "fontFamily": "Arial",
+          "textColor": "#111111",
+          "bold": true,
+          "italic": false,
+          "textAlign": "center",
+          "lineHeight": "1.2",
+          "padding": 8,
+          "borderRadius": 14,
+          "bgColor": "rgba(255,255,255,.65)"
+        },
+        {
+          "id": "text_kognitif_7_1779803722786",
+          "type": "text",
+          "args": [
+            660,
+            675,
+            88,
+            82
+          ],
+          "text": "Textbox",
+          "fontSize": 24,
+          "fontFamily": "Arial",
+          "textColor": "#111111",
+          "bold": true,
+          "italic": false,
+          "textAlign": "center",
+          "lineHeight": "1.2",
+          "padding": 8,
+          "borderRadius": 14,
+          "bgColor": "rgba(255,255,255,.65)"
+        },
+        {
+          "id": "text_kognitif_7_1779803736040",
+          "type": "text",
+          "args": [
+            761,
+            680,
+            103,
+            81
+          ],
+          "text": "Textbox",
+          "fontSize": 24,
+          "fontFamily": "Arial",
+          "textColor": "#111111",
+          "bold": true,
+          "italic": false,
+          "textAlign": "center",
+          "lineHeight": "1.2",
+          "padding": 8,
+          "borderRadius": 14,
+          "bgColor": "rgba(255,255,255,.65)"
+        },
+        {
+          "id": "text_kognitif_7_1779803743886",
+          "type": "text",
+          "args": [
+            874,
+            682,
+            91,
+            80
+          ],
+          "text": "Textbox",
+          "fontSize": 24,
+          "fontFamily": "Arial",
+          "textColor": "#111111",
+          "bold": true,
+          "italic": false,
+          "textAlign": "center",
+          "lineHeight": "1.2",
+          "padding": 8,
+          "borderRadius": 14,
+          "bgColor": "rgba(255,255,255,.65)"
+        },
+        {
+          "id": "text_kognitif_7_1779803765376",
+          "type": "text",
+          "args": [
+            666,
+            804,
+            94,
+            81
+          ],
+          "text": "Textbox",
+          "fontSize": 24,
+          "fontFamily": "Arial",
+          "textColor": "#111111",
+          "bold": true,
+          "italic": false,
+          "textAlign": "center",
+          "lineHeight": "1.2",
+          "padding": 8,
+          "borderRadius": 14,
+          "bgColor": "rgba(255,255,255,.65)"
+        },
+        {
+          "id": "text_kognitif_7_1779803774820",
+          "type": "text",
+          "args": [
+            771,
+            809,
+            89,
+            74
+          ],
+          "text": "Textbox",
+          "fontSize": 24,
+          "fontFamily": "Arial",
+          "textColor": "#111111",
+          "bold": true,
+          "italic": false,
+          "textAlign": "center",
+          "lineHeight": "1.2",
+          "padding": 8,
+          "borderRadius": 14,
+          "bgColor": "rgba(255,255,255,.65)"
+        },
+        {
+          "id": "text_kognitif_7_1779803783119",
+          "type": "text",
+          "args": [
+            878,
+            801,
+            92,
+            86
+          ],
+          "text": "Textbox",
+          "fontSize": 24,
+          "fontFamily": "Arial",
+          "textColor": "#111111",
+          "bold": true,
+          "italic": false,
+          "textAlign": "center",
+          "lineHeight": "1.2",
+          "padding": 8,
+          "borderRadius": 14,
+          "bgColor": "rgba(255,255,255,.65)"
+        },
+        {
+          "id": "text_kognitif_7_1779803799958",
+          "type": "text",
+          "args": [
+            669,
+            929,
+            97,
+            88
+          ],
+          "text": "Textbox",
+          "fontSize": 24,
+          "fontFamily": "Arial",
+          "textColor": "#111111",
+          "bold": true,
+          "italic": false,
+          "textAlign": "center",
+          "lineHeight": "1.2",
+          "padding": 8,
+          "borderRadius": 14,
+          "bgColor": "rgba(255,255,255,.65)"
+        },
+        {
+          "id": "text_kognitif_7_1779803810075",
+          "type": "text",
+          "args": [
+            771,
+            926,
+            97,
+            86
+          ],
+          "text": "Textbox",
+          "fontSize": 24,
+          "fontFamily": "Arial",
+          "textColor": "#111111",
+          "bold": true,
+          "italic": false,
+          "textAlign": "center",
+          "lineHeight": "1.2",
+          "padding": 8,
+          "borderRadius": 14,
+          "bgColor": "rgba(255,255,255,.65)"
+        },
+        {
+          "id": "text_kognitif_7_1779803819287",
+          "type": "text",
+          "args": [
+            871,
+            935,
+            96,
+            75
+          ],
+          "text": "Textbox",
+          "fontSize": 24,
+          "fontFamily": "Arial",
+          "textColor": "#111111",
+          "bold": true,
+          "italic": false,
+          "textAlign": "center",
+          "lineHeight": "1.2",
+          "padding": 8,
+          "borderRadius": 14,
+          "bgColor": "rgba(255,255,255,.65)"
+        },
+        {
+          "id": "text_kognitif_7_1779803835002",
+          "type": "text",
+          "args": [
+            663,
+            1053,
+            109,
+            88
+          ],
+          "text": "Textbox",
+          "fontSize": 24,
+          "fontFamily": "Arial",
+          "textColor": "#111111",
+          "bold": true,
+          "italic": false,
+          "textAlign": "center",
+          "lineHeight": "1.2",
+          "padding": 8,
+          "borderRadius": 14,
+          "bgColor": "rgba(255,255,255,.65)"
+        },
+        {
+          "id": "text_kognitif_7_1779803844994",
+          "type": "text",
+          "args": [
+            774,
+            1059,
+            98,
+            86
+          ],
+          "text": "Textbox",
+          "fontSize": 24,
+          "fontFamily": "Arial",
+          "textColor": "#111111",
+          "bold": true,
+          "italic": false,
+          "textAlign": "center",
+          "lineHeight": "1.2",
+          "padding": 8,
+          "borderRadius": 14,
+          "bgColor": "rgba(255,255,255,.65)"
+        },
+        {
+          "id": "text_kognitif_7_1779803851768",
+          "type": "text",
+          "args": [
+            879,
+            1061,
+            110,
+            84
+          ],
+          "text": "Textbox",
+          "fontSize": 24,
+          "fontFamily": "Arial",
+          "textColor": "#111111",
+          "bold": true,
+          "italic": false,
+          "textAlign": "center",
+          "lineHeight": "1.2",
+          "padding": 8,
+          "borderRadius": 14,
+          "bgColor": "rgba(255,255,255,.65)"
+        },
+        {
+          "id": "text_kognitif_7_1779803864063",
+          "type": "text",
+          "args": [
+            669,
+            1176,
+            101,
+            93
+          ],
+          "text": "Textbox",
+          "fontSize": 24,
+          "fontFamily": "Arial",
+          "textColor": "#111111",
+          "bold": true,
+          "italic": false,
+          "textAlign": "center",
+          "lineHeight": "1.2",
+          "padding": 8,
+          "borderRadius": 14,
+          "bgColor": "rgba(255,255,255,.65)"
+        },
+        {
+          "id": "text_kognitif_7_1779803873373",
+          "type": "text",
+          "args": [
+            764,
+            1173,
+            92,
+            98
+          ],
+          "text": "Textbox",
+          "fontSize": 24,
+          "fontFamily": "Arial",
+          "textColor": "#111111",
+          "bold": true,
+          "italic": false,
+          "textAlign": "center",
+          "lineHeight": "1.2",
+          "padding": 8,
+          "borderRadius": 14,
+          "bgColor": "rgba(255,255,255,.65)"
+        },
+        {
+          "id": "text_kognitif_7_1779803881626",
+          "type": "text",
+          "args": [
+            869,
+            1180,
+            104,
+            86
           ],
           "text": "Textbox",
           "fontSize": 24,
